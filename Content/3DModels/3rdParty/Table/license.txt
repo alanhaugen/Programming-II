@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low Poly Wooden Table N64 PSX style
+* source:	https://sketchfab.com/3d-models/low-poly-wooden-table-n64-psx-style-91d386962d9c404083500d7f2b056316
+* author:	zhya (https://sketchfab.com/zzzhya)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low Poly Wooden Table N64 PSX style" (https://sketchfab.com/3d-models/low-poly-wooden-table-n64-psx-style-91d386962d9c404083500d7f2b056316) by zhya (https://sketchfab.com/zzzhya) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

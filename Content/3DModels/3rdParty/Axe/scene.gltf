@@ -1,0 +1,299 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 395,
+      "max": [
+        18.212385177612305,
+        1.6948699951171875,
+        9.565113067626953
+      ],
+      "min": [
+        -35.92271041870117,
+        -1.694870948791504,
+        -9.565113067626953
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 4740,
+      "componentType": 5126,
+      "count": 395,
+      "max": [
+        0.9999771118164063,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -0.9999997615814209
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 395,
+      "max": [
+        0.99462890625,
+        0.98681640625
+      ],
+      "min": [
+        0.004795074462890625,
+        0.1524658203125
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 1350,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "liltoba (https://sketchfab.com/liltoba)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/axe-psx-low-poly-02cf57cb3fd248a69b71d2e6bbbed0f2",
+      "title": "Axe Psx | Low Poly"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 5400,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3160,
+      "byteOffset": 5400,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 9480,
+      "byteOffset": 8560,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 18040,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/axe_material_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "axe_material",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9844748658398755
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Hatchet_axe_material_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Hatchet.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        7.050000190734863,
+        -29.25,
+        1.0
+      ],
+      "name": "PlayerCamera"
+    },
+    {
+      "children": [
+        5
+      ],
+      "name": "ItemCamera"
+    },
+    {
+      "children": [
+        6
+      ],
+      "name": "ItemHolder"
+    },
+    {
+      "children": [
+        7
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9640770557957866,
+        -0.26562272208553195,
+        0.0,
+        0.0,
+        0.26562272208553195,
+        0.9640770557957866,
+        0.0,
+        0.0,
+        -0.2730000913143158,
+        -0.2089996039867401,
+        1.0
+      ],
+      "name": "Axe"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        -0.0038144890836876834,
+        -0.02171626155471393,
+        -0.006388148987525455,
+        0.0,
+        -0.022326214717242433,
+        0.0025406279336435836,
+        0.0046946559413901705,
+        0.0,
+        -0.00373419992466935,
+        0.006993131253859619,
+        -0.021543110972371188,
+        0.0,
+        -0.2809999883174896,
+        -0.5830000042915344,
+        0.7419999837875366,
+        1.0
+      ],
+      "name": "Hatchet"
+    },
+    {
+      "mesh": 0,
+      "name": "Hatchet_axe_material_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}

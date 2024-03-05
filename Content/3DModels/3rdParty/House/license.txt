@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ps1/PsX House
+* source:	https://sketchfab.com/3d-models/ps1psx-house-63dd16bf5586473094ddcc018071803f
+* author:	crammyberry (https://sketchfab.com/crammyberry)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ps1/PsX House" (https://sketchfab.com/3d-models/ps1psx-house-63dd16bf5586473094ddcc018071803f) by crammyberry (https://sketchfab.com/crammyberry) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
