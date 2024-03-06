@@ -16,8 +16,6 @@ Using kreyt8042's Items In PS1 Style (2024): https://sketchfab.com/3d-models/ite
 
 Using HenRi's PSX Stylized Couch (2024): https://sketchfab.com/3d-models/psx-stylized-couch-eb5052ce14b1413084bf583c0ae9362d
 
-Using HenRi's PSX Stylized Couch (2024): https://sketchfab.com/3d-models/psx-stylized-couch-eb5052ce14b1413084bf583c0ae9362d
-
 Using Moustache Cat's Armadura Medieval No Estilo De PS1 (2022): https://sketchfab.com/3d-models/armadura-medieval-no-estilo-de-ps1-89e23ef8fc6047d3bfbb7bf15d48d02e
 
 Using crammyberry's Ps1/PsX House(2024): https://sketchfab.com/3d-models/ps1psx-house-63dd16bf5586473094ddcc018071803f
