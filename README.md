@@ -10,12 +10,14 @@ Develop a 3D computer game that has at lease FOUR game mechanics within its game
 
 Make a 3D game according to this description:
 
-The group shall make a functional game.
-The game must be a finished, polished, workable demo that combines game play user experience with game mechanics, level design, animations, FX, and lighting.
-The game shall run on a Windows PC and use Unreal as the primary game engine.
-The game should be playable with keyboard / mouse.
-When the game is turned in, it shall be compiled, meaning that it should run by starting the .exe file. It should not be necessary to play it within the Unreal Editor.
-Source code and assets for the game shall be available in a repository at github. Write the URL in the report.
+* The group shall make a functional game.
+* The game must be a finished, polished, workable demo that combines game play user experience with game mechanics, level design, animations, FX, and lighting.
+* The game shall run on a Windows PC and use Unreal as the primary game engine.
+* The game should be playable with keyboard / mouse.
+* When the game is turned in, it shall be compiled, meaning that it should run by starting the .exe file. It should not be necessary to play it within the Unreal Editor.
+* Source code and assets for the game shall be available in a repository at github. Write the URL in the report.
+
+---
 
 > The game shall follow the given parameters:
 
