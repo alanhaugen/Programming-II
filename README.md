@@ -17,7 +17,7 @@ The game should be playable with keyboard / mouse.
 When the game is turned in, it shall be compiled, meaning that it should run by starting the .exe file. It should not be necessary to play it within the Unreal Editor.
 Source code and assets for the game shall be available in a repository at github. Write the URL in the report.
 
-> The game shall follow the given parameters
+> The game shall follow the given parameters:
 
 # Students on the Production Course should consider the following -
 
