@@ -1,3 +1,117 @@
+# Production & Programming 2 Combined Course game assignment
+
+Based upon the creation of your GDD and Art Bible you should develop a game that follows the development design guidance that is included within these documents
+
+CA03: Game parameters
+
+The develop a game that includes the following criteria -
+
+Develop a 3D computer game that has at lease FOUR game mechanics within its gameplay.
+
+Make a 3D game according to this description:
+
+The group shall make a functional game.
+The game must be a finished, polished, workable demo that combines game play user experience with game mechanics, level design, animations, FX, and lighting.
+The game shall run on a Windows PC and use Unreal as the primary game engine.
+The game should be playable with keyboard / mouse.
+When the game is turned in, it shall be compiled, meaning that it should run by starting the .exe file. It should not be necessary to play it within the Unreal Editor.
+Source code and assets for the game shall be available in a repository at github. Write the URL in the report.
+
+> The game shall follow the given parameters
+
+# Students on the Production Course should consider the following -
+
+There should be a single map or level that includes FOUR of the following game mechanics.
+
+These first THREE mechanics MUST be included within your game -
+
+1. AI/NPC - several characters or vehicles that react to the player's main character in a negative way.
+2. HUD - User Interface that shows at least TWO or more points of interest for the player
+3. Camera - placement that shows a choice of two or more camera angles.
+Your game MUST include at least ONE of the following mechanics -
+
+* Checkpoints - areas within the map/level that you reach a save point or re-spawn point if the player character dies.
+* Pick Ups Items - collect item by walking over it. Instant use
+* Win / Lose - Shows whether the player won or lost at the end of the game play.
+Combat - the ability to shoot at and injure or kill an opponent with either a weapon, vehicle or physical attack that includes a medium and heavy attack level of damage.
+
+----
+
+Your game must show evidence of 3D asset development and have four original assets developed by student that are made purely for your shooter game.
+
+The following assets must be included within the game and can be either outsourced or made by members of the group :
+
+Vehicle / Tunnel / Bridge / Building.( ONE iconic building or landmark such as the statue of liberty) / Fallen Statue or Pillar
+
+
+
+Your game must include examples of the following -
+
+Lights ( electric or natural , Neon or fire) / Fauna ( trees, plants , flowers, etc.)
+
+You should also consider developing any other assets that fit within your established game design.
+
+Interior environments should support modular based development
+
+---
+
+Artists should design a minimum of TWO UI displays for the following game mechanics -
+
+Heath Bar / Ammo Counter / Ammo Type / Minimap
+
+Any other UI development is also allowed
+
+---
+
+All Characters along with animations should be outsources from a 3rd party web site such as the Unreal library or Mixamo.
+
+Designing, developing, texturing, rigging and animations for a single character takes a lot of time. You are advised to outsource your model and animation for all characters from a 3rd part website such as those listed above
+
+---
+
+You are allowed the use of some outsourced assets that can be contributed to the game.
+
+They are is limited to the following -
+
+* ONLY TWO Vehicles. - Any additional Vehicles must be made by the group.
+* ONLY TWO Large Environmental assets - i.e ONE or TWO building, statue, bridge or tunnel. - Any additional Environmental Assets must be made by the group
+* ONE Weapon only. Any additional weapons must be made by the group.
+ALL OUTSOURCED ASSETS MUST BE LISTED WITHIN PRODUCTION SCHEDULE ALONG WITH THE LINK FROM THE ONLINE LOCATION IT WAS DOWNLOADED FROM.
+
+Think about how retexturing can expand the use of these assets rather than modeling new assets from scratch.
+
+Also consider how kitbashing assets can also expand the use of assets.
+
+# Students on the Programming 2 course should consider the following -
+
+NECESSARY -
+
+* AI/NPC - Several objects or characters that react to the player.
+* HUD - User Interface that shows at least TWO or more points of interest for the player For example - Heath / Ammo Counter / Minimap
+* Camera - Placement that shows a choice of two or more camera angles
+
+
+OPTIONAL (MINIMUM ONE) -
+
+* Checkpoints - areas within the map/level that you reach a save point or respawn location
+* Pick Ups Items - collect item by walking over it. Instant use
+* Win Lose - show a clear winner or loser during the game play
+* Combat - the ability to injure or kill an opponent with either a weapon or physical attack that include a medium and heavy attack
+
+
+Game parameters:
+
+1. Your game must include AI Controlling NPC assets
+2. Your game must include a minimum of TWO UI HUD examples
+3. The game must include ONE other mechanic
+4. There should be some camera switching
+5. Pick ups, health, ammo
+6. A menu system that starts the game, along with TWO other game options such as game controls
+7. Pause option
+
+A Game made With Only FREE Assets In Unreal Engine 5 Links to an external site.
+https://www.youtube.com/watch?v=vwVmiA77quELinks to an external site.
+
 # Sources
 
 Using Advanced CRT TV - VCR - VHS Effects (free pick of February 2024): https://www.unrealengine.com/marketplace/en-US/product/animated-crt-tv-vcr-effects
