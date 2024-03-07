@@ -31,3 +31,9 @@ Using zhya's Low Poly Wooden Table N64 PSX style (2023): https://sketchfab.com/3
 Using Avatar of RBG illustrationsRBG illustration's First 3 Gravestones (2021): https://sketchfab.com/3d-models/first-3-gravestones-ad7128e6c7d544cbae2af16ddeca6951
 
 Using Macky's Low Poly PS1 Tombstone (2023): https://sketchfab.com/3d-models/low-poly-ps1-tombstone-2e4ecda5e9df487099affe2a4d45eba0
+
+Using interactive stylized Lowpoly Grass from Project Nature - Props (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/dynamic-stylized-lowpoly-gras
+
+Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
+
+Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Content/3DModels. He also made the re-rendered films in Content/Video 
