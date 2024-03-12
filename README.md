@@ -30,12 +30,13 @@ These first THREE mechanics MUST be included within your game -
 1. AI/NPC - several characters or vehicles that react to the player's main character in a negative way.
 2. HUD - User Interface that shows at least TWO or more points of interest for the player
 3. Camera - placement that shows a choice of two or more camera angles.
+
 Your game MUST include at least ONE of the following mechanics -
 
 * Checkpoints - areas within the map/level that you reach a save point or re-spawn point if the player character dies.
 * Pick Ups Items - collect item by walking over it. Instant use
 * Win / Lose - Shows whether the player won or lost at the end of the game play.
-Combat - the ability to shoot at and injure or kill an opponent with either a weapon, vehicle or physical attack that includes a medium and heavy attack level of damage.
+* Combat - the ability to shoot at and injure or kill an opponent with either a weapon, vehicle or physical attack that includes a medium and heavy attack level of damage.
 
 ----
 
