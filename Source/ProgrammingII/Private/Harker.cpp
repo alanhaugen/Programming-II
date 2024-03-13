@@ -15,7 +15,6 @@ AHarker::AHarker()
 void AHarker::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -23,6 +22,7 @@ void AHarker::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	SetActorLocation(GetActorLocation() + FVector(0.0f, 1.0f, -1.0f));
 }
 
 // Called to bind functionality to input
