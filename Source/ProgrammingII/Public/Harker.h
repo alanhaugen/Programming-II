@@ -31,8 +31,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Mesh
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Harker")
-	TSubclassOf<AActor> HarkerMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Harker") // VisibleAnywhere
+	TSubclassOf<AActor> HarkerMesh; // UStaticMeshComponent*
 
 	// Input
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
