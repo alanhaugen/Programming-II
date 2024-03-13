@@ -23,7 +23,11 @@ void AHarker::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	SetActorLocation(GetActorLocation() + FVector(0.0f, 1.0f, -1.0f));
+	// Movement rate in units cm/s
+	float MovementRate = 50.0f;
+
+	// MovmentRate * DeltaTime (cm/s) * (c/frame) = (cm/frame)
+	SetActorLocation(GetActorLocation() + FVector(0.0f, MovementRate * DeltaTime, 0.0f));
 }
 
 // Called to bind functionality to input
