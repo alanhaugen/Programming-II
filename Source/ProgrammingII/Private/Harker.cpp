@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Harker.h"
+#include <EnhancedInputComponent.h>
+#include <EnhancedInputSubsystems.h>
 
 // Sets default values
 AHarker::AHarker()
@@ -30,5 +31,13 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AHarker::Move(const FInputActionValue& Value)
+{
+}
+
+void AHarker::LookAround(const FInputActionValue& Value)
+{
 }
 

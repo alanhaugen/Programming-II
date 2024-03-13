@@ -6,6 +6,10 @@
 #include "GameFramework/Character.h"
 #include "Harker.generated.h"
 
+class UInputMappingContext;
+class UInputAction;
+struct FInputActionValue;
+
 UCLASS()
 class PROGRAMMINGII_API AHarker : public ACharacter
 {
@@ -26,6 +30,24 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Mesh
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Harker")
 	TSubclassOf<AActor> HarkerMesh;
+
+	// Input
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputMappingContext* IMC;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputAction* JumpAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UInputAction* LookAction;
+
+	void Move(const FInputActionValue& Value);
+
+	void LookAround(const FInputActionValue& Value);
 };
