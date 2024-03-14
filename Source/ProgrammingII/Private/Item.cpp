@@ -24,9 +24,9 @@ void AItem::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// Movement rate in units cm/s
-	//RunningTime += DeltaTime;
+	RunningTime += DeltaTime;
 
 	// MovmentRate * DeltaTime (cm/s) * (c/frame) = (cm/frame)
-	//AddActorWorldOffset(FVector(0.0f, 0.0f, Amplitude * FMath::Sin(RunningTime * TimeConstant)));
+	AddActorWorldOffset(FVector(0.0f, 0.0f, Amplitude * FMath::Sin(RunningTime * TimeConstant)));
 }
 
