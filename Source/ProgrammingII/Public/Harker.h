@@ -9,6 +9,8 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class USpringArmComponent;
+class UCameraComponent;
 
 UCLASS()
 class PROGRAMMINGII_API AHarker : public ACharacter
@@ -18,36 +20,39 @@ class PROGRAMMINGII_API AHarker : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AHarker();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// Mesh
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Harker") // VisibleAnywhere
-	TSubclassOf<AActor> HarkerMesh; // UStaticMeshComponent*
-
 	// Input
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
-	UInputMappingContext* IMC;
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputMappingContext* HarkerContext;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* MoveAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* JumpAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* LookAction;
 
-	void Move(const FInputActionValue& Value);
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
+private:
+	// Spring Arm
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArm;
+
+	// Camera
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* Camera;
+
+	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
 };
