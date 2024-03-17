@@ -28,5 +28,6 @@ void AItem::Tick(float DeltaTime)
 
 	// MovmentRate * DeltaTime (cm/s) * (c/frame) = (cm/frame)
 	AddActorWorldOffset(FVector(0.0f, 0.0f, Amplitude * FMath::Sin(RunningTime * TimeConstant)));
+	SetActorRotation(GetActorRotation() + (FRotator(0.0f, 1.0f, 0.0f) * RotationSpeed * DeltaTime));
 }
 

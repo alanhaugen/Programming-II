@@ -27,8 +27,11 @@ public:
 	float RunningTime;
 
 	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float Amplitude = 0.25f;
+	float Amplitude = 1.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Item Parameters")
 	float TimeConstant = 5.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float RotationSpeed = 50.0f;
 };
