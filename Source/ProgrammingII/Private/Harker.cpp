@@ -77,6 +77,8 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AHarker::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AHarker::LookAround);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AHarker::Fire);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AHarker::Jump);
 	}
 }
 
@@ -102,3 +104,22 @@ void AHarker::LookAround(const FInputActionValue& Value)
 	AddControllerYawInput(LookAxisVector.X);
 }
 
+void AHarker::Fire()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Emerald, TEXT("Triggering Fire function "));
+
+	if (BulletToSpawn != nullptr)
+	{
+		UWorld* World = GetWorld();
+		if (World != nullptr)
+		{
+			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
+			FVector SpawnLocation = GetActorLocation();
+			FActorSpawnParameters ActorSpawnParams;
+			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+		}
+	}
+}

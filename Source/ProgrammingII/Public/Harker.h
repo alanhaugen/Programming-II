@@ -40,6 +40,18 @@ public:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputMappingContext* FireIMC;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* FireAction;
+
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void Fire();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
+	TSubclassOf<AActor> BulletToSpawn;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
