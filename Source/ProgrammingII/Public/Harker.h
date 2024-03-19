@@ -21,6 +21,9 @@ public:
 	// Sets default values for this character's properties
 	AHarker();
 	
+	bool isZoomingIn = false;
+	float ZoomFactor;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -46,8 +49,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* FireAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* AimAction;
+
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Fire();
+
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void AimStart(const FInputActionValue& Value);
+
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void AimEnd(const FInputActionValue& Value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
 	TSubclassOf<AActor> BulletToSpawn;

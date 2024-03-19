@@ -60,11 +60,21 @@ void AHarker::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Movement rate in units cm/s
-	//float MovementRate = 50.0f;
+	if (isZoomingIn)
+	{
+		ZoomFactor += DeltaTime / 0.5f;         //Zoom in over half a second
+	}
+	else
+	{
+		ZoomFactor -= DeltaTime / 0.25f;        //Zoom out over a quarter of a second
+	}
+	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
 
-	// MovmentRate * DeltaTime (cm/s) * (s/frame) = (cm/frame)
-	//SetActorLocation(GetActorLocation() + FVector(0.0f, MovementRate * DeltaTime, 0.0f));
+	//Blend our camera's FOV and our SpringArm's length based on ZoomFactor
+	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
+	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
+	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
+
 }
 
 // Called to bind functionality to input
@@ -79,6 +89,9 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AHarker::LookAround);
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AHarker::Fire);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AHarker::Jump);
+		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started , this, &AHarker::AimStart);
+		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
+
 	}
 }
 
@@ -105,7 +118,10 @@ void AHarker::LookAround(const FInputActionValue& Value)
 }
 
 void AHarker::Fire()
-{
+{	
+	if (isZoomingIn == false)
+		return;
+
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Emerald, TEXT("Triggering Fire function "));
 
 	if (BulletToSpawn != nullptr)
@@ -122,4 +138,16 @@ void AHarker::Fire()
 			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
 	}
+}
+
+void AHarker::AimStart(const FInputActionValue& Value)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
+	isZoomingIn = true;
+}
+
+void AHarker::AimEnd(const FInputActionValue& Value)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
+	isZoomingIn = false;
 }
