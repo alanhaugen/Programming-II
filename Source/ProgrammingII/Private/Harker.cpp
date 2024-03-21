@@ -67,6 +67,9 @@ void AHarker::Tick(float DeltaTime)
 	else
 	{
 		ZoomFactor -= DeltaTime / 0.25f;        //Zoom out over a quarter of a second
+		bUseControllerRotationPitch = false;
+		bUseControllerRotationYaw = false;
+		bUseControllerRotationRoll = false;
 	}
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
 
@@ -122,6 +125,10 @@ void AHarker::Fire()
 	if (isZoomingIn == false)
 		return;
 
+	bUseControllerRotationPitch = true;
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationRoll = true;
+
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Emerald, TEXT("Triggering Fire function "));
 
 	if (BulletToSpawn != nullptr)
@@ -134,6 +141,7 @@ void AHarker::Fire()
 			FVector SpawnLocation = GetActorLocation();
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+			
 
 			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
