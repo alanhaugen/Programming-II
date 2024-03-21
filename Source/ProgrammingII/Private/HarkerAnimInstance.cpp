@@ -25,5 +25,6 @@ void UHarkerAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	if (HarkerCharacterMovement)
 	{
 		GroundSpeed = UKismetMathLibrary::VSizeXY(HarkerCharacterMovement->Velocity);
+		IsFalling = HarkerCharacterMovement->IsFalling();
 	}
 }

@@ -23,4 +23,7 @@ public:
 
 	UPROPERTY(BluePrintReadOnly, Category = Movement)
 	float GroundSpeed;
+
+	UPROPERTY(BluePrintReadOnly, Category = Movement)
+	bool IsFalling;
 };

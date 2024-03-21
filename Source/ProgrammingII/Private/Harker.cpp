@@ -73,7 +73,7 @@ void AHarker::Tick(float DeltaTime)
 	}
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
 
-	//Blend our camera's FOV and our SpringArm's length based on ZoomFactor
+	// Blend our camera's FOV and our SpringArm's length based on ZoomFactor
 	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
 	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
