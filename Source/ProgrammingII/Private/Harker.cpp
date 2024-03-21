@@ -125,9 +125,6 @@ void AHarker::Fire()
 	if (isZoomingIn == false)
 		return;
 
-	
-
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Emerald, TEXT("Triggering Fire function "));
 
 	if (BulletToSpawn != nullptr)
 	{
