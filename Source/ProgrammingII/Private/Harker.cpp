@@ -125,9 +125,7 @@ void AHarker::Fire()
 	if (isZoomingIn == false)
 		return;
 
-	bUseControllerRotationPitch = true;
-	bUseControllerRotationYaw = true;
-	bUseControllerRotationRoll = true;
+	
 
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Emerald, TEXT("Triggering Fire function "));
 
@@ -152,6 +150,9 @@ void AHarker::AimStart(const FInputActionValue& Value)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
+	bUseControllerRotationPitch = true;
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationRoll = true;
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
