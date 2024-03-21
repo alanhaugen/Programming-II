@@ -62,7 +62,7 @@ void AHarker::Tick(float DeltaTime)
 
 	if (isZoomingIn)
 	{
-		ZoomFactor += DeltaTime / 0.5f;         //Zoom in over half a second
+		ZoomFactor += DeltaTime / 0.2f;         //Zoom in over half a second
 	}
 	else
 	{
