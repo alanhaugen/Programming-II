@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "CharacterState.h"
 #include "HarkerAnimInstance.generated.h"
 
 UCLASS()
@@ -26,4 +27,7 @@ public:
 
 	UPROPERTY(BluePrintReadOnly, Category = Movement)
 	bool IsFalling;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Movement | Character State")
+	ECharacterState CharacterState;
 };

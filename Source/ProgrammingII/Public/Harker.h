@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "CharacterState.h"
 #include "Harker.generated.h"
 
 class UInputMappingContext;
@@ -11,6 +12,7 @@ class UInputAction;
 struct FInputActionValue;
 class USpringArmComponent;
 class UCameraComponent;
+class AItem;
 
 UCLASS()
 class PROGRAMMINGII_API AHarker : public ACharacter
@@ -79,4 +81,14 @@ private:
 
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
+
+	UPROPERTY(VisibleInstanceOnly)
+	AItem* OverlappingItem;
+
+	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+
+public:
+	FORCEINLINE void SetOverlappingItem(AItem* item) { OverlappingItem = item; };
+	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
+	FORCEINLINE AItem* GetOverlappingItem(AItem* item) const { return OverlappingItem; };
 };
