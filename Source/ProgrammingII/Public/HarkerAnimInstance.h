@@ -28,6 +28,15 @@ public:
 	UPROPERTY(BluePrintReadOnly, Category = Movement)
 	bool IsFalling;
 
+	UPROPERTY(BluePrintReadOnly, Category = Movement)
+	bool IsStraphing;
+
+	UPROPERTY(BluePrintReadOnly, Category = Movement)
+	bool IsMovingForward;
+
+	UPROPERTY(BluePrintReadOnly, Category = Movement)
+	bool IsMovingRight;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Movement | Character State")
 	ECharacterState CharacterState;
 };

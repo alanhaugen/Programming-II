@@ -23,6 +23,7 @@ public:
 	// Sets default values for this character's properties
 	AHarker();
 	
+	// Variables for aiming with right mouse click
 	bool isZoomingIn = false;
 	float ZoomFactor;
 

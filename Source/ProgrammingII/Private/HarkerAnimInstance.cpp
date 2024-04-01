@@ -5,6 +5,7 @@
 #include "Harker.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "KismetAnimationLibrary.h"
 
 void UHarkerAnimInstance::NativeInitializeAnimation()
 {
@@ -24,8 +25,11 @@ void UHarkerAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
 	if (HarkerCharacterMovement)
 	{
-		GroundSpeed = UKismetMathLibrary::VSizeXY(HarkerCharacterMovement->Velocity);
-		IsFalling = HarkerCharacterMovement->IsFalling();
-		CharacterState = HarkerCharacter->GetCharacterState();
+		GroundSpeed     = UKismetMathLibrary::VSizeXY(HarkerCharacterMovement->Velocity);
+		IsFalling       = HarkerCharacterMovement->IsFalling();
+		IsStraphing     = HarkerCharacter->isZoomingIn;
+		IsMovingForward = GroundSpeed > 0.0f && UKismetAnimationLibrary::CalculateDirection(HarkerCharacterMovement->Velocity, HarkerCharacter->GetActorRotation()) == 0.0f;
+		IsMovingRight   = UKismetAnimationLibrary::CalculateDirection(HarkerCharacterMovement->Velocity, HarkerCharacter->GetActorRotation()) > 0.0f;
+		CharacterState  = HarkerCharacter->GetCharacterState();
 	}
 }
