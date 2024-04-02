@@ -149,6 +149,12 @@ Using Avatar of RBG illustrationsRBG illustration's First 3 Gravestones (2021): 
 
 Using Macky's Low Poly PS1 Tombstone (2023): https://sketchfab.com/3d-models/low-poly-ps1-tombstone-2e4ecda5e9df487099affe2a4d45eba0
 
+Using hamsterspit's Medieval asset 21\ bat (2017): https://sketchfab.com/3d-models/medieval-asset-21-bat-8c900496173b4b32b8f8990c2d97886b
+
+Using Lost Gecko's Fagnolle Church [Belgium] (2017) https://sketchfab.com/3d-models/fagnolle-church-belgium-ae5bcac872ac47f9b644e08aeb19f936
+
+Using Teranox's House Asset (2022) https://sketchfab.com/3d-models/house-asset-f4ee8bbe544c4a188ca74212a9ba8ab9
+
 Using interactive stylized Lowpoly Grass from Project Nature - Props (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/dynamic-stylized-lowpoly-gras
 
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
