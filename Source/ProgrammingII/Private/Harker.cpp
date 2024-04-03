@@ -37,7 +37,9 @@ AHarker::AHarker()
 
 	// Make the default items lantern and umbrella
 	Lantern  = CreateDefaultSubobject<ALantern>(TEXT("Lantern"));
+	Lantern->LanternMesh->SetupAttachment(GetRootComponent());
 	Umbrella = CreateDefaultSubobject<AUmbrella>(TEXT("Umbrella"));
+	Umbrella->UmbrellaMesh->SetupAttachment(GetRootComponent());
 	
 	// Put lantern and umbrella in hands
 	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);

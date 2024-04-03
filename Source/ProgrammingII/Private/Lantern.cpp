@@ -9,4 +9,11 @@ ALantern::ALantern()
 	PrimaryActorTick.bCanEverTick = true;
 
 	LanternMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Lantern Mesh"));
+
+	UStaticMesh* StaticMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, TEXT("/Game/Mesh/Characters/Lantern/SK_lantern")));
+
+	if (StaticMesh && LanternMesh)
+	{
+		LanternMesh->SetStaticMesh(StaticMesh);
+	}
 }

@@ -9,4 +9,11 @@ AUmbrella::AUmbrella()
 	PrimaryActorTick.bCanEverTick = true;
 
 	UmbrellaMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella Mesh"));
+
+	UStaticMesh* StaticMesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, TEXT("/Game/Mesh/Characters/Umbrella/SK_umbrella")));
+
+	if (StaticMesh && UmbrellaMesh)
+	{
+		UmbrellaMesh->SetStaticMesh(StaticMesh);
+	}
 }
