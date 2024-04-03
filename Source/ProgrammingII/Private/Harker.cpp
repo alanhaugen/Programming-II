@@ -7,8 +7,6 @@
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
-#include "Lantern.h"
-#include "Umbrella.h"
 
 // Sets default values
 AHarker::AHarker()
@@ -36,15 +34,15 @@ AHarker::AHarker()
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.f, 0.0f);
 
 	// Make the default items lantern and umbrella
-	Lantern  = CreateDefaultSubobject<ALantern>(TEXT("Lantern"));
-	Lantern->LanternMesh->SetupAttachment(GetRootComponent());
-	Umbrella = CreateDefaultSubobject<AUmbrella>(TEXT("Umbrella"));
-	Umbrella->UmbrellaMesh->SetupAttachment(GetRootComponent());
+	Lantern  = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Lantern"));
+	Lantern->SetupAttachment(GetRootComponent());
+	Umbrella = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella"));
+	Umbrella->SetupAttachment(GetRootComponent());
 	
 	// Put lantern and umbrella in hands
 	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
-	Lantern->LanternMesh->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
-	Umbrella->UmbrellaMesh->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
+	Lantern->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
+	Umbrella->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
 
 	// Make an instance of this class the standard player
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;

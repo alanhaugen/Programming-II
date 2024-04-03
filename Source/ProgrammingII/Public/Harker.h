@@ -13,8 +13,6 @@ struct FInputActionValue;
 class USpringArmComponent;
 class UCameraComponent;
 class AItem;
-class ALantern;
-class AUmbrella;
 
 UCLASS()
 class PROGRAMMINGII_API AHarker : public ACharacter
@@ -86,8 +84,11 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* Camera;
 
-	ALantern* Lantern;
-	AUmbrella* Umbrella;
+	// Default items
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* Lantern;
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* Umbrella;
 
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
