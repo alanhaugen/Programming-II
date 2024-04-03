@@ -22,6 +22,10 @@ class PROGRAMMINGII_API AHarker : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AHarker();
+
+	// Harker health
+	UPROPERTY(VisibleInstanceOnly)
+	float Health = 0;
 	
 	// Variables for aiming with right mouse click
 	bool isZoomingIn = false;
