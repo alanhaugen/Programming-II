@@ -33,6 +33,11 @@ AHarker::AHarker()
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.f, 0.0f);
 
+	// Put lantern and umbrella in hands
+	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
+	//LanternMesh->AttachToComponent(this, TransformRules, "RightHandSocket");
+	//UmbrellaMesh->AttachToComponent(this, TransformRules, "LeftHandSocket");
+
 	// Make an instance of this class the standard player
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
@@ -62,15 +67,18 @@ void AHarker::Tick(float DeltaTime)
 
 	if (isZoomingIn)
 	{
-		ZoomFactor += DeltaTime / 0.5f;         //Zoom in over half a second
+		ZoomFactor += DeltaTime / 0.2f;         //Zoom in over half a second
 	}
 	else
 	{
 		ZoomFactor -= DeltaTime / 0.25f;        //Zoom out over a quarter of a second
+		bUseControllerRotationPitch = false;
+		bUseControllerRotationYaw = false;
+		bUseControllerRotationRoll = false;
 	}
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
 
-	//Blend our camera's FOV and our SpringArm's length based on ZoomFactor
+	// Blend our camera's FOV and our SpringArm's length based on ZoomFactor
 	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
 	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
@@ -91,7 +99,6 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AHarker::Jump);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started , this, &AHarker::AimStart);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
-
 	}
 }
 
@@ -120,13 +127,14 @@ void AHarker::LookAround(const FInputActionValue& Value)
 void AHarker::Fire()
 {	
 	if (isZoomingIn == false)
+	{
 		return;
-
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Emerald, TEXT("Triggering Fire function "));
+	}
 
 	if (BulletToSpawn != nullptr)
 	{
 		UWorld* World = GetWorld();
+
 		if (World != nullptr)
 		{
 			APlayerController* PlayerController = Cast<APlayerController>(GetController());
@@ -134,7 +142,7 @@ void AHarker::Fire()
 			FVector SpawnLocation = GetActorLocation();
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-
+			
 			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
 	}
@@ -144,6 +152,9 @@ void AHarker::AimStart(const FInputActionValue& Value)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
+	bUseControllerRotationPitch = true;
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationRoll = true;
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
