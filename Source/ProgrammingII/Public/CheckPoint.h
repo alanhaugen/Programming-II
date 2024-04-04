@@ -22,7 +22,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	AHarker* player;
+	AHarker* Player;
 
 public:	
 	void Load();

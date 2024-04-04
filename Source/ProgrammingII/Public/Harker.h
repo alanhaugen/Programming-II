@@ -90,6 +90,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
 	TSubclassOf<AActor> BulletToSpawn;
 
+	// Check points
+	UPROPERTY(VisibleInstanceOnly, Category = CheckPoint)
+	ACheckPoint* CurrentCheckPoint;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = CheckPoint)
+	TArray<ACheckPoint*> CheckPoints;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -112,11 +119,8 @@ private:
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
 
-	UPROPERTY(VisibleInstanceOnly)
+	UPROPERTY(VisibleInstanceOnly, Category = Item)
 	AItem* OverlappingItem;
-
-	UPROPERTY(VisibleInstanceOnly)
-	ACheckPoint* CurrentCheckPoint;
 
 	// State of the player
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;

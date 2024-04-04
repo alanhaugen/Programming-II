@@ -17,18 +17,24 @@ void ACheckPoint::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (GetWorld())
+	{
+		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		Player->CheckPoints.Add(this);
+		Player->CurrentCheckPoint = this;
+	}
 }
 
 void ACheckPoint::Load()
 {
-	if (player)
+	if (Player)
 	{
-		player->SetActorLocation(GetActorLocation());
-		player->SetActorRotation(GetActorRotation());
+		Player->SetActorLocation(GetActorLocation());
+		Player->SetActorRotation(GetActorRotation());
 
-		player->AmmunitionNormal = AmmunitionNormal;
-		player->AmmunitionFlame  = AmmunitionFlame;
-		player->AmmunitionHoly   = AmmunitionHoly;
+		Player->AmmunitionNormal = AmmunitionNormal;
+		Player->AmmunitionFlame  = AmmunitionFlame;
+		Player->AmmunitionHoly   = AmmunitionHoly;
 	}
 }
 
