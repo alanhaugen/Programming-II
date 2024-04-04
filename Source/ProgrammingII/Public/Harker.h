@@ -13,6 +13,7 @@ struct FInputActionValue;
 class USpringArmComponent;
 class UCameraComponent;
 class AItem;
+class ACheckPoint;
 
 UCLASS()
 class PROGRAMMINGII_API AHarker : public ACharacter
@@ -26,6 +27,18 @@ public:
 	// Harker health
 	UPROPERTY(VisibleInstanceOnly)
 	float Health = 0;
+
+	// Amount of ammunition normal
+	UPROPERTY(EditAnywhere)
+	float AmmunitionNormal = 10.0f;
+
+	// Amount of ammunition incendiary
+	UPROPERTY(EditAnywhere)
+	float AmmunitionFlame = 0.0f;
+
+	// Amount of ammunition holy water
+	UPROPERTY(EditAnywhere)
+	float AmmunitionHoly = 0.0f;
 	
 	// Variables for aiming with right mouse click
 	bool isZoomingIn = false;
@@ -96,6 +109,10 @@ private:
 	UPROPERTY(VisibleInstanceOnly)
 	AItem* OverlappingItem;
 
+	UPROPERTY(VisibleInstanceOnly)
+	ACheckPoint* CurrentCheckPoint;
+
+	// State of the player
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
 
 public:

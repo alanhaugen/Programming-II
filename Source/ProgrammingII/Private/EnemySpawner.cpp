@@ -32,7 +32,7 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 	if (RunningTime > SpawnTime) 
 	{
-		RunningTime = 0.f;
+		RunningTime = 0.0f;
 
 		GetWorld()->SpawnActor<AEnemy>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
 	}

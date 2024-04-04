@@ -7,6 +7,7 @@
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
+#include "CheckPoint.h"
 
 // Sets default values
 AHarker::AHarker()
@@ -43,6 +44,9 @@ AHarker::AHarker()
 	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
 	Lantern->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
 	Umbrella->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
+
+	// Set first check point
+	CurrentCheckPoint = nullptr;
 
 	// Make an instance of this class the standard player
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -82,6 +86,7 @@ void AHarker::Tick(float DeltaTime)
 		bUseControllerRotationYaw = false;
 		bUseControllerRotationRoll = false;
 	}
+
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
 
 	// Blend our camera's FOV and our SpringArm's length based on ZoomFactor
