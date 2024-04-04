@@ -151,7 +151,7 @@ void AHarker::Fire()
 	{
 		UWorld* World = GetWorld();
 
-		if (World != nullptr)
+		if (World)
 		{
 			APlayerController* PlayerController = Cast<APlayerController>(GetController());
 			FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();

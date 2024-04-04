@@ -49,4 +49,10 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Item Parameters")
 	float RotationSpeed = 50.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float AmmunitionAmount = 10.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	int AmmunitionType = 0;
 };

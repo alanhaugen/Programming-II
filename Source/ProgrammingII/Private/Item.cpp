@@ -27,7 +27,15 @@ void AItem::BeginPlay()
 
 void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	Player->AmmunitionNormal += 10;
+	if (AmmunitionType == 0)
+		Player->AmmunitionNormal += AmmunitionAmount;
+
+	if (AmmunitionType == 1)
+		Player->AmmunitionFlame += AmmunitionAmount;
+
+	if (AmmunitionType == 2)
+		Player->AmmunitionHoly += AmmunitionAmount;
+
 	Destroy();
 }
 
