@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Item.h"
-#include "Components/BoxComponent.h"
+#include "Harker.h"
+#include <Components/BoxComponent.h>
 
 AItem::AItem()
 {
@@ -15,26 +16,23 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (GetWorld())
+	{
+		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	}
+
 	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSpehereOverlap);
 	CollisionMesh->OnComponentEndOverlap.AddDynamic(this, &AItem::OnSpehereEndOverlap);
 }
 
 void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Overlap item"));
-	}
-
+	Player->AmmunitionNormal += 10;
 	Destroy();
 }
 
 void AItem::OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("End overlap item"));
-	}
 }
 
 void AItem::Tick(float DeltaTime)

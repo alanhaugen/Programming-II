@@ -29,15 +29,15 @@ public:
 	float Health = 0;
 
 	// Amount of ammunition normal
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float AmmunitionNormal = 10.0f;
 
 	// Amount of ammunition incendiary
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float AmmunitionFlame = 0.0f;
 
 	// Amount of ammunition holy water
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float AmmunitionHoly = 0.0f;
 	
 	// Variables for aiming with right mouse click

@@ -7,6 +7,7 @@
 #include "Item.generated.h"
 
 class UBoxComponent;
+class AHarker;
 
 UCLASS()
 class PROGRAMMINGII_API AItem : public AActor
@@ -28,6 +29,9 @@ protected:
 
 	UFUNCTION()
 	virtual void OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+private:
+	AHarker* Player;
 
 public:	
 	// Called every frame

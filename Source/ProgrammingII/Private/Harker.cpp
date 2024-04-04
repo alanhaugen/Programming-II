@@ -142,6 +142,11 @@ void AHarker::Fire()
 		return;
 	}
 
+	if (AmmunitionNormal <= 0)
+		return;
+
+	AmmunitionNormal--;
+
 	if (BulletToSpawn != nullptr)
 	{
 		UWorld* World = GetWorld();
