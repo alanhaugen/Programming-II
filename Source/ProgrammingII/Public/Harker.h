@@ -25,8 +25,8 @@ public:
 	AHarker();
 
 	// Harker health
-	UPROPERTY(VisibleInstanceOnly)
-	float Health = 0;
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
+	float Health = 100.0f;
 
 	// Amount of ammunition normal
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
