@@ -39,11 +39,6 @@ AHarker::AHarker()
 	Lantern->SetupAttachment(GetRootComponent());
 	Umbrella = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella"));
 	Umbrella->SetupAttachment(GetRootComponent());
-	
-	// Put lantern and umbrella in hands
-	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
-	Lantern->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
-	Umbrella->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
 
 	// Set first check point
 	CurrentCheckPoint = nullptr;
@@ -56,6 +51,11 @@ AHarker::AHarker()
 void AHarker::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Put lantern and umbrella in hands
+	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
+	Lantern->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
+	Umbrella->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
 
 	// Enhanced Input Input Mapping Controller (IMC) Setup for The Castle Main Game Character Harker
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
