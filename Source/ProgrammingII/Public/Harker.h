@@ -72,6 +72,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* AimAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* InteractionAction;
+
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Fire();
 
@@ -80,6 +83,9 @@ public:
 
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void AimEnd(const FInputActionValue& Value);
+
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void Interaction();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
 	TSubclassOf<AActor> BulletToSpawn;

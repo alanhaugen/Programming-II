@@ -93,7 +93,6 @@ void AHarker::Tick(float DeltaTime)
 	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
 	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
-
 }
 
 // Called to bind functionality to input
@@ -110,6 +109,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AHarker::Jump);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started , this, &AHarker::AimStart);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
+		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Completed, this, &AHarker::Interaction);
 	}
 }
 
@@ -172,4 +172,17 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
+}
+
+void AHarker::Interaction()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Interact"));
+	}
+
+	if (CurrentCheckPoint)
+	{
+		CurrentCheckPoint->Load();
+	}
 }
