@@ -158,12 +158,17 @@ void AHarker::LookAround(const FInputActionValue& Value)
 }
 
 void AHarker::Fire()
-{	
-	if (isZoomingIn == false || CharacterState == ECharacterState::ECS_Unequipped)
+{
+	if (isZoomingIn == false)
+	{
+		// Melee attack
+	}
+	else if (CharacterState == ECharacterState::ECS_Unequipped)
 	{
 		return;
 	}
 
+	// Fire crossbow based on selected ammunition
 	if (SelectedAmmo == EAmmoTypes::EAT_Normal)
 	{
 		if (AmmunitionNormal <= 0)
