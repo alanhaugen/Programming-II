@@ -70,6 +70,11 @@ void AHarker::BeginPlay()
 	}
 }
 
+void AHarker::EquipWeapon()
+{
+	CharacterState = ECharacterState::ECS_Equipped;
+}
+
 // Called every frame
 void AHarker::Tick(float DeltaTime)
 {

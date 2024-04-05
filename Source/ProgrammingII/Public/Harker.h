@@ -44,6 +44,10 @@ public:
 	bool isZoomingIn = false;
 	float ZoomFactor;
 
+	// Public Equip Weapon function
+	UFUNCTION(BlueprintCallable)
+	void EquipWeapon();
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

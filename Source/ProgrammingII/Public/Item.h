@@ -33,6 +33,14 @@ protected:
 private:
 	AHarker* Player;
 
+	enum EItemType
+	{
+		EIT_NormalArrow = 0,
+		EIT_FireArrow,
+		EIT_HolyWaterArrow,
+		EIT_Crossbow
+	};
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
