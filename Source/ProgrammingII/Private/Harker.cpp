@@ -173,7 +173,7 @@ void AHarker::Fire()
 
 		AmmunitionNormal--;
 	}
-	if (SelectedAmmo == EAmmoTypes::EAT_Fire)
+	else if (SelectedAmmo == EAmmoTypes::EAT_Fire)
 	{
 		if (AmmunitionFlame <= 0)
 		{
@@ -182,7 +182,7 @@ void AHarker::Fire()
 
 		AmmunitionFlame--;
 	}
-	if (SelectedAmmo == EAmmoTypes::EAT_Holy)
+	else if (SelectedAmmo == EAmmoTypes::EAT_Holy)
 	{
 		if (AmmunitionHoly <= 0)
 		{
