@@ -23,6 +23,10 @@ void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (Health <= 0.0)
+	{
+		IsDead = true;
+	}
 }
 
 // Called to bind functionality to input

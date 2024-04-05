@@ -25,6 +25,7 @@ void UEnemyAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	if (EnemyCharacterMovement)
 	{
 		GroundSpeed = UKismetMathLibrary::VSizeXY(EnemyCharacterMovement->Velocity);
-		IsFalling = EnemyCharacterMovement->IsFalling();
+		IsFalling   = EnemyCharacterMovement->IsFalling();
+		IsDead      = EnemyCharacter->IsDead;
 	}
 }

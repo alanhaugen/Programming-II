@@ -17,7 +17,11 @@ public:
 
 	// Enemy health
 	UPROPERTY(VisibleInstanceOnly)
-	float Health = 0;
+	float Health = 1.0f;
+
+	// Enemy state
+	UPROPERTY(VisibleInstanceOnly)
+	bool IsDead = false;
 
 protected:
 	// Called when the game starts or when spawned
