@@ -83,7 +83,7 @@ void AHarker::EquipWeapon()
 		// Show the crossbow
 		Crossbow->ToggleVisibility();
 
-		// Chane the state of the character
+		// Change the state of the character
 		CharacterState = ECharacterState::ECS_Equipped;
 
 		// Hide the default assets
@@ -162,6 +162,9 @@ void AHarker::Fire()
 	if (isZoomingIn == false)
 	{
 		// Melee attack
+		//Umbrella->ToggleVisibility();
+		// Play animation montage
+		// Damage nearby enemies
 	}
 	else if (CharacterState == ECharacterState::ECS_Unequipped)
 	{
