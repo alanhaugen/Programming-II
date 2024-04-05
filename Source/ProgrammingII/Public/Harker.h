@@ -15,6 +15,13 @@ class UCameraComponent;
 class AItem;
 class ACheckPoint;
 
+enum EAmmoTypes
+{
+	EAT_Normal,
+	EAT_Fire,
+	EAT_Holy
+};
+
 UCLASS()
 class PROGRAMMINGII_API AHarker : public ACharacter
 {
@@ -120,6 +127,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Umbrella;
 
+	// Crossbow weapon
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* Crossbow;
+
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
 
@@ -128,6 +139,7 @@ private:
 
 	// State of the player
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* item) { OverlappingItem = item; };

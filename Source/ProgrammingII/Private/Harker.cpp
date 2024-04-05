@@ -40,6 +40,11 @@ AHarker::AHarker()
 	Umbrella = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella"));
 	Umbrella->SetupAttachment(GetRootComponent());
 
+	// Make the crossbow then hide it as it is not equipped by default
+	Crossbow = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow"));
+	Crossbow->SetupAttachment(GetRootComponent());
+	Crossbow->ToggleVisibility();
+
 	// Set first check point
 	CurrentCheckPoint = nullptr;
 
@@ -56,6 +61,7 @@ void AHarker::BeginPlay()
 	FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
 	Lantern->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
 	Umbrella->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
+	Crossbow->AttachToComponent(GetMesh(), TransformRules, "RightHandGunSocket");
 
 	// Enhanced Input Input Mapping Controller (IMC) Setup for The Castle Main Game Character Harker
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
@@ -72,7 +78,18 @@ void AHarker::BeginPlay()
 
 void AHarker::EquipWeapon()
 {
-	CharacterState = ECharacterState::ECS_Equipped;
+	if (CharacterState != ECharacterState::ECS_Equipped)
+	{
+		// Show the crossbow
+		Crossbow->ToggleVisibility();
+
+		// Chane the state of the character
+		CharacterState = ECharacterState::ECS_Equipped;
+
+		// Hide the default assets
+		Lantern->ToggleVisibility();
+		Umbrella->ToggleVisibility();
+	}
 }
 
 // Called every frame
@@ -142,15 +159,38 @@ void AHarker::LookAround(const FInputActionValue& Value)
 
 void AHarker::Fire()
 {	
-	if (isZoomingIn == false)
+	if (isZoomingIn == false || CharacterState == ECharacterState::ECS_Unequipped)
 	{
 		return;
 	}
 
-	if (AmmunitionNormal <= 0)
-		return;
+	if (SelectedAmmo == EAmmoTypes::EAT_Normal)
+	{
+		if (AmmunitionNormal <= 0)
+		{
+			return;
+		}
 
-	AmmunitionNormal--;
+		AmmunitionNormal--;
+	}
+	if (SelectedAmmo == EAmmoTypes::EAT_Fire)
+	{
+		if (AmmunitionFlame <= 0)
+		{
+			return;
+		}
+
+		AmmunitionFlame--;
+	}
+	if (SelectedAmmo == EAmmoTypes::EAT_Holy)
+	{
+		if (AmmunitionHoly <= 0)
+		{
+			return;
+		}
+
+		AmmunitionHoly--;
+	}
 
 	if (BulletToSpawn != nullptr)
 	{

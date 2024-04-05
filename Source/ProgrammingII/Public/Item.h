@@ -38,7 +38,7 @@ private:
 		EIT_NormalArrow = 0,
 		EIT_FireArrow,
 		EIT_HolyWaterArrow,
-		EIT_Crossbow
+		EIT_Crossbow = 5
 	};
 
 public:	
