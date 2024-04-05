@@ -165,8 +165,11 @@ void AHarker::Fire()
 		//Umbrella->ToggleVisibility();
 		// Play animation montage
 		// Damage nearby enemies
+
+		return;
 	}
-	else if (CharacterState == ECharacterState::ECS_Unequipped)
+	
+	if (CharacterState == ECharacterState::ECS_Unequipped)
 	{
 		return;
 	}
