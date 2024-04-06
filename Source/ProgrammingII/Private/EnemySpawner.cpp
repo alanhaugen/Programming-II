@@ -4,6 +4,7 @@
 #include "EnemySpawner.h"
 #include "Math/UnrealMathUtility.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
+#include "Harker.h"
 #include "Enemy.h"
 
 // Sets default values
@@ -19,12 +20,25 @@ void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (GetWorld())
+	{
+		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	}
 }
 
 // Called every frame
 void AEnemySpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// Don't spawn enemies before the player has found and equipped the crossbow
+	if (Player)
+	{
+		if (Player->GetCharacterState() == ECharacterState::ECS_Unequipped)
+		{
+			return;
+		}
+	}
 
 	RunningTime += DeltaTime;
 
