@@ -30,9 +30,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BulletSettings")
 	class UStaticMeshComponent* BulletMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponSettings")
-	FVector GuntipOffset;
-
 	UPROPERTY(EditAnywhere, Category = "WeaponSettings")
 	float MovementSpeed = 10.f;
 };

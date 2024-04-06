@@ -11,9 +11,6 @@ ABullet::ABullet()
 	BulletMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bullet Mesh"));
 	RootComponent = BulletMesh;
 
-	GuntipOffset = FVector(100.0f, 0.0f, 10.0f);
-
-	SetActorLocation(GetActorLocation() + GuntipOffset);
 }
 
 void ABullet::BeginPlay()
