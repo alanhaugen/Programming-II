@@ -14,6 +14,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class AItem;
 class ACheckPoint;
+class UAnimMontage;
 
 enum EAmmoTypes
 {
@@ -113,9 +114,18 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Collision")
 	TEnumAsByte<ECollisionChannel> TraceChannelProperty = ECC_Pawn;
 
+	// Animation montages
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UAnimMontage* AttackMontage;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	// Attack logic for Harker's Fire function
+	bool MeleeAttack();
+	bool SpendAmmo();
+	void SpawnBullet();
 
 private:
 	// Spring Arm
@@ -144,6 +154,7 @@ private:
 
 	// State of the player
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	EActionState ActionState = EActionState::EAS_Unoccupied;
 	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
 public:
