@@ -312,6 +312,12 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AHarker::Move(const FInputActionValue& Value)
 {
+	// Don't move if attacking melee
+	if (ActionState == EActionState::EAS_Attacking)
+	{
+		return;
+	}
+
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
 	const FRotator Rotation = Controller->GetControlRotation();
