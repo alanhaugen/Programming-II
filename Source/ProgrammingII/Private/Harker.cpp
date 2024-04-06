@@ -77,6 +77,102 @@ void AHarker::BeginPlay()
 	}
 }
 
+bool AHarker::MeleeAttack()
+{
+	if (isZoomingIn == false && ActionState == EActionState::EAS_Unoccupied)
+	{
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+
+		if (AnimInstance && AttackMontage)
+		{
+			AnimInstance->Montage_Play(AttackMontage);
+
+			if (CharacterState == ECharacterState::ECS_Equipped)
+			{
+				Umbrella->ToggleVisibility();
+				Crossbow->ToggleVisibility();
+			}
+
+			/*const int32 Selection = FMath::RandRange(0, 1);
+			FName SelectionName;
+			switch(Selection)
+			{
+			case 0:
+				SelectionName = FName("Attack1");
+				break;
+			case 1:
+				SelectionName = FName("Attack2");
+				break;
+			default:
+			}
+
+			AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);*/
+
+			ActionState = EActionState::EAS_Attacking;
+		}
+		// Play animation montage
+		// Damage nearby enemies
+
+		return true;
+	}
+
+	return false;
+}
+
+bool AHarker::SpendAmmo()
+{
+	switch (SelectedAmmo)
+	{
+	case EAmmoTypes::EAT_Normal:
+		if (AmmunitionNormal <= 0)
+		{
+			return false;
+		}
+
+		AmmunitionNormal--;
+		break;
+	case EAmmoTypes::EAT_Fire:
+		if (AmmunitionFlame <= 0)
+		{
+			return false;
+		}
+
+		AmmunitionFlame--;
+		break;
+	case EAmmoTypes::EAT_Holy:
+		if (AmmunitionHoly <= 0)
+		{
+			return false;
+		}
+
+		AmmunitionHoly--;
+		break;
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Ammo not supported"));
+	}
+
+	return true;
+}
+
+void AHarker::SpawnBullet()
+{
+	if (BulletToSpawn)
+	{
+		UWorld* World = GetWorld();
+
+		if (World)
+		{
+			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
+			FVector SpawnLocation = GetActorLocation();
+			FActorSpawnParameters ActorSpawnParams;
+			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+		}
+	}
+}
+
 void AHarker::EquipWeapon()
 {
 	if (CharacterState != ECharacterState::ECS_Equipped)
@@ -160,89 +256,26 @@ void AHarker::LookAround(const FInputActionValue& Value)
 
 void AHarker::Fire()
 {
-	if (isZoomingIn == false)
+	// If left mouse is clicked without aiming, fight via melee (swing umbrella)
+	if (MeleeAttack())
 	{
-		// Melee attack
-		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-		
-		if (AnimInstance && AttackMontage)
-		{
-			AnimInstance->Montage_Play(AttackMontage);
-
-			/*int32 Selection = FMath::RandRange(0, 1);
-			FName SelectionName;
-			switch(Selection)
-			{
-			case 0:
-				SelectionName = FName("Attack1");
-				break;
-			case 1:
-				SelectionName = FName("Attack2");
-				break;
-			default:
-			}
-			
-			AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);*/
-		}
-
-		//Umbrella->ToggleVisibility();
-		// Play animation montage
-		// Damage nearby enemies
-
 		return;
 	}
 	
+	// Don't fire if no weapon is equipped
 	if (CharacterState == ECharacterState::ECS_Unequipped)
 	{
 		return;
 	}
 
-	// Fire crossbow based on selected ammunition
-	switch(SelectedAmmo)
+	// Try to fire crossbow based on selected ammunition, stop if out of ammo
+	if (SpendAmmo() == false)
 	{
-	case EAmmoTypes::EAT_Normal:
-		if (AmmunitionNormal <= 0)
-		{
-			return;
-		}
-
-		AmmunitionNormal--;
-		break;
-	case EAmmoTypes::EAT_Fire:
-		if (AmmunitionFlame <= 0)
-		{
-			return;
-		}
-
-		AmmunitionFlame--;
-		break;
-	case EAmmoTypes::EAT_Holy:
-		if (AmmunitionHoly <= 0)
-		{
-			return;
-		}
-
-		AmmunitionHoly--;
-		break;
-	default:
-		UE_LOG(LogTemp, Warning, TEXT("Ammo not supported"));
+		return;
 	}
 
-	if (BulletToSpawn)
-	{
-		UWorld* World = GetWorld();
-
-		if (World)
-		{
-			APlayerController* PlayerController = Cast<APlayerController>(GetController());
-			FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
-			FVector SpawnLocation = GetActorLocation();
-			FActorSpawnParameters ActorSpawnParams;
-			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-			
-			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
-		}
-	}
+	// Spawn arrow/bullet from crossbow
+	SpawnBullet();
 }
 
 void AHarker::AimStart(const FInputActionValue& Value)
