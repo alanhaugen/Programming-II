@@ -14,6 +14,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class AItem;
 class ACheckPoint;
+class UAnimMontage;
 
 enum EAmmoTypes
 {
@@ -107,6 +108,10 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = CheckPoint)
 	TArray<ACheckPoint*> CheckPoints;
+
+	// Animation montages
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UAnimMontage* AttackMontage;
 
 protected:
 	// Called when the game starts or when spawned

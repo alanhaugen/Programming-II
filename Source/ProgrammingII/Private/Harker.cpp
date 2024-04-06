@@ -7,6 +7,7 @@
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
+#include <Animation/AnimMontage.h>
 #include "CheckPoint.h"
 
 // Sets default values
@@ -162,6 +163,28 @@ void AHarker::Fire()
 	if (isZoomingIn == false)
 	{
 		// Melee attack
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		
+		if (AnimInstance && AttackMontage)
+		{
+			AnimInstance->Montage_Play(AttackMontage);
+
+			/*int32 Selection = FMath::RandRange(0, 1);
+			FName SelectionName;
+			switch(Selection)
+			{
+			case 0:
+				SelectionName = FName("Attack1");
+				break;
+			case 1:
+				SelectionName = FName("Attack2");
+				break;
+			default:
+			}
+			
+			AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);*/
+		}
+
 		//Umbrella->ToggleVisibility();
 		// Play animation montage
 		// Damage nearby enemies
@@ -175,35 +198,37 @@ void AHarker::Fire()
 	}
 
 	// Fire crossbow based on selected ammunition
-	if (SelectedAmmo == EAmmoTypes::EAT_Normal)
+	switch(SelectedAmmo)
 	{
+	case EAmmoTypes::EAT_Normal:
 		if (AmmunitionNormal <= 0)
 		{
 			return;
 		}
 
 		AmmunitionNormal--;
-	}
-	else if (SelectedAmmo == EAmmoTypes::EAT_Fire)
-	{
+		break;
+	case EAmmoTypes::EAT_Fire:
 		if (AmmunitionFlame <= 0)
 		{
 			return;
 		}
 
 		AmmunitionFlame--;
-	}
-	else if (SelectedAmmo == EAmmoTypes::EAT_Holy)
-	{
+		break;
+	case EAmmoTypes::EAT_Holy:
 		if (AmmunitionHoly <= 0)
 		{
 			return;
 		}
 
 		AmmunitionHoly--;
+		break;
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Ammo not supported"));
 	}
 
-	if (BulletToSpawn != nullptr)
+	if (BulletToSpawn)
 	{
 		UWorld* World = GetWorld();
 
