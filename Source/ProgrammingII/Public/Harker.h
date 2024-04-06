@@ -126,6 +126,7 @@ protected:
 	bool MeleeAttack();
 	bool SpendAmmo();
 	void SpawnBullet();
+	bool CanFire() const;
 
 	UFUNCTION(BlueprintCallable) // This function will be called in ABP_Harker
 	void MeleeAttackEnd(); // in the event graph
