@@ -108,6 +108,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = CheckPoint)
 	TArray<ACheckPoint*> CheckPoints;
 
+	// You can expose some of your collision query data as properties to help customize and debug 
+	// Here we expose the collision channel we want to run the query on, and set it to only hit Pawns.
+	UPROPERTY(EditAnywhere, Category = "Collision")
+	TEnumAsByte<ECollisionChannel> TraceChannelProperty = ECC_Pawn;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

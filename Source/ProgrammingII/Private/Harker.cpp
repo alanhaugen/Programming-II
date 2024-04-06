@@ -6,6 +6,7 @@
 #include <Components/CapsuleComponent.h>
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
+#include "Kismet/KismetSystemLibrary.h"
 #include <GameFramework/CharacterMovementComponent.h>
 #include "CheckPoint.h"
 
@@ -115,6 +116,61 @@ void AHarker::Tick(float DeltaTime)
 	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
 	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
+
+	// Line trace
+
+	/*FVector Start = Camera->GetComponentLocation();
+	FVector Forward = Camera->GetForwardVector();
+	FVector End = ((Forward * 1000.0f) + Start);
+	FHitResult outHit;
+
+	TArray<TEnumAsByte<EObjectTypeQuery>> TraceObjectTypes;
+	TraceObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_WorldStatic));
+	
+	TArray<AActor*> ignore;
+	ignore.Add(GetOwner());
+	ignore.Add(this);
+	
+
+	bool result = UKismetSystemLibrary::LineTraceSingleForObjects(GetWorld(), Start, End, TraceObjectTypes, false, ignore, EDrawDebugTrace::ForOneFrame, OUT outHit, true);
+
+	if (result) 
+	{
+		FString f = FString(outHit.GetActor()->GetName());
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, f);
+	}
+	*/
+	
+	// FHitResult will hold all data returned by our line collision query
+	FHitResult Hit;
+
+	// We set up a line trace from our current location to a point 1000cm ahead of us
+	FVector TraceStart = GetActorLocation();
+	FVector TraceEnd = GetActorLocation() + GetActorForwardVector() * 5000.0f;
+
+	// You can use FCollisionQueryParams to further configure the query
+	// Here we add ourselves to the ignored list so we won't block the trace
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+
+	// To run the query, you need a pointer to the current level, which you can get from an Actor with GetWorld()
+	// UWorld()->LineTraceSingleByChannel runs a line trace and returns the first actor hit over the provided collision channel.
+	GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, TraceChannelProperty, QueryParams);
+
+	// You can use DrawDebug helpers and the log to help visualize and debug your trace queries.
+	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, Hit.bBlockingHit ? FColor::Blue : FColor::Red, false, 5.0f, 0, 10.0f);
+	UE_LOG(LogTemp, Log, TEXT("Tracing line: %s to %s"), *TraceStart.ToCompactString(), *TraceEnd.ToCompactString());
+
+	// If the trace hit something, bBlockingHit will be true,
+	// and its fields will be filled with detailed info about what was hit
+	if (Hit.bBlockingHit && IsValid(Hit.GetActor()))
+	{
+		UE_LOG(LogTemp, Log, TEXT("Trace hit actor: %s"), *Hit.GetActor()->GetName());
+	}
+	else {
+		UE_LOG(LogTemp, Log, TEXT("No Actors were hit"));
+	}
+
 }
 
 // Called to bind functionality to input
