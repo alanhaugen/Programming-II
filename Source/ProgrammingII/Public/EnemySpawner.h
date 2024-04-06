@@ -8,6 +8,8 @@
 #include "Math/UnrealMathUtility.h"
 #include "EnemySpawner.generated.h"
 
+class AHarker;
+
 UCLASS()
 class PROGRAMMINGII_API AEnemySpawner : public AActor
 {
@@ -33,4 +35,5 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Enemy")
 	TSubclassOf<class AEnemy> EnemyClass;
 
+	AHarker* Player;
 };
