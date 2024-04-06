@@ -174,6 +174,17 @@ void AHarker::SpawnBullet()
 	}
 }
 
+void AHarker::MeleeAttackEnd()
+{
+	ActionState = EActionState::EAS_Unoccupied;
+
+	if (CharacterState == ECharacterState::ECS_Equipped)
+	{
+		Umbrella->ToggleVisibility();
+		Crossbow->ToggleVisibility();
+	}
+}
+
 void AHarker::EquipWeapon()
 {
 	if (CharacterState != ECharacterState::ECS_Equipped)
@@ -318,8 +329,9 @@ void AHarker::Fire()
 		return;
 	}
 	
-	// Don't fire if no weapon is equipped
-	if (CharacterState == ECharacterState::ECS_Unequipped)
+	// Don't fire if no weapon is equipped or doing melee attack
+	if (CharacterState == ECharacterState::ECS_Unequipped ||
+		ActionState == EActionState::EAS_Attacking)
 	{
 		return;
 	}
