@@ -174,6 +174,23 @@ void AHarker::SpawnBullet()
 	}
 }
 
+bool AHarker::CanFire() const
+{
+	return CharacterState == ECharacterState::ECS_Equipped &&
+		   ActionState    == EActionState::EAS_Unoccupied;
+}
+
+void AHarker::MeleeAttackEnd()
+{
+	ActionState = EActionState::EAS_Unoccupied;
+
+	if (CharacterState == ECharacterState::ECS_Equipped)
+	{
+		Umbrella->ToggleVisibility();
+		Crossbow->ToggleVisibility();
+	}
+}
+
 void AHarker::EquipWeapon()
 {
 	if (CharacterState != ECharacterState::ECS_Equipped)
@@ -323,20 +340,18 @@ void AHarker::Fire()
 		return;
 	}
 	
-	// Don't fire if no weapon is equipped
-	if (CharacterState == ECharacterState::ECS_Unequipped)
+	// Don't fire if no weapon is equipped or doing melee attack	
+	if (CanFire())
 	{
-		return;
-	}
+		// Try to fire crossbow based on selected ammunition, stop if out of ammo
+		if (SpendAmmo() == false)
+		{
+			return;
+		}
 
-	// Try to fire crossbow based on selected ammunition, stop if out of ammo
-	if (SpendAmmo() == false)
-	{
-		return;
+		// Spawn arrow/bullet from crossbow
+		SpawnBullet();
 	}
-
-	// Spawn arrow/bullet from crossbow
-	SpawnBullet();
 }
 
 void AHarker::AimStart(const FInputActionValue& Value)

@@ -126,6 +126,10 @@ protected:
 	bool MeleeAttack();
 	bool SpendAmmo();
 	void SpawnBullet();
+	bool CanFire() const;
+
+	UFUNCTION(BlueprintCallable) // This function will be called in ABP_Harker
+	void MeleeAttackEnd(); // in the event graph
 
 private:
 	// Spring Arm
@@ -152,9 +156,14 @@ private:
 	UPROPERTY(VisibleInstanceOnly, Category = Item)
 	AItem* OverlappingItem;
 
-	// State of the player
+	// Equipment state of the player
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+
+	// Action state of the player
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	EActionState ActionState = EActionState::EAS_Unoccupied;
+	
+	// Player selected ammunition
 	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
 public:
