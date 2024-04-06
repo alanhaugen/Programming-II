@@ -61,6 +61,6 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Item Parameters")
 	float AmmunitionAmount = 10.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	UPROPERTY(EditDefaultsOnly, Category = "Item Parameters")
 	int AmmunitionType = 0;
 };
