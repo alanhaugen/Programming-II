@@ -30,6 +30,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UAttributeComponent* Attributes;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UHealthBarComponent* HealthBarWidget;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,9 +41,6 @@ protected:
 	void DeathEnd();				// in the event graph
 
 private:	
-	UPROPERTY(VisibleAnywhere)
-	UHealthBarComponent* HealthBarWidget;
-
 	// Animation Montages
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* AttackMontage;
