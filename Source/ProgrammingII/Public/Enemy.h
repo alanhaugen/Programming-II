@@ -8,7 +8,7 @@
 
 class UAttributeComponent;
 class UAnimMontage;
-class UWidgetComponent;
+class UHealthBarComponent;
 
 UCLASS()
 class PROGRAMMINGII_API AEnemy : public ACharacter
@@ -29,6 +29,8 @@ public:
 	UPROPERTY(VisibleInstanceOnly)
 	bool IsDead = false;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,7 +40,7 @@ private:
 	UAttributeComponent* Attributes;
 
 	UPROPERTY(VisibleAnywhere)
-	UWidgetComponent* HealthBarWidget;
+	UHealthBarComponent* HealthBarWidget;
 
 	// Animation Montages
 	UAnimMontage* AttackMontage;

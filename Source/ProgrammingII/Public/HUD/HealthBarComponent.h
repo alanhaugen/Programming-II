@@ -14,4 +14,10 @@ class PROGRAMMINGII_API UHealthBarComponent : public UWidgetComponent
 {
 	GENERATED_BODY()
 	
+public:
+	void SetHealthPercent(float Percent);
+
+private:
+	UPROPERTY() // UPROPERTY() will make HealtBar start off as a nullptr
+	class UHealthBar* HealthBarWidget;
 };

@@ -2,7 +2,7 @@
 
 
 #include "Enemy.h"
-#include <Components/WidgetComponent.h>
+#include "HUD/HealthBarComponent.h"
 #include "AttributeComponent.h"
 
 // Sets default values
@@ -12,8 +12,14 @@ AEnemy::AEnemy()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Attributes = CreateDefaultSubobject<UAttributeComponent>(TEXT("Attributes"));
-	HealthBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HealthBar"));
+	HealthBarWidget = CreateDefaultSubobject<UHealthBarComponent>(TEXT("HealthBar"));
 	HealthBarWidget->SetupAttachment(GetRootComponent());
+}
+
+float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+
+	return 0.0f;
 }
 
 // Called when the game starts or when spawned
@@ -21,6 +27,10 @@ void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (HealthBarWidget)
+	{
+		HealthBarWidget->SetHealthPercent(1.0f);
+	}
 }
 
 // Called every frame
