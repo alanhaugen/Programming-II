@@ -240,6 +240,10 @@ void AHarker::Tick(float DeltaTime)
 		}
 
 		CharacterState = ECharacterState::ECS_Dead;
+		isZoomingIn = false;
+		bUseControllerRotationPitch = false;
+		bUseControllerRotationYaw   = false;
+		bUseControllerRotationRoll  = false;
 
 		return;
 	}
