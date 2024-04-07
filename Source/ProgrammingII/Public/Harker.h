@@ -49,7 +49,9 @@ public:
 	float AmmunitionHoly = 0.0f;
 	
 	// Variables for aiming with right mouse click
+	UPROPERTY(BlueprintReadOnly)
 	bool isZoomingIn = false;
+
 	float ZoomFactor;
 
 	// Public Equip Weapon function

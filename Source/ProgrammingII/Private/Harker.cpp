@@ -163,7 +163,8 @@ void AHarker::SpawnBullet()
 
 		if (World)
 		{
-			//FVector TraceStart = GetMesh()->GetSocketLocation("RightHandGunSocket");
+			// Make ray from crossbow to middle of screen (Crossair)
+			// Thanks to https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
 			FVector TraceStart = Camera->GetComponentLocation();
 			FVector TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * 10000000.f;
 
@@ -172,23 +173,23 @@ void AHarker::SpawnBullet()
 			FCollisionQueryParams QueryParams;
 			QueryParams.AddIgnoredActor(this);
 
-			// To run the query, you need a pointer to the current level, which you can get from an Actor with GetWorld()
-			// UWorld()->LineTraceSingleByChannel runs a line trace and returns the first actor hit over the provided collision channel.
-			float Distance = 10000.f;
+			// Length of ray to do line trace against
+			float Distance = 10000.0f;
 
+			// If the ray hits something, make the thing hit the target of the bullet/arrow
 			if (GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, TraceChannelProperty, QueryParams))
 			{
 				TraceEnd = Hit.ImpactPoint;
 			}
 			else
 			{
+				// Else just fire from the crossbow and far into the middle of the screen
 				TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * Distance;
 			}
 
 			FVector Direction(TraceEnd - GetMesh()->GetSocketLocation("RightHandGunSocket"));
 
 			APlayerController* PlayerController = Cast<APlayerController>(GetController());
-			//FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
 			FRotator SpawnRotation = Direction.Rotation();
 			FVector SpawnLocation = GetMesh()->GetSocketLocation("RightHandGunSocket");
 			FActorSpawnParameters ActorSpawnParams;
@@ -197,8 +198,6 @@ void AHarker::SpawnBullet()
 			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
 
 			//DrawDebugLine(GetWorld(), TraceStart, TraceEnd, Hit.bBlockingHit ? FColor::Blue : FColor::Red, false, 5.0f, 0, 10.0f);
-			//UE_LOG(LogTemp, Log, TEXT("Tracing line: %s to %s"), *TraceStart.ToCompactString(), *TraceEnd.ToCompactString());
-
 		}
 	}
 }
@@ -259,35 +258,6 @@ void AHarker::Tick(float DeltaTime)
 	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
 	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
-
-	// Line trace
-
-	/*FVector Start = Camera->GetComponentLocation();
-	FVector Forward = Camera->GetForwardVector();
-	FVector End = ((Forward * 1000.0f) + Start);
-	FHitResult outHit;
-
-	TArray<TEnumAsByte<EObjectTypeQuery>> TraceObjectTypes;
-	TraceObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_WorldStatic));
-	
-	TArray<AActor*> ignore;
-	ignore.Add(GetOwner());
-	ignore.Add(this);
-	
-
-	bool result = UKismetSystemLibrary::LineTraceSingleForObjects(GetWorld(), Start, End, TraceObjectTypes, false, ignore, EDrawDebugTrace::ForOneFrame, OUT outHit, true);
-
-	if (result) 
-	{
-		FString f = FString(outHit.GetActor()->GetName());
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, f);
-	}
-	*/
-
-	
-	
-	
-
 }
 
 // Called to bind functionality to input
