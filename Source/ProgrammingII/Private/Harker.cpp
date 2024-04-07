@@ -312,6 +312,12 @@ void AHarker::LookAround(const FInputActionValue& Value)
 
 void AHarker::Fire()
 {
+	// Don't do anything if dead
+	if (CharacterState == ECharacterState::ECS_Dead)
+	{
+		return;
+	}
+
 	// If left mouse is clicked without aiming, fight via melee (swing umbrella)
 	if (MeleeAttack())
 	{
@@ -334,6 +340,12 @@ void AHarker::Fire()
 
 void AHarker::AimStart(const FInputActionValue& Value)
 {
+	// Don't do anything if dead
+	if (CharacterState == ECharacterState::ECS_Dead)
+	{
+		return;
+	}
+
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
 	bUseControllerRotationPitch = true;
@@ -343,12 +355,24 @@ void AHarker::AimStart(const FInputActionValue& Value)
 
 void AHarker::AimEnd(const FInputActionValue& Value)
 {
+	// Don't do anything if dead
+	if (CharacterState == ECharacterState::ECS_Dead)
+	{
+		return;
+	}
+
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
 }
 
 void AHarker::Interaction()
 {
+	// Don't do anything if dead
+	if (CharacterState == ECharacterState::ECS_Dead)
+	{
+		return;
+	}
+
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Interact"));
