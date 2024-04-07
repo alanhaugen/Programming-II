@@ -284,8 +284,8 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AHarker::Move(const FInputActionValue& Value)
 {
-	// Don't move if attacking melee
-	if (ActionState == EActionState::EAS_Attacking)
+	// Don't move if attacking melee or dead
+	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead)
 	{
 		return;
 	}

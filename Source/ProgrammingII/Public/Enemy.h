@@ -10,7 +10,6 @@ class UAttributeComponent;
 class UAnimMontage;
 class UHealthBarComponent;
 
-
 UCLASS()
 class PROGRAMMINGII_API AEnemy : public ACharacter
 {
