@@ -82,6 +82,7 @@ bool AHarker::MeleeAttack()
 {
 	if (isZoomingIn == false && ActionState == EActionState::EAS_Unoccupied)
 	{
+		// Play animation montage
 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 
 		if (AnimInstance && AttackMontage)
@@ -94,24 +95,9 @@ bool AHarker::MeleeAttack()
 				Crossbow->ToggleVisibility();
 			}
 
-			/*const int32 Selection = FMath::RandRange(0, 1);
-			FName SelectionName;
-			switch(Selection)
-			{
-			case 0:
-				SelectionName = FName("Attack1");
-				break;
-			case 1:
-				SelectionName = FName("Attack2");
-				break;
-			default:
-			}
-
-			AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);*/
-
 			ActionState = EActionState::EAS_Attacking;
 		}
-		// Play animation montage
+		
 		// Damage nearby enemies
 
 		return true;
@@ -239,6 +225,24 @@ void AHarker::EquipWeapon()
 void AHarker::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (CharacterState == ECharacterState::ECS_Dead)
+	{
+		return;
+	}
+	else if (Health <= 0.0f)
+	{
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+
+		if (AnimInstance && DeathMontage)
+		{
+			AnimInstance->Montage_Play(DeathMontage);
+		}
+
+		CharacterState = ECharacterState::ECS_Dead;
+
+		return;
+	}
 
 	if (isZoomingIn)
 	{

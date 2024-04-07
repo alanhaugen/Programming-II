@@ -120,6 +120,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* AttackMontage;
 
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UAnimMontage* DeathMontage;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -130,8 +133,8 @@ protected:
 	void SpawnBullet();
 	bool CanFire() const;
 
-	UFUNCTION(BlueprintCallable) // This function will be called in ABP_Harker
-	void MeleeAttackEnd(); // in the event graph
+	UFUNCTION(BlueprintCallable)	// This function will be called in ABP_Harker
+	void MeleeAttackEnd();			// in the event graph
 
 private:
 	// Spring Arm

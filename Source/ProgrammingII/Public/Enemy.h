@@ -10,6 +10,7 @@ class UAttributeComponent;
 class UAnimMontage;
 class UHealthBarComponent;
 
+
 UCLASS()
 class PROGRAMMINGII_API AEnemy : public ACharacter
 {
@@ -21,27 +22,30 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// Enemy health
-	UPROPERTY(VisibleInstanceOnly)
-	float Health = 1.0f;
-
 	// Enemy state
-	UPROPERTY(VisibleInstanceOnly)
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
 	bool IsDead = false;
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UAttributeComponent* Attributes;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:	
-	UPROPERTY(VisibleAnywhere)
-	UAttributeComponent* Attributes;
+	UFUNCTION(BlueprintCallable)	// This function will be called in ABP_Enemy
+	void DeathEnd();				// in the event graph
 
+private:	
 	UPROPERTY(VisibleAnywhere)
 	UHealthBarComponent* HealthBarWidget;
 
 	// Animation Montages
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* AttackMontage;
+
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UAnimMontage* DeathMontage;
 };
