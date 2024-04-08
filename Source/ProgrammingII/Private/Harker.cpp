@@ -48,8 +48,8 @@ AHarker::AHarker()
 	// Make the default item umbrella
 	Umbrella = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella"));
 	Umbrella->SetupAttachment(GetRootComponent());
-	//CollisionBoxUmbrella = CreateDefaultSubobject<UBoxComponent>(FName("Collision Mesh"));
-	//CollisionBoxUmbrella->SetupAttachment(Umbrella);
+	CollisionBoxUmbrella = CreateDefaultSubobject<UBoxComponent>(FName("Collision Mesh"));
+	CollisionBoxUmbrella->SetupAttachment(Umbrella);
 
 	// Make the crossbow then hide it as it is not equipped by default
 	Crossbow = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow"));
