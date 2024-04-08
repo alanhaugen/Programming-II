@@ -25,6 +25,10 @@
 		{
 			"Name": "ImagePlate",
 			"Enabled": true
+		},
+		{
+			"Name": "Landmass",
+			"Enabled": true
 		}
 	]
 }
