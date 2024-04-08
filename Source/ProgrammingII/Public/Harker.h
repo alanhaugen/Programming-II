@@ -12,6 +12,8 @@ class UInputAction;
 struct FInputActionValue;
 class USpringArmComponent;
 class UCameraComponent;
+class UPointLightComponent;
+class UBoxComponent;
 class AItem;
 class ACheckPoint;
 class UAnimMontage;
@@ -145,11 +147,17 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* Camera;
 
-	// Default items
+	// Default item lantern
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Lantern;
 	UPROPERTY(VisibleAnywhere)
+	UPointLightComponent* LanternSpotLight;
+
+	// Default item umbrella
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Umbrella;
+	UPROPERTY(VisibleAnywhere)
+	UBoxComponent* CollisionBoxUmbrella;
 
 	// Crossbow weapon
 	UPROPERTY(VisibleAnywhere)
@@ -157,6 +165,8 @@ private:
 
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
+
+	void ToggleDefaultItems();
 
 	UPROPERTY(VisibleInstanceOnly, Category = Item)
 	AItem* OverlappingItem;

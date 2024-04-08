@@ -3,12 +3,14 @@
 #include "Harker.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
+#include <Components/PointLightComponent.h>
 #include <Components/CapsuleComponent.h>
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
-#include "Kismet/KismetSystemLibrary.h"
+#include <Kismet/KismetSystemLibrary.h>
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Animation/AnimMontage.h>
+#include <Components/BoxComponent.h>
 #include "CheckPoint.h"
 
 // Sets default values
@@ -36,11 +38,18 @@ AHarker::AHarker()
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.f, 0.0f);
 
-	// Make the default items lantern and umbrella
+	// Make the default item lantern
 	Lantern  = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Lantern"));
 	Lantern->SetupAttachment(GetRootComponent());
+	LanternSpotLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("LanternSpotlight"));
+	LanternSpotLight->Intensity = 1000.0f;
+	LanternSpotLight->SetupAttachment(Lantern);
+
+	// Make the default item umbrella
 	Umbrella = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella"));
 	Umbrella->SetupAttachment(GetRootComponent());
+	//CollisionBoxUmbrella = CreateDefaultSubobject<UBoxComponent>(FName("Collision Mesh"));
+	//CollisionBoxUmbrella->SetupAttachment(Umbrella);
 
 	// Make the crossbow then hide it as it is not equipped by default
 	Crossbow = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow"));
@@ -216,8 +225,7 @@ void AHarker::EquipWeapon()
 		CharacterState = ECharacterState::ECS_Equipped;
 
 		// Hide the default assets
-		Lantern->ToggleVisibility();
-		Umbrella->ToggleVisibility();
+		ToggleDefaultItems();
 	}
 }
 
@@ -312,6 +320,13 @@ void AHarker::LookAround(const FInputActionValue& Value)
 
 	AddControllerPitchInput(LookAxisVector.Y);
 	AddControllerYawInput(LookAxisVector.X);
+}
+
+void AHarker::ToggleDefaultItems()
+{
+	Lantern->ToggleVisibility();
+	LanternSpotLight->ToggleVisibility();
+	Umbrella->ToggleVisibility();
 }
 
 void AHarker::Fire()
