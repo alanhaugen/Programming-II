@@ -34,6 +34,10 @@ AHarker::AHarker()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
+	// Setup Harker First Person Camera
+	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPSCamera"));
+	FPSCamera->SetupAttachment(GetMesh());
+
 	// Make the Character face where it is moving
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.f, 0.0f);
@@ -73,6 +77,7 @@ void AHarker::BeginPlay()
 	Lantern->AttachToComponent(GetMesh(), TransformRules, "LeftHandSocket");
 	Umbrella->AttachToComponent(GetMesh(), TransformRules, "RightHandSocket");
 	Crossbow->AttachToComponent(GetMesh(), TransformRules, "RightHandGunSocket");
+	FPSCamera->AttachToComponent(GetMesh(), TransformRules, "Head");
 
 	// Enhanced Input Input Mapping Controller (IMC) Setup for The Castle Main Game Character Harker
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
@@ -291,6 +296,8 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started , this, &AHarker::AimStart);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Completed, this, &AHarker::Interaction);
+		//EnhancedInputComponent->BindAction(FPSAimAction, ETriggerEvent::Triggered, this, &AHarker::AimStart);
+		//EnhancedInputComponent->BindAction(FPSAimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
 	}
 }
 
@@ -370,6 +377,9 @@ void AHarker::AimStart(const FInputActionValue& Value)
 	bUseControllerRotationPitch = true;
 	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = true;
+	
+	FPSCamera->SetActive(true);
+	Camera->SetActive(false);
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
@@ -382,6 +392,9 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
+
+	FPSCamera->SetActive(false);
+	Camera->SetActive(true);
 }
 
 void AHarker::Interaction()

@@ -147,6 +147,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* Camera;
 
+	// FPSCamera
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* FPSCamera;
+
 	// Default item lantern
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Lantern;
