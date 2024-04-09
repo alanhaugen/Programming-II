@@ -157,6 +157,8 @@ Using Teranox's House Asset (2022) https://sketchfab.com/3d-models/house-asset-f
 
 Using interactive stylized Lowpoly Grass from Project Nature - Props (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/dynamic-stylized-lowpoly-gras
 
+Using matisosanimation's Bat (2019) https://sketchfab.com/3d-models/bat-28af38de4d2c401d809148c7f63a73f9
+
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
 
 Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Content/3DModels. He also made the re-rendered films in Content/Video 
