@@ -399,8 +399,8 @@ void AHarker::Scope()
 		Camera->SetActive(false);
 
 		bUseControllerRotationPitch = true;
-		bUseControllerRotationYaw = true;
-		bUseControllerRotationRoll = true;
+		bUseControllerRotationYaw   = true;
+		bUseControllerRotationRoll  = true;
 	}
 	else
 	{
@@ -408,8 +408,8 @@ void AHarker::Scope()
 		Camera->SetActive(true);
 
 		bUseControllerRotationPitch = false;
-		bUseControllerRotationYaw = false;
-		bUseControllerRotationRoll = false;
+		bUseControllerRotationYaw   = false;
+		bUseControllerRotationRoll  = false;
 	}
 }
 
