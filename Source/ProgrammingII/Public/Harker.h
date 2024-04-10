@@ -80,13 +80,13 @@ public:
 	UInputAction* LookAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	class UInputMappingContext* FireIMC;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* FireAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* AimAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* ScopeAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* InteractionAction;
@@ -99,6 +99,9 @@ public:
 
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void AimEnd(const FInputActionValue& Value);
+
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void Scope();
 
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Interaction();

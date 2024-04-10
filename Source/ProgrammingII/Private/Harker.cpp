@@ -292,12 +292,11 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AHarker::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AHarker::LookAround);
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AHarker::Fire);
-		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AHarker::Jump);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AHarker::Jump); // Jump bugs out at death
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Started , this, &AHarker::AimStart);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
-		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Completed, this, &AHarker::Interaction);
-		//EnhancedInputComponent->BindAction(FPSAimAction, ETriggerEvent::Triggered, this, &AHarker::AimStart);
-		//EnhancedInputComponent->BindAction(FPSAimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
+		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
+		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
 	}
 }
 
@@ -377,9 +376,6 @@ void AHarker::AimStart(const FInputActionValue& Value)
 	bUseControllerRotationPitch = true;
 	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = true;
-	
-	FPSCamera->SetActive(true);
-	Camera->SetActive(false);
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
@@ -392,9 +388,20 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
+}
 
-	FPSCamera->SetActive(false);
-	Camera->SetActive(true);
+void AHarker::Scope()
+{
+	if (Camera->IsActive())
+	{
+		FPSCamera->SetActive(true);
+		Camera->SetActive(false);
+	}
+	else
+	{
+		FPSCamera->SetActive(false);
+		Camera->SetActive(true);
+	}
 }
 
 void AHarker::Interaction()
