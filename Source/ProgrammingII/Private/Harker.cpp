@@ -268,9 +268,6 @@ void AHarker::Tick(float DeltaTime)
 	else
 	{
 		ZoomFactor -= DeltaTime / 0.25f;        //Zoom out over a quarter of a second
-		bUseControllerRotationPitch = false;
-		bUseControllerRotationYaw = false;
-		bUseControllerRotationRoll = false;
 	}
 
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
@@ -374,8 +371,8 @@ void AHarker::AimStart(const FInputActionValue& Value)
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
 	bUseControllerRotationPitch = true;
-	bUseControllerRotationYaw = true;
-	bUseControllerRotationRoll = true;
+	bUseControllerRotationYaw   = true;
+	bUseControllerRotationRoll  = true;
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
@@ -388,6 +385,10 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw   = false;
+	bUseControllerRotationRoll  = false;
 }
 
 void AHarker::Scope()
@@ -396,11 +397,19 @@ void AHarker::Scope()
 	{
 		FPSCamera->SetActive(true);
 		Camera->SetActive(false);
+
+		bUseControllerRotationPitch = true;
+		bUseControllerRotationYaw = true;
+		bUseControllerRotationRoll = true;
 	}
 	else
 	{
 		FPSCamera->SetActive(false);
 		Camera->SetActive(true);
+
+		bUseControllerRotationPitch = false;
+		bUseControllerRotationYaw = false;
+		bUseControllerRotationRoll = false;
 	}
 }
 
