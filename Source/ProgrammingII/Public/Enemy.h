@@ -36,6 +36,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateWalkSpeed(float NewWalkSpeed);
 
+	UFUNCTION(BlueprintCallable)
+	void CancelWaypoints();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

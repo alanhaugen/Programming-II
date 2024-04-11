@@ -34,6 +34,11 @@ void AEnemy::UpdateWalkSpeed(float NewWalkSpeed)
 	}
 }
 
+void AEnemy::CancelWaypoints()
+{
+	Waypoints.Empty();
+}
+
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
@@ -108,15 +113,6 @@ void AEnemy::MoveToNextWaypoint()
 	{
 		return;
 	}
-
-	// Check if chasing should commence
-	/*const FActorPerceptionInfo* ActorInfo =
-		AIController->GetAIPerceptionComponent()->
-	if (ActorInfo && ActorInfo->LastSensedStimuli.Num() > 0)
-	{
-		// Revert to standard AI behaviour tree
-		Waypoints.Empty();
-	}*/
 
 	// Choose next waypoint
 	FVector CurrentLocation = GetActorLocation();  // get the currect actor location 
