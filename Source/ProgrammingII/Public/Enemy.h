@@ -40,6 +40,12 @@ protected:
 	UFUNCTION(BlueprintCallable)	// This function will be called in ABP_Enemy
 	void DeathEnd();				// in the event graph
 
+	void UpdateUI();
+	void UpdateDeathLogic();
+	void MoveToNextWaypoint();
+
+	int32 CurrentWaypointIndex = 0;
+
 private:	
 	// Animation Montages
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
@@ -47,4 +53,8 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* DeathMontage;
+
+	// Array of waypoints
+	UPROPERTY(EditAnywhere, Category = "Waypoints")
+	TArray<AActor*> Waypoints;
 };

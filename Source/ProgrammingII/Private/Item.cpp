@@ -27,6 +27,12 @@ void AItem::BeginPlay()
 
 void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	// Only pick up if player overlaps items
+	if (Cast<AHarker>(OtherActor) == nullptr)
+	{
+		return;
+	}
+
 	if (AmmunitionType == EItemType::EIT_NormalArrow)
 	{
 		Player->AmmunitionNormal += AmmunitionAmount;
