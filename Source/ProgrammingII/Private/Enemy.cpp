@@ -6,6 +6,8 @@
 #include "AttributeComponent.h"
 #include <Animation/AnimMontage.h>
 #include <AIController.h>
+#include <Perception/AIPerceptionComponent.h>
+#include "Harker.h"
 
 AEnemy::AEnemy()
 {
@@ -85,16 +87,36 @@ void AEnemy::UpdateDeathLogic()
 
 void AEnemy::MoveToNextWaypoint()
 {
-	if (Waypoints.Num() == 0)
+	// Check if there are waypoints to travel between
+	AAIController* AIController = Cast<AAIController>(GetController());
+	if (AIController == nullptr || Waypoints.Num() == 0)
+	{
 		return;
+	}
 
+	// Check if the waypoint still exists (It might have been destroyed)
+	if (Waypoints[CurrentWaypointIndex] == nullptr)
+	{
+		return;
+	}
+
+	// Check if chasing should commence
+	/*const FActorPerceptionInfo* ActorInfo = AIController->GetAIPerceptionComponent()->GetActorInfo(*Cast<AActor>(GetWorld()->GetFirstPlayerController()->GetPawn()));
+	if (ActorInfo && ActorInfo->LastSensedStimuli.Num() > 0)
+	{
+		// Revert to standard AI behaviour tree
+		Waypoints.Empty();
+	}*/
+
+	// Choose next waypoint
 	FVector CurrentLocation = GetActorLocation();  // get the currect actor location 
 	FVector TargetLocation = Waypoints[CurrentWaypointIndex]->GetActorLocation();  // get the current waypoint location // starts from index 0 
 
 	// When we get close to the targe, then change to the next way point 
-	if (FVector::Dist(TargetLocation, CurrentLocation) < 100.0f)
+	if (FVector::Dist(TargetLocation, CurrentLocation) < 200.0f)
 	{
-		CurrentWaypointIndex += 1;
+		CurrentWaypointIndex++;
+
 		if (CurrentWaypointIndex >= Waypoints.Num())
 		{
 			CurrentWaypointIndex = 0;
@@ -102,12 +124,7 @@ void AEnemy::MoveToNextWaypoint()
 	}
 	else
 	{
-		AAIController* AIController = Cast<AAIController>(GetController());
-
-		if (AIController)
-		{
-			AIController->MoveToLocation(TargetLocation);
-		}
+		AIController->MoveToLocation(TargetLocation);
 	}
 }
 
