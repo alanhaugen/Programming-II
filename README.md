@@ -163,7 +163,7 @@ Using MadGamesmith's Mad Zombie! (2020) https://sketchfab.com/3d-models/mad-zomb
 
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
 
-Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Content/3DModels. He also made the re-rendered films in Content/Video 
+Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Assets/3DModels/3rdParty. He also made the re-rendered films in Content/Video 
 
 ## Resources
 
