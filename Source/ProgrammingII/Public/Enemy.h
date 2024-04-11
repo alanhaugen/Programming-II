@@ -33,6 +33,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UHealthBarComponent* HealthBarWidget;
 
+	UFUNCTION(BlueprintCallable)
+	void UpdateWalkSpeed(float NewWalkSpeed);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -7,6 +7,7 @@
 #include <Animation/AnimMontage.h>
 #include <AIController.h>
 #include <Perception/AIPerceptionComponent.h>
+#include <GameFramework/CharacterMovementComponent.h>
 #include "Harker.h"
 
 AEnemy::AEnemy()
@@ -23,6 +24,14 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 {
 
 	return 0.0f;
+}
+
+void AEnemy::UpdateWalkSpeed(float NewWalkSpeed)
+{
+	if (GetCharacterMovement())
+	{
+		GetCharacterMovement()->MaxWalkSpeed = NewWalkSpeed;
+	}
 }
 
 void AEnemy::BeginPlay()
@@ -101,7 +110,8 @@ void AEnemy::MoveToNextWaypoint()
 	}
 
 	// Check if chasing should commence
-	/*const FActorPerceptionInfo* ActorInfo = AIController->GetAIPerceptionComponent()->GetActorInfo(*Cast<AActor>(GetWorld()->GetFirstPlayerController()->GetPawn()));
+	/*const FActorPerceptionInfo* ActorInfo =
+		AIController->GetAIPerceptionComponent()->
 	if (ActorInfo && ActorInfo->LastSensedStimuli.Num() > 0)
 	{
 		// Revert to standard AI behaviour tree

@@ -421,7 +421,7 @@ void AHarker::Interaction()
 		return;
 	}
 
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Interact"));
 	}
@@ -429,5 +429,10 @@ void AHarker::Interaction()
 	if (CurrentCheckPoint)
 	{
 		CurrentCheckPoint->Load();
+	}*/
+
+	if (OverlappingItem)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Item overlapping"));
 	}
 }
