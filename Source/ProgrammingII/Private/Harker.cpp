@@ -299,6 +299,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
+		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
 	}
 }
 
@@ -443,5 +444,26 @@ void AHarker::Interaction()
 	if (OverlappingItem)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Item overlapping"));
+	}
+}
+
+void AHarker::CycleAmmunition()
+{
+	switch (SelectedAmmo)
+	{
+	case EAmmoTypes::EAT_Normal:
+		SelectedAmmo = EAmmoTypes::EAT_Fire;
+		break;
+
+	case EAmmoTypes::EAT_Fire:
+		SelectedAmmo = EAmmoTypes::EAT_Holy;
+		break;
+
+	case EAmmoTypes::EAT_Holy:
+		SelectedAmmo = EAmmoTypes::EAT_Normal;
+		break;
+
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Unsupported ammo type set"));
 	}
 }

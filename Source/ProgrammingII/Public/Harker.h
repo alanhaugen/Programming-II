@@ -91,6 +91,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* InteractionAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* CycleAmmunitionAction;
+
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Fire();
 
@@ -106,6 +109,10 @@ public:
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Interaction();
 
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void CycleAmmunition();
+
+	// Bullet spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
 	TSubclassOf<AActor> BulletToSpawn;
 

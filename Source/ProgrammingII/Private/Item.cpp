@@ -33,24 +33,34 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 		return;
 	}
 
-	if (AmmunitionType == EItemType::EIT_NormalArrow)
+	switch (ItemType)
 	{
-		Player->AmmunitionNormal += AmmunitionAmount;
-	}
+	case EItemType::EIT_NormalArrow:
+		Player->AmmunitionNormal += ItemAmount;
+		break;
 
-	if (AmmunitionType == EItemType::EIT_FireArrow)
-	{
-		Player->AmmunitionFlame += AmmunitionAmount;
-	}
+	case EItemType::EIT_FireArrow:
+		Player->AmmunitionFlame += ItemAmount;
+		break;
 
-	if (AmmunitionType == EItemType::EIT_HolyWaterArrow)
-	{
-		Player->AmmunitionHoly += AmmunitionAmount;
-	}
+	case EItemType::EIT_HolyWaterArrow:
+		Player->AmmunitionHoly += ItemAmount;
+		break;
 
-	if (AmmunitionType == EItemType::EIT_Crossbow)
-	{
+	case EItemType::EIT_Crossbow:
 		Player->EquipWeapon();
+		break;
+
+	case EItemType::EIT_InstantDeath:
+		Player->Health = 0;
+		break;
+
+	case EItemType::EIT_Health:
+		Player->Health += ItemAmount;
+		break;
+
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Item not supported."));
 	}
 
 	Destroy();
