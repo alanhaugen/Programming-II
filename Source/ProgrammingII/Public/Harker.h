@@ -174,6 +174,7 @@ private:
 	void LookAround(const FInputActionValue& Value);
 
 	void ToggleDefaultItems();
+	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
 
 	UPROPERTY(VisibleInstanceOnly, Category = Item)
 	AItem* OverlappingItem;

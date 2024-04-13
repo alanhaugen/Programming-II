@@ -20,9 +20,7 @@ AHarker::AHarker()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Don't rotate the character oddly with camera rotations
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw   = false;
-	bUseControllerRotationRoll  = false;
+	UpdateCameraBehaviour();
 
 	// Setup Camera Boom also known as Spring Arm
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
@@ -111,6 +109,9 @@ bool AHarker::MeleeAttack()
 
 			ActionState = EActionState::EAS_Attacking;
 		}
+
+		// Face the direction of the attack
+		UpdateCameraBehaviour(true);
 		
 		// Damage nearby enemies
 
@@ -217,6 +218,12 @@ void AHarker::MeleeAttackEnd()
 		Umbrella->ToggleVisibility();
 		Crossbow->ToggleVisibility();
 	}
+
+	// If in 3ps mode, return camera behaviour to normal
+	if (Camera->IsActive())
+	{
+		UpdateCameraBehaviour();
+	}
 }
 
 void AHarker::EquipWeapon()
@@ -254,9 +261,7 @@ void AHarker::Tick(float DeltaTime)
 
 		CharacterState = ECharacterState::ECS_Dead;
 		isZoomingIn = false;
-		bUseControllerRotationPitch = false;
-		bUseControllerRotationYaw   = false;
-		bUseControllerRotationRoll  = false;
+		UpdateCameraBehaviour();
 
 		return;
 	}
@@ -332,6 +337,14 @@ void AHarker::ToggleDefaultItems()
 	Umbrella->ToggleVisibility();
 }
 
+void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
+{
+	// When this is set to false, the character will not rotate oddly with camera rotations (for 3rd person mode)
+	bUseControllerRotationPitch = isTurningWithCamera;
+	bUseControllerRotationYaw   = isTurningWithCamera;
+	bUseControllerRotationRoll  = isTurningWithCamera;
+}
+
 void AHarker::Fire()
 {
 	// Don't do anything if dead
@@ -370,9 +383,7 @@ void AHarker::AimStart(const FInputActionValue& Value)
 
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
-	bUseControllerRotationPitch = true;
-	bUseControllerRotationYaw   = true;
-	bUseControllerRotationRoll  = true;
+	UpdateCameraBehaviour(true);
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
@@ -386,9 +397,7 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
 
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw   = false;
-	bUseControllerRotationRoll  = false;
+	UpdateCameraBehaviour();
 }
 
 void AHarker::Scope()
@@ -398,18 +407,18 @@ void AHarker::Scope()
 		FPSCamera->SetActive(true);
 		Camera->SetActive(false);
 
-		bUseControllerRotationPitch = true;
-		bUseControllerRotationYaw   = true;
-		bUseControllerRotationRoll  = true;
+		GetMesh()->SetVisibility(false);
+
+		UpdateCameraBehaviour(true);
 	}
 	else
 	{
 		FPSCamera->SetActive(false);
 		Camera->SetActive(true);
 
-		bUseControllerRotationPitch = false;
-		bUseControllerRotationYaw   = false;
-		bUseControllerRotationRoll  = false;
+		GetMesh()->SetVisibility(true);
+
+		UpdateCameraBehaviour();
 	}
 }
 
