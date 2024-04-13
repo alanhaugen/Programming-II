@@ -161,6 +161,8 @@ Using matisosanimation's Bat (2019) https://sketchfab.com/3d-models/bat-28af38de
 
 Using MadGamesmith's Mad Zombie! (2020) https://sketchfab.com/3d-models/mad-zombie-3ae800207d764fcebb16db191ca35eca
 
+Using romullus's Wooden Ladder (2018) https://sketchfab.com/3d-models/wooden-ladder-0ac651eb518a4bc69873b117cc7e3dd2
+
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
 
 Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Assets/3DModels/3rdParty. He also made the re-rendered films in Content/Video 
