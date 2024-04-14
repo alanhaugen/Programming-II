@@ -16,21 +16,28 @@ class PROGRAMMINGII_API AInteractable : public AActor
 public:	
 	AInteractable();
 
+protected:
+	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, Category = Mesh)
 	UStaticMeshComponent* Mesh;
 
+	// Collision mesh for interactable
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* CollisionBox;
 
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = Message)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Message)
 	FText PreInteractionMessage = FText::FromString("Press E to Interact");
 
-	UPROPERTY(EditAnywhere, Category = Message)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Message, meta = (MultiLine = true))
 	FText InteractionMessage = FText::FromString("This is the text for the message box upon pressing E");
 
-protected:
-	virtual void BeginPlay() override;
+	UFUNCTION()
+	virtual void OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	virtual void OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 };

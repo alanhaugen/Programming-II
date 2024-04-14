@@ -306,7 +306,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void AHarker::Move(const FInputActionValue& Value)
 {
 	// Don't move if attacking melee or dead
-	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead)
+	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -349,7 +349,7 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 void AHarker::Fire()
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead)
+	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -377,7 +377,7 @@ void AHarker::Fire()
 void AHarker::AimStart(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead)
+	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -390,7 +390,7 @@ void AHarker::AimStart(const FInputActionValue& Value)
 void AHarker::AimEnd(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead)
+	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -441,9 +441,9 @@ void AHarker::Interaction()
 		CurrentCheckPoint->Load();
 	}*/
 
-	if (OverlappingItem)
+	if (bCanInteract)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Item overlapping"));
+		isInteracting = !isInteracting;
 	}
 }
 

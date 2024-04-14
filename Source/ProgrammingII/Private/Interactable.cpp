@@ -2,8 +2,8 @@
 
 
 #include "Interactable.h"
-#include "Internationalization/Text.h"
 #include <Components/BoxComponent.h>
+#include "Harker.h"
 
 AInteractable::AInteractable()
 {
@@ -11,7 +11,7 @@ AInteractable::AInteractable()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Mesh for interactable object
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella"));
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(GetRootComponent());
 
 	// Collision box which dictates when object becomes interactable to player
@@ -23,6 +23,8 @@ void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AInteractable::OnSpehereOverlap);
+	CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AInteractable::OnSpehereEndOverlap);
 }
 
 void AInteractable::Tick(float DeltaTime)
@@ -31,3 +33,23 @@ void AInteractable::Tick(float DeltaTime)
 
 }
 
+void AInteractable::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	AHarker* Player = Cast<AHarker>(OtherActor);
+
+	if (Player)
+	{
+		Player->bCanInteract = true;
+		Player->CurrentInteractable = this;
+	}
+}
+
+void AInteractable::OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	AHarker* Player = Cast<AHarker>(OtherActor);
+
+	if (Player)
+	{
+		Player->bCanInteract = false;
+	}
+}
