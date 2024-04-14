@@ -176,3 +176,5 @@ How to change active camera on player character. (2023) Unreal Forum. https://fo
 Unreal Engine 5 C++ The Ultimate Game Developer Course. (2023) udemy. https://www.udemy.com/course/unreal-engine-5-the-ultimate-game-developer-course
 
 Trace a line to where the character’s camera is looking (2023) Unreal Forum. https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
+
+Farris, J. (2024) Damage in UE4. Unreal blog. https://www.unrealengine.com/en-US/blog/damage-in-ue4
