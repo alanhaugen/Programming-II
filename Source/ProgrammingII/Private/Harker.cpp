@@ -12,6 +12,7 @@
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
 #include "CheckPoint.h"
+#include "Ladder.h"
 
 // Sets default values
 AHarker::AHarker()
@@ -441,7 +442,14 @@ void AHarker::Interaction()
 		CurrentCheckPoint->Load();
 	}*/
 
-	if (bCanInteract)
+	// Climb ladder
+	ALadder* Ladder = Cast<ALadder>(CurrentInteractable);
+	if (Ladder && bCanInteract)
+	{
+		SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
+	}
+	// Toggle interact with object (Interacting will freeze movement)
+	else if (bCanInteract)
 	{
 		isInteracting = !isInteracting;
 	}
