@@ -1,0 +1,11 @@
+Model Information:
+* title:	Wooden Sign - Low poly
+* source:	https://sketchfab.com/3d-models/wooden-sign-low-poly-923ce9265cf244558ffa3b8c127d8111
+* author:	lightguard (https://sketchfab.com/lightguard)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Wooden Sign - Low poly" (https://sketchfab.com/3d-models/wooden-sign-low-poly-923ce9265cf244558ffa3b8c127d8111) by lightguard (https://sketchfab.com/lightguard) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
