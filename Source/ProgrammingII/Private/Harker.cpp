@@ -307,7 +307,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void AHarker::Move(const FInputActionValue& Value)
 {
 	// Don't move if attacking melee or dead
-	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -326,6 +326,12 @@ void AHarker::Move(const FInputActionValue& Value)
 
 void AHarker::LookAround(const FInputActionValue& Value)
 {
+	// Looking around can make character move out of interaction hitbox
+	if (IsInteracting)
+	{
+		return;
+	}
+
 	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	AddControllerPitchInput(LookAxisVector.Y);
@@ -350,7 +356,7 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 void AHarker::Fire()
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -378,7 +384,7 @@ void AHarker::Fire()
 void AHarker::AimStart(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -391,7 +397,7 @@ void AHarker::AimStart(const FInputActionValue& Value)
 void AHarker::AimEnd(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -451,7 +457,7 @@ void AHarker::Interaction()
 	// Toggle interact with object (Interacting will freeze movement)
 	else if (bCanInteract)
 	{
-		isInteracting = !isInteracting;
+		IsInteracting = !IsInteracting;
 	}
 }
 

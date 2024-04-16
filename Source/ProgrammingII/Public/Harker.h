@@ -59,7 +59,7 @@ public:
 
 	// Variables for text when interacting with interactable objects
 	UPROPERTY(BlueprintReadOnly, Category = Interactable)
-	bool isInteracting = false;
+	bool IsInteracting = false;
 
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Interactable)
 	AInteractable* CurrentInteractable;
