@@ -33,12 +33,24 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UHealthBarComponent* HealthBarWidget;
 
+	UFUNCTION(BlueprintCallable)
+	void UpdateWalkSpeed(float NewWalkSpeed);
+
+	UFUNCTION(BlueprintCallable)
+	void CancelWaypoints();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)	// This function will be called in ABP_Enemy
 	void DeathEnd();				// in the event graph
+
+	void UpdateUI();
+	void UpdateDeathLogic();
+	void MoveToNextWaypoint();
+
+	int32 CurrentWaypointIndex = 0;
 
 private:	
 	// Animation Montages
@@ -47,4 +59,8 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* DeathMontage;
+
+	// Array of waypoints
+	UPROPERTY(EditAnywhere, Category = "Waypoints")
+	TArray<AActor*> Waypoints;
 };

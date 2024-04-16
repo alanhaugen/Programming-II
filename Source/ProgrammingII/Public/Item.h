@@ -38,7 +38,9 @@ private:
 		EIT_NormalArrow = 0,
 		EIT_FireArrow,
 		EIT_HolyWaterArrow,
-		EIT_Crossbow = 5
+		EIT_Crossbow = 5,
+		EIT_InstantDeath,
+		EIT_Health
 	};
 
 public:	
@@ -59,8 +61,8 @@ public:
 	float RotationSpeed = 50.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float AmmunitionAmount = 10.0f;
+	float ItemAmount = 10.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Item Parameters")
-	int AmmunitionType = 0;
+	int ItemType = 0;
 };

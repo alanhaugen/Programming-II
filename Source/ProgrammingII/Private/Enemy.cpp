@@ -5,8 +5,11 @@
 #include "HUD/HealthBarComponent.h"
 #include "AttributeComponent.h"
 #include <Animation/AnimMontage.h>
+#include <AIController.h>
+#include <Perception/AIPerceptionComponent.h>
+#include <GameFramework/CharacterMovementComponent.h>
+#include "Harker.h"
 
-// Sets default values
 AEnemy::AEnemy()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -23,7 +26,19 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 	return 0.0f;
 }
 
-// Called when the game starts or when spawned
+void AEnemy::UpdateWalkSpeed(float NewWalkSpeed)
+{
+	if (GetCharacterMovement())
+	{
+		GetCharacterMovement()->MaxWalkSpeed = NewWalkSpeed;
+	}
+}
+
+void AEnemy::CancelWaypoints()
+{
+	Waypoints.Empty();
+}
+
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
@@ -41,16 +56,16 @@ void AEnemy::DeathEnd()
 	AnimInstance->Montage_Pause();
 }
 
-// Called every frame
-void AEnemy::Tick(float DeltaTime)
+void AEnemy::UpdateUI()
 {
-	Super::Tick(DeltaTime);
-
 	if (HealthBarWidget)
 	{
 		HealthBarWidget->SetHealthPercent(Attributes->Health / Attributes->MaxHealth);
 	}
+}
 
+void AEnemy::UpdateDeathLogic()
+{
 	if (IsDead == false && Attributes->Health <= 0.0f)
 	{
 		// Play animation montage
@@ -61,7 +76,7 @@ void AEnemy::Tick(float DeltaTime)
 		const int32 Selection = FMath::RandRange(0, 3);
 		FName SelectionName;
 
-		switch(Selection)
+		switch (Selection)
 		{
 		case 0:
 			SelectionName = FName("Death1");
@@ -82,6 +97,52 @@ void AEnemy::Tick(float DeltaTime)
 		AnimInstance->Montage_JumpToSectionsEnd(SelectionName, DeathMontage);
 		IsDead = true;
 	}
+}
+
+void AEnemy::MoveToNextWaypoint()
+{
+	// Check if there are waypoints to travel between
+	AAIController* AIController = Cast<AAIController>(GetController());
+	if (AIController == nullptr || Waypoints.Num() == 0)
+	{
+		return;
+	}
+
+	// Check if the waypoint still exists (It might have been destroyed)
+	if (Waypoints[CurrentWaypointIndex] == nullptr)
+	{
+		return;
+	}
+
+	// Choose next waypoint
+	FVector CurrentLocation = GetActorLocation();  // get the currect actor location 
+	FVector TargetLocation = Waypoints[CurrentWaypointIndex]->GetActorLocation();  // get the current waypoint location // starts from index 0 
+
+	// When we get close to the targe, then change to the next way point 
+	if (FVector::Dist(TargetLocation, CurrentLocation) < 200.0f)
+	{
+		CurrentWaypointIndex++;
+
+		if (CurrentWaypointIndex >= Waypoints.Num())
+		{
+			CurrentWaypointIndex = 0;
+		}
+	}
+	else
+	{
+		AIController->MoveToLocation(TargetLocation);
+	}
+}
+
+void AEnemy::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	UpdateUI();
+
+	UpdateDeathLogic();
+
+	MoveToNextWaypoint();
 }
 
 // Called to bind functionality to input

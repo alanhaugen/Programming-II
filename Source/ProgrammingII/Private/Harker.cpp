@@ -12,6 +12,7 @@
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
 #include "CheckPoint.h"
+#include "Ladder.h"
 
 // Sets default values
 AHarker::AHarker()
@@ -20,9 +21,7 @@ AHarker::AHarker()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Don't rotate the character oddly with camera rotations
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw   = false;
-	bUseControllerRotationRoll  = false;
+	UpdateCameraBehaviour();
 
 	// Setup Camera Boom also known as Spring Arm
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
@@ -111,6 +110,9 @@ bool AHarker::MeleeAttack()
 
 			ActionState = EActionState::EAS_Attacking;
 		}
+
+		// Face the direction of the attack
+		UpdateCameraBehaviour(true);
 		
 		// Damage nearby enemies
 
@@ -217,6 +219,12 @@ void AHarker::MeleeAttackEnd()
 		Umbrella->ToggleVisibility();
 		Crossbow->ToggleVisibility();
 	}
+
+	// If in 3ps mode, return camera behaviour to normal
+	if (Camera->IsActive())
+	{
+		UpdateCameraBehaviour();
+	}
 }
 
 void AHarker::EquipWeapon()
@@ -254,9 +262,7 @@ void AHarker::Tick(float DeltaTime)
 
 		CharacterState = ECharacterState::ECS_Dead;
 		isZoomingIn = false;
-		bUseControllerRotationPitch = false;
-		bUseControllerRotationYaw   = false;
-		bUseControllerRotationRoll  = false;
+		UpdateCameraBehaviour();
 
 		return;
 	}
@@ -294,13 +300,14 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, this, &AHarker::AimEnd);
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
+		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
 	}
 }
 
 void AHarker::Move(const FInputActionValue& Value)
 {
 	// Don't move if attacking melee or dead
-	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead)
+	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -332,10 +339,18 @@ void AHarker::ToggleDefaultItems()
 	Umbrella->ToggleVisibility();
 }
 
+void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
+{
+	// When this is set to false, the character will not rotate oddly with camera rotations (for 3rd person mode)
+	bUseControllerRotationPitch = isTurningWithCamera;
+	bUseControllerRotationYaw   = isTurningWithCamera;
+	bUseControllerRotationRoll  = isTurningWithCamera;
+}
+
 void AHarker::Fire()
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead)
+	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -363,22 +378,20 @@ void AHarker::Fire()
 void AHarker::AimStart(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead)
+	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
 
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
-	bUseControllerRotationPitch = true;
-	bUseControllerRotationYaw   = true;
-	bUseControllerRotationRoll  = true;
+	UpdateCameraBehaviour(true);
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead)
+	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
 	{
 		return;
 	}
@@ -386,9 +399,7 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 	//UE_LOG(LogTemp, Warning, TEXT("Stopped Aim"));
 	isZoomingIn = false;
 
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw   = false;
-	bUseControllerRotationRoll  = false;
+	UpdateCameraBehaviour();
 }
 
 void AHarker::Scope()
@@ -398,18 +409,18 @@ void AHarker::Scope()
 		FPSCamera->SetActive(true);
 		Camera->SetActive(false);
 
-		bUseControllerRotationPitch = true;
-		bUseControllerRotationYaw   = true;
-		bUseControllerRotationRoll  = true;
+		GetMesh()->SetVisibility(false);
+
+		UpdateCameraBehaviour(true);
 	}
 	else
 	{
 		FPSCamera->SetActive(false);
 		Camera->SetActive(true);
 
-		bUseControllerRotationPitch = false;
-		bUseControllerRotationYaw   = false;
-		bUseControllerRotationRoll  = false;
+		GetMesh()->SetVisibility(true);
+
+		UpdateCameraBehaviour();
 	}
 }
 
@@ -421,7 +432,7 @@ void AHarker::Interaction()
 		return;
 	}
 
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Interact"));
 	}
@@ -429,5 +440,38 @@ void AHarker::Interaction()
 	if (CurrentCheckPoint)
 	{
 		CurrentCheckPoint->Load();
+	}*/
+
+	// Climb ladder
+	ALadder* Ladder = Cast<ALadder>(CurrentInteractable);
+	if (Ladder && bCanInteract)
+	{
+		SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
+	}
+	// Toggle interact with object (Interacting will freeze movement)
+	else if (bCanInteract)
+	{
+		isInteracting = !isInteracting;
+	}
+}
+
+void AHarker::CycleAmmunition()
+{
+	switch (SelectedAmmo)
+	{
+	case EAmmoTypes::EAT_Normal:
+		SelectedAmmo = EAmmoTypes::EAT_Fire;
+		break;
+
+	case EAmmoTypes::EAT_Fire:
+		SelectedAmmo = EAmmoTypes::EAT_Holy;
+		break;
+
+	case EAmmoTypes::EAT_Holy:
+		SelectedAmmo = EAmmoTypes::EAT_Normal;
+		break;
+
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Unsupported ammo type set"));
 	}
 }

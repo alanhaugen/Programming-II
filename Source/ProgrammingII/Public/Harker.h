@@ -17,6 +17,7 @@ class UBoxComponent;
 class AItem;
 class ACheckPoint;
 class UAnimMontage;
+class AInteractable;
 
 enum EAmmoTypes
 {
@@ -56,6 +57,16 @@ public:
 
 	float ZoomFactor;
 
+	// Variables for text when interacting with interactable objects
+	UPROPERTY(BlueprintReadOnly, Category = Interactable)
+	bool isInteracting = false;
+
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Interactable)
+	AInteractable* CurrentInteractable;
+
+	UPROPERTY(BlueprintReadOnly, Category = Interactable)
+	bool bCanInteract = false; // Check if standing by next to interactable object
+
 	// Public Equip Weapon function
 	UFUNCTION(BlueprintCallable)
 	void EquipWeapon();
@@ -91,6 +102,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* InteractionAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* CycleAmmunitionAction;
+
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Fire();
 
@@ -106,6 +120,10 @@ public:
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Interaction();
 
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void CycleAmmunition();
+
+	// Bullet spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
 	TSubclassOf<AActor> BulletToSpawn;
 
@@ -174,9 +192,7 @@ private:
 	void LookAround(const FInputActionValue& Value);
 
 	void ToggleDefaultItems();
-
-	UPROPERTY(VisibleInstanceOnly, Category = Item)
-	AItem* OverlappingItem;
+	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
 
 	// Equipment state of the player
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
@@ -189,7 +205,5 @@ private:
 	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
 public:
-	FORCEINLINE void SetOverlappingItem(AItem* item) { OverlappingItem = item; };
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
-	FORCEINLINE AItem* GetOverlappingItem(AItem* item) const { return OverlappingItem; };
 };

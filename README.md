@@ -161,6 +161,8 @@ Using matisosanimation's Bat (2019) https://sketchfab.com/3d-models/bat-28af38de
 
 Using MadGamesmith's Mad Zombie! (2020) https://sketchfab.com/3d-models/mad-zombie-3ae800207d764fcebb16db191ca35eca
 
+Using romullus's Wooden Ladder (2018) https://sketchfab.com/3d-models/wooden-ladder-0ac651eb518a4bc69873b117cc7e3dd2
+
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
 
 Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Assets/3DModels/3rdParty. He also made the re-rendered films in Content/Video 
@@ -176,3 +178,7 @@ Unreal Engine 5 C++ The Ultimate Game Developer Course. (2023) udemy. https://ww
 Behavior Tree Quick Start Guide. (2024) Epic Games. https://dev.epicgames.com/documentation/en-us/unreal-engine/behavior-tree-in-unreal-engine---quick-start-guide
 
 AI Enemy not moving. (2019). Unreal Forum. https://forums.unrealengine.com/t/ai-enemy-not-moving/458776/5
+
+Trace a line to where the character’s camera is looking (2023) Unreal Forum. https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
+
+Farris, J. (2024) Damage in UE4. Unreal blog. https://www.unrealengine.com/en-US/blog/damage-in-ue4
