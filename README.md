@@ -173,3 +173,6 @@ How to change active camera on player character. (2023) Unreal Forum. https://fo
 
 Unreal Engine 5 C++ The Ultimate Game Developer Course. (2023) udemy. https://www.udemy.com/course/unreal-engine-5-the-ultimate-game-developer-course
 
+Behavior Tree Quick Start Guide. (2024) Epic Games. https://dev.epicgames.com/documentation/en-us/unreal-engine/behavior-tree-in-unreal-engine---quick-start-guide
+
+AI Enemy not moving. (2019). Unreal Forum. https://forums.unrealengine.com/t/ai-enemy-not-moving/458776/5
