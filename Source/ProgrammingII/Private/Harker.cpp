@@ -326,12 +326,6 @@ void AHarker::Move(const FInputActionValue& Value)
 
 void AHarker::LookAround(const FInputActionValue& Value)
 {
-	// Looking around can make character move out of interaction hitbox
-	if (IsInteracting)
-	{
-		return;
-	}
-
 	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	AddControllerPitchInput(LookAxisVector.Y);
@@ -432,9 +426,10 @@ void AHarker::Scope()
 
 void AHarker::Interaction()
 {
-	// Don't do anything if dead
+	// Don't do anything if dead or moving
 	if (CharacterState == ECharacterState::ECS_Dead)
 	{
+		IsInteracting = false;
 		return;
 	}
 
@@ -455,9 +450,14 @@ void AHarker::Interaction()
 		SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
 	}
 	// Toggle interact with object (Interacting will freeze movement)
-	else if (bCanInteract)
+	else if (bCanInteract && IsInteracting == false)
 	{
-		IsInteracting = !IsInteracting;
+		IsInteracting = true;
+	}
+	// Stop interacting if you press E and are interacting
+	else
+	{
+		IsInteracting = false;
 	}
 }
 
