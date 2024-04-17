@@ -9,6 +9,7 @@
 #include <Perception/AIPerceptionComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
 #include "Harker.h"
+#include "Item.h"
 
 AEnemy::AEnemy()
 {
@@ -37,6 +38,46 @@ void AEnemy::UpdateWalkSpeed(float NewWalkSpeed)
 void AEnemy::CancelWaypoints()
 {
 	Waypoints.Empty();
+}
+
+void AEnemy::SpawnRandomPickup()
+{
+	// 20 % chance of spawning an item
+	if (FMath::RandRange(0, ChanceOfDroppingItem) == 0)
+	{
+		// Randomly choose a pickup to spawn
+		const int32 Selection = FMath::RandRange(0, 3);
+		TSubclassOf<AItem> ItemToSpawn;
+
+		switch (Selection)
+		{
+		case 0:
+			ItemToSpawn = NormalAmmoPickup;
+			break;
+		case 1:
+			ItemToSpawn = FireAmmoPickup;
+			break;
+		case 2:
+			ItemToSpawn = HolyAmmoPickup;
+			break;
+		case 3:
+			ItemToSpawn = HealthPickup;
+			break;
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Invalid pickup"));
+		}
+
+		// Spawn item
+		FActorSpawnParameters ActorSpawnParams;
+		ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		UWorld* World = GetWorld();
+
+		if (World && ItemToSpawn)
+		{
+			World->SpawnActor<AActor>(ItemToSpawn, GetActorLocation(), FRotator::ZeroRotator, ActorSpawnParams);
+		}
+	}
 }
 
 void AEnemy::BeginPlay()
@@ -96,20 +137,16 @@ void AEnemy::UpdateDeathLogic()
 
 		AnimInstance->Montage_JumpToSectionsEnd(SelectionName, DeathMontage);
 		IsDead = true;
+
+		SpawnRandomPickup();
 	}
 }
 
 void AEnemy::MoveToNextWaypoint()
 {
-	// Check if there are waypoints to travel between
+	// Check if there are waypoints to travel between and if the waypoint still exists (It might have been destroyed)
 	AAIController* AIController = Cast<AAIController>(GetController());
-	if (AIController == nullptr || Waypoints.Num() == 0)
-	{
-		return;
-	}
-
-	// Check if the waypoint still exists (It might have been destroyed)
-	if (Waypoints[CurrentWaypointIndex] == nullptr)
+	if (AIController == nullptr || Waypoints.Num() == 0 || Waypoints[CurrentWaypointIndex] == nullptr)
 	{
 		return;
 	}

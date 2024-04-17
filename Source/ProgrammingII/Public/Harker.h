@@ -19,7 +19,8 @@ class ACheckPoint;
 class UAnimMontage;
 class AInteractable;
 
-enum EAmmoTypes
+UENUM(BlueprintType)
+enum class EAmmoTypes : uint8
 {
 	EAT_Normal,
 	EAT_Fire,
@@ -202,6 +203,7 @@ private:
 	EActionState ActionState = EActionState::EAS_Unoccupied;
 	
 	// Player selected ammunition
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
 public:
