@@ -88,6 +88,16 @@ void AEnemy::BeginPlay()
 	{
 		HealthBarWidget->SetHealthPercent(1.0f);
 	}
+
+	if (GetWorld())
+	{
+		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		
+		if (Player)
+		{
+			Player->EnemiesQuantity++;
+		}
+	}
 }
 
 void AEnemy::DeathEnd()
@@ -139,6 +149,11 @@ void AEnemy::UpdateDeathLogic()
 		IsDead = true;
 
 		SpawnRandomPickup();
+
+		if (Player)
+		{
+			Player->EnemiesQuantity--;
+		}
 	}
 }
 

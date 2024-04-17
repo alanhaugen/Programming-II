@@ -9,6 +9,7 @@
 class UAttributeComponent;
 class UAnimMontage;
 class UHealthBarComponent;
+class AHarker;
 class AItem;
 
 UCLASS()
@@ -83,4 +84,7 @@ private:
 	// Array of waypoints
 	UPROPERTY(EditAnywhere, Category = "Waypoints")
 	TArray<AActor*> Waypoints;
+
+	// Pointer to player
+	AHarker* Player;
 };

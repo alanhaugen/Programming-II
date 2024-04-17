@@ -36,6 +36,10 @@ public:
 	// Sets default values for this character's properties
 	AHarker();
 
+	// Track number of enemies (for survival game mode)
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
+	int EnemiesQuantity = 0;
+
 	// Harker health
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadWrite)
 	float Health = 100.0f;
