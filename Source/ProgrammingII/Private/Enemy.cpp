@@ -127,6 +127,7 @@ void AEnemy::UpdateDeathLogic()
 		const int32 Selection = FMath::RandRange(0, 3);
 		FName SelectionName;
 
+		// Play a random death animation
 		switch (Selection)
 		{
 		case 0:
