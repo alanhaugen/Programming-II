@@ -47,7 +47,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SpawnRandomPickup();
 
-	// Pickups spawn on death (20 % chance)
+	// Pickups spawn on death (ChanceOfDroppingItem dictates chance)
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pickup)
 	TSubclassOf<AItem> NormalAmmoPickup;
 

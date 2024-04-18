@@ -42,7 +42,7 @@ void AEnemy::CancelWaypoints()
 
 void AEnemy::SpawnRandomPickup()
 {
-	// 20 % chance of spawning an item
+	// ChanceOfDroppingItem dictates chance of spawning an item (somewhat random spawning)
 	if (FMath::RandRange(0, ChanceOfDroppingItem) == 0)
 	{
 		// Randomly choose a pickup to spawn
