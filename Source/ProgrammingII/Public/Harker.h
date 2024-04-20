@@ -110,6 +110,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* CycleAmmunitionAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* PauseAction;
+
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void Fire();
 
@@ -127,6 +130,9 @@ public:
 
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void CycleAmmunition();
+
+	UFUNCTION(Blueprintcallable, Category = "Input")
+	void TogglePause();
 
 	// Bullet spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")

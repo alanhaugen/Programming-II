@@ -11,6 +11,7 @@
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
+#include <Kismet/GameplayStatics.h>
 #include "CheckPoint.h"
 #include "Ladder.h"
 
@@ -301,6 +302,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
 		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::TogglePause);
 	}
 }
 
@@ -479,5 +481,13 @@ void AHarker::CycleAmmunition()
 
 	default:
 		UE_LOG(LogTemp, Warning, TEXT("Unsupported ammo type set"));
+	}
+}
+
+void AHarker::TogglePause()
+{
+	if (GetWorld())
+	{
+		UGameplayStatics::SetGamePaused(GetWorld(), !UGameplayStatics::IsGamePaused(GetWorld()));
 	}
 }
