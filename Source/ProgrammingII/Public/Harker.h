@@ -41,8 +41,10 @@ public:
 	int EnemiesQuantity = 0;
 
 	// Harker health
+	float MaxHealth = 100.0f;
+
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadWrite)
-	float Health = 100.0f;
+	float Health = MaxHealth;
 
 	// Amount of ammunition normal
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
@@ -145,6 +147,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = CheckPoint)
 	TArray<ACheckPoint*> CheckPoints;
 
+	UFUNCTION(BlueprintCallable)
+	bool LoadCheckPoint();
+
 	// You can expose some of your collision query data as properties to help customize and debug 
 	// Here we expose the collision channel we want to run the query on, and set it to only hit Pawns.
 	UPROPERTY(EditAnywhere, Category = "Collision")
@@ -206,6 +211,7 @@ private:
 	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
 
 	// Equipment state of the player
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
 
 	// Action state of the player

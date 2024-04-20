@@ -491,3 +491,18 @@ void AHarker::TogglePause()
 		UGameplayStatics::SetGamePaused(GetWorld(), !UGameplayStatics::IsGamePaused(GetWorld()));
 	}
 }
+
+bool AHarker::LoadCheckPoint()
+{
+	if (CurrentCheckPoint)
+	{
+		CurrentCheckPoint->Load();
+		Health = MaxHealth;
+
+		CharacterState = ECharacterState::ECS_Equipped;
+
+		return true;
+	}
+
+	return false;
+}
