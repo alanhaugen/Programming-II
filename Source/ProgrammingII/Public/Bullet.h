@@ -27,9 +27,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BulletSettings")
+	UPROPERTY(EditAnywhere, Category = "Bullet Settings")
 	class UStaticMeshComponent* BulletMesh;
 
-	UPROPERTY(EditAnywhere, Category = "WeaponSettings")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Bullet Type")
+	EAmmoTypes BulletType = EAmmoTypes::EAT_Normal;
+
+	UPROPERTY(EditAnywhere, Category = "Bullet Settings")
 	float MovementSpeed = 10.f;
 };
