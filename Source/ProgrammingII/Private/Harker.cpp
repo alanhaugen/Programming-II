@@ -311,7 +311,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
 		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
-		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::TogglePause);
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::PauseGame);
 	}
 }
 
@@ -493,11 +493,11 @@ void AHarker::CycleAmmunition()
 	}
 }
 
-void AHarker::TogglePause()
+void AHarker::PauseGame()
 {
 	if (GetWorld())
 	{
-		UGameplayStatics::SetGamePaused(GetWorld(), !UGameplayStatics::IsGamePaused(GetWorld()));
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
 	}
 }
 

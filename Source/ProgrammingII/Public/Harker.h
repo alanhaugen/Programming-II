@@ -135,7 +135,7 @@ public:
 	void CycleAmmunition();
 
 	UFUNCTION(Blueprintcallable, Category = "Input")
-	void TogglePause();
+	void PauseGame();
 
 	// Bullet spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
