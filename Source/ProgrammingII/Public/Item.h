@@ -15,8 +15,28 @@ class PROGRAMMINGII_API AItem : public AActor
 public:	
 	AItem();
 
+	virtual void Tick(float DeltaTime) override;
+
+	// Blueprint visible
+	UPROPERTY(VisibleAnywhere, Category = "Item Parameters")
+	float RunningTime;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float Amplitude = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float TimeConstant = 5.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float RotationSpeed = 50.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float ItemAmount = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Item Parameters")
+	int ItemType = 0;
+
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Collision mesh for item
@@ -40,27 +60,4 @@ private:
 		EIT_InstantDeath,
 		EIT_Health
 	};
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Blueprint visible
-	UPROPERTY(VisibleAnywhere, Category = "Item Parameters")
-	float RunningTime;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float Amplitude = 1.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float TimeConstant = 5.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float RotationSpeed = 50.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float ItemAmount = 10.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Item Parameters")
-	int ItemType = 0;
 };

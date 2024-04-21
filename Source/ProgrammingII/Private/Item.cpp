@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Item.h"
-#include "Harker.h"
+#include <Kismet/GameplayStatics.h>
 #include <Components/BoxComponent.h>
+#include "Harker.h"
+#include "SurvivalGameMode.h"
 
 AItem::AItem()
 {
@@ -49,6 +51,15 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 
 	case EItemType::EIT_Crossbow:
 		Player->EquipWeapon();
+		if (GetWorld())
+		{
+			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+
+			if (SurvivalMode)
+			{
+				SurvivalMode->CheckIfLastEnemy(); // Potentially start waves of enemies
+			}
+		}
 		break;
 
 	case EItemType::EIT_InstantDeath:
