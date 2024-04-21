@@ -70,6 +70,7 @@ protected:
 	void UpdateUI();
 	void UpdateDeathLogic();
 	void MoveToNextWaypoint();
+	void RemoveAIComponent();
 
 	int32 CurrentWaypointIndex = 0;
 

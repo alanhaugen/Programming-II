@@ -12,6 +12,7 @@
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
 #include <Kismet/GameplayStatics.h>
+#include "Bullet.h"
 #include "CheckPoint.h"
 #include "Ladder.h"
 
@@ -190,15 +191,23 @@ void AHarker::SpawnBullet()
 				TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * Distance;
 			}
 
+			// Direction the bullet will travel (from the crossbow to the middle of the screen or enemy)
 			FVector Direction(TraceEnd - GetMesh()->GetSocketLocation("RightHandGunSocket"));
 
-			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			// Setup spawn state
 			FRotator SpawnRotation = Direction.Rotation();
 			FVector SpawnLocation = GetMesh()->GetSocketLocation("RightHandGunSocket");
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			// Spawn the bullet into the game world
+			ABullet* Bullet = World->SpawnActor<ABullet>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+
+			// Set the bullet ammunition type
+			if (Bullet)
+			{
+				Bullet->BulletType = SelectedAmmo;
+			}
 
 			//DrawDebugLine(GetWorld(), TraceStart, TraceEnd, Hit.bBlockingHit ? FColor::Blue : FColor::Red, false, 5.0f, 0, 10.0f);
 		}
@@ -302,7 +311,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
 		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
-		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::TogglePause);
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::PauseGame);
 	}
 }
 
@@ -484,11 +493,11 @@ void AHarker::CycleAmmunition()
 	}
 }
 
-void AHarker::TogglePause()
+void AHarker::PauseGame()
 {
 	if (GetWorld())
 	{
-		UGameplayStatics::SetGamePaused(GetWorld(), !UGameplayStatics::IsGamePaused(GetWorld()));
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
 	}
 }
 

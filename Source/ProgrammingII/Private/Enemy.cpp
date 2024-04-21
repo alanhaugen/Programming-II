@@ -149,12 +149,17 @@ void AEnemy::UpdateDeathLogic()
 		AnimInstance->Montage_JumpToSectionsEnd(SelectionName, DeathMontage);
 		IsDead = true;
 
+		// Spawn pickup on death
 		SpawnRandomPickup();
 
+		// Keep track of number of enemies
 		if (Player)
 		{
 			Player->EnemiesQuantity--;
 		}
+
+		// Stop processing AI on dead agent
+		RemoveAIComponent();
 	}
 }
 
@@ -184,6 +189,20 @@ void AEnemy::MoveToNextWaypoint()
 	else
 	{
 		AIController->MoveToLocation(TargetLocation);
+	}
+}
+
+void AEnemy::RemoveAIComponent()
+{
+	// Thanks to https://www.reddit.com/r/unrealengine/comments/6a8id9/question_how_do_stop_my_ai_move_to_node_from/
+	AController* CurrentController = GetController();
+	if (CurrentController) {
+		// Stop movement so the death animation plays immediately
+		CurrentController->StopMovement();
+		// Unpossess to stop AI
+		CurrentController->UnPossess();
+		// Destroy the controller, since it's not part of the enemy anymore
+		CurrentController->Destroy();
 	}
 }
 

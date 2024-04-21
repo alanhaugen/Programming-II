@@ -18,6 +18,7 @@ class AItem;
 class ACheckPoint;
 class UAnimMontage;
 class AInteractable;
+class ABullet;
 
 UENUM(BlueprintType)
 enum class EAmmoTypes : uint8
@@ -134,11 +135,11 @@ public:
 	void CycleAmmunition();
 
 	UFUNCTION(Blueprintcallable, Category = "Input")
-	void TogglePause();
+	void PauseGame();
 
 	// Bullet spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
-	TSubclassOf<AActor> BulletToSpawn;
+	TSubclassOf<ABullet> BulletToSpawn;
 
 	// Check points
 	UPROPERTY(VisibleInstanceOnly, Category = CheckPoint)
