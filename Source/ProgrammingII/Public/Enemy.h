@@ -9,7 +9,7 @@
 class UAttributeComponent;
 class UAnimMontage;
 class UHealthBarComponent;
-class AHarker;
+class ASurvivalGameMode;
 class AItem;
 
 UCLASS()
@@ -86,6 +86,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Waypoints")
 	TArray<AActor*> Waypoints;
 
-	// Pointer to player
-	AHarker* Player;
+	// Pointer to Survival Game Mode
+	UPROPERTY()
+	ASurvivalGameMode* SurvivalMode;
 };

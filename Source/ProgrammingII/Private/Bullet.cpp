@@ -10,13 +10,11 @@ ABullet::ABullet()
 
 	BulletMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bullet Mesh"));
 	RootComponent = BulletMesh;
-
 }
 
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void ABullet::Tick(float DeltaTime)
@@ -24,7 +22,6 @@ void ABullet::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	SetActorLocation(GetActorLocation() + (this->GetActorForwardVector() * DeltaTime * MovementSpeed));
-
 }
 
 
