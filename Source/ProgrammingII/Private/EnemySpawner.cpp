@@ -2,20 +2,19 @@
 
 
 #include "EnemySpawner.h"
-#include "Math/UnrealMathUtility.h"
-#include "Blueprint/AIBlueprintHelperLibrary.h"
+#include <Math/UnrealMathUtility.h>
+#include <Kismet/GameplayStatics.h>
+#include <Blueprint/AIBlueprintHelperLibrary.h>
+#include "SurvivalGameMode.h"
 #include "Harker.h"
 #include "Enemy.h"
 
-// Sets default values
 AEnemySpawner::AEnemySpawner()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
-// Called when the game starts or when spawned
 void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
@@ -23,10 +22,30 @@ void AEnemySpawner::BeginPlay()
 	if (GetWorld())
 	{
 		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+
+		if (SurvivalMode)
+		{
+			SurvivalMode->Spawners.Add(this);
+		}
 	}
 }
 
-// Called every frame
+void AEnemySpawner::Spawn(int Wave)
+{
+	// Escape if waves array is empty or out of bounds
+	if (Waves.IsEmpty() || Wave >= Waves.Num())
+	{
+		return;
+	}
+
+	// Spawn the amount of enemies corresponding to the setup for the current wave
+	for (int i = 0; i < Waves[Wave]; i++)
+	{
+		GetWorld()->SpawnActor<AEnemy>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
+	}
+}
+
 void AEnemySpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -40,16 +59,18 @@ void AEnemySpawner::Tick(float DeltaTime)
 		}
 	}
 
-	RunningTime += DeltaTime;
-
-	SpawnTime = 3.f;
-
-	if (RunningTime > SpawnTime) 
+	if (SurvivalMode == nullptr)
 	{
-		RunningTime = 0.0f;
+		RunningTime += DeltaTime;
 
-		GetWorld()->SpawnActor<AEnemy>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
+		SpawnTime = 3.f;
+
+		if (RunningTime > SpawnTime) 
+		{
+			RunningTime = 0.0f;
+
+			GetWorld()->SpawnActor<AEnemy>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
+		}
 	}
-
 }
 

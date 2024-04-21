@@ -57,6 +57,11 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 
 	case EItemType::EIT_Health:
 		Player->Health += ItemAmount;
+		if (Player->Health > Player->MaxHealth)
+		{
+			Player->Health = Player->MaxHealth;
+		}
+
 		break;
 
 	default:

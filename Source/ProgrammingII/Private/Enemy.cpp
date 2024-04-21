@@ -8,7 +8,8 @@
 #include <AIController.h>
 #include <Perception/AIPerceptionComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
-#include "Harker.h"
+#include <Kismet/GameplayStatics.h>
+#include "SurvivalGameMode.h"
 #include "Item.h"
 
 AEnemy::AEnemy()
@@ -91,11 +92,11 @@ void AEnemy::BeginPlay()
 
 	if (GetWorld())
 	{
-		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 		
-		if (Player)
+		if (SurvivalMode)
 		{
-			Player->EnemiesQuantity++;
+			SurvivalMode->EnemyQuantity++;
 		}
 	}
 }
@@ -153,9 +154,12 @@ void AEnemy::UpdateDeathLogic()
 		SpawnRandomPickup();
 
 		// Keep track of number of enemies
-		if (Player)
+		if (SurvivalMode)
 		{
-			Player->EnemiesQuantity--;
+			SurvivalMode->EnemyQuantity--;
+
+			// Potentially start a new wave of enemies (for survival game mode)
+			SurvivalMode->CheckIfLastEnemy();
 		}
 
 		// Stop processing AI on dead agent

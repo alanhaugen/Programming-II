@@ -9,6 +9,7 @@
 #include "EnemySpawner.generated.h"
 
 class AHarker;
+class ASurvivalGameMode;
 
 UCLASS()
 class PROGRAMMINGII_API AEnemySpawner : public AActor
@@ -16,24 +17,28 @@ class PROGRAMMINGII_API AEnemySpawner : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AEnemySpawner();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	float RunningTime = 0.f;
+	float RunningTime = 0.0f;
 
-	UPROPERTY(EditAnywhere, Category = "SpawnTimer")
-	float SpawnTime;
+	UPROPERTY(EditAnywhere, Category = "Spawn Options")
+	TArray<int> Waves;
 
-	UPROPERTY(EditAnywhere, Category = "Enemy")
+	UPROPERTY(EditAnywhere, Category = "Spawn Options")
 	TSubclassOf<class AEnemy> EnemyClass;
 
+	UPROPERTY(EditAnywhere, Category = Default)
+	float SpawnTime;
+
+	UFUNCTION(BlueprintCallable)
+	void Spawn(int Wave);
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
 	AHarker* Player;
+	ASurvivalGameMode* SurvivalMode;
 };
