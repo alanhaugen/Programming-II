@@ -58,6 +58,7 @@ private:
 		EIT_HolyWaterArrow,
 		EIT_Crossbow = 5,
 		EIT_InstantDeath,
-		EIT_Health
+		EIT_Health,
+		EIT_Special
 	};
 };

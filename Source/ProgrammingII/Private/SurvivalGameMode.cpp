@@ -37,3 +37,7 @@ void ASurvivalGameMode::CheckIfLastEnemy()
 		EnemyQuantityForCurrentWave = EnemyQuantity;
 	}
 }
+
+void ASurvivalGameMode::PickupSpecialItem()
+{
+}

@@ -75,6 +75,19 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 
 		break;
 
+	case EItemType::EIT_Special:
+		if (GetWorld())
+		{
+			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+
+			if (SurvivalMode)
+			{
+				SurvivalMode->PickupSpecialItem(); // Potentially start waves of enemies
+			}
+		}
+
+		break;
+
 	default:
 		UE_LOG(LogTemp, Warning, TEXT("Item not supported."));
 	}

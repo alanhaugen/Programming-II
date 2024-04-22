@@ -30,4 +30,6 @@ public:
 
 	// Call this when an enemy dies
 	void CheckIfLastEnemy();
+
+	void PickupSpecialItem();
 };
