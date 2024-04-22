@@ -11,6 +11,8 @@
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
+#include <Kismet/GameplayStatics.h>
+#include "Bullet.h"
 #include "CheckPoint.h"
 #include "Ladder.h"
 
@@ -189,15 +191,23 @@ void AHarker::SpawnBullet()
 				TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * Distance;
 			}
 
+			// Direction the bullet will travel (from the crossbow to the middle of the screen or enemy)
 			FVector Direction(TraceEnd - GetMesh()->GetSocketLocation("RightHandGunSocket"));
 
-			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			// Setup spawn state
 			FRotator SpawnRotation = Direction.Rotation();
 			FVector SpawnLocation = GetMesh()->GetSocketLocation("RightHandGunSocket");
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			// Spawn the bullet into the game world
+			ABullet* Bullet = World->SpawnActor<ABullet>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+
+			// Set the bullet ammunition type
+			if (Bullet)
+			{
+				Bullet->BulletType = SelectedAmmo;
+			}
 
 			//DrawDebugLine(GetWorld(), TraceStart, TraceEnd, Hit.bBlockingHit ? FColor::Blue : FColor::Red, false, 5.0f, 0, 10.0f);
 		}
@@ -301,13 +311,14 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
 		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::PauseGame);
 	}
 }
 
 void AHarker::Move(const FInputActionValue& Value)
 {
 	// Don't move if attacking melee or dead
-	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (ActionState == EActionState::EAS_Attacking || CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -350,7 +361,7 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 void AHarker::Fire()
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -378,7 +389,7 @@ void AHarker::Fire()
 void AHarker::AimStart(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -391,7 +402,7 @@ void AHarker::AimStart(const FInputActionValue& Value)
 void AHarker::AimEnd(const FInputActionValue& Value)
 {
 	// Don't do anything if dead
-	if (CharacterState == ECharacterState::ECS_Dead || isInteracting)
+	if (CharacterState == ECharacterState::ECS_Dead || IsInteracting)
 	{
 		return;
 	}
@@ -426,9 +437,10 @@ void AHarker::Scope()
 
 void AHarker::Interaction()
 {
-	// Don't do anything if dead
+	// Don't do anything if dead or moving
 	if (CharacterState == ECharacterState::ECS_Dead)
 	{
+		IsInteracting = false;
 		return;
 	}
 
@@ -449,9 +461,14 @@ void AHarker::Interaction()
 		SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
 	}
 	// Toggle interact with object (Interacting will freeze movement)
-	else if (bCanInteract)
+	else if (bCanInteract && IsInteracting == false)
 	{
-		isInteracting = !isInteracting;
+		IsInteracting = true;
+	}
+	// Stop interacting if you press E and are interacting
+	else
+	{
+		IsInteracting = false;
 	}
 }
 
@@ -474,4 +491,27 @@ void AHarker::CycleAmmunition()
 	default:
 		UE_LOG(LogTemp, Warning, TEXT("Unsupported ammo type set"));
 	}
+}
+
+void AHarker::PauseGame()
+{
+	if (GetWorld())
+	{
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
+	}
+}
+
+bool AHarker::LoadCheckPoint()
+{
+	if (CurrentCheckPoint)
+	{
+		CurrentCheckPoint->Load();
+		Health = MaxHealth;
+
+		CharacterState = ECharacterState::ECS_Equipped;
+
+		return true;
+	}
+
+	return false;
 }

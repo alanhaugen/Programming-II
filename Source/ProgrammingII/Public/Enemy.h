@@ -9,6 +9,8 @@
 class UAttributeComponent;
 class UAnimMontage;
 class UHealthBarComponent;
+class ASurvivalGameMode;
+class AItem;
 
 UCLASS()
 class PROGRAMMINGII_API AEnemy : public ACharacter
@@ -33,11 +35,30 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UHealthBarComponent* HealthBarWidget;
 
+	UPROPERTY(EditAnywhere, Category = Pickup)
+	int ChanceOfDroppingItem = 1; // Higher => Less likely
+
 	UFUNCTION(BlueprintCallable)
 	void UpdateWalkSpeed(float NewWalkSpeed);
 
 	UFUNCTION(BlueprintCallable)
 	void CancelWaypoints();
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnRandomPickup();
+
+	// Pickups spawn on death (ChanceOfDroppingItem dictates chance)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pickup)
+	TSubclassOf<AItem> NormalAmmoPickup;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pickup)
+	TSubclassOf<AItem> FireAmmoPickup;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pickup)
+	TSubclassOf<AItem> HolyAmmoPickup;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pickup)
+	TSubclassOf<AItem> HealthPickup;
 
 protected:
 	// Called when the game starts or when spawned
@@ -49,6 +70,7 @@ protected:
 	void UpdateUI();
 	void UpdateDeathLogic();
 	void MoveToNextWaypoint();
+	void RemoveAIComponent();
 
 	int32 CurrentWaypointIndex = 0;
 
@@ -63,4 +85,8 @@ private:
 	// Array of waypoints
 	UPROPERTY(EditAnywhere, Category = "Waypoints")
 	TArray<AActor*> Waypoints;
+
+	// Pointer to Survival Game Mode
+	UPROPERTY()
+	ASurvivalGameMode* SurvivalMode;
 };
