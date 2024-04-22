@@ -1,0 +1,33 @@
+[AActor]<-
+[AInteractable
+|
+# attributes
+\# UStaticMeshComponent : Mesh*
+\# UBoxComponent : CollisionBox*
+\# PreInteractionMessage : FText
+\# InteractionMessage : FText
+|
+# operations
++ OnSpehereOverlap(
+            in mOverlappedComponent : UPrimitiveComponent*,
+            in mOtherActor : AActor*,
+            in mOtherComp : UPrimitiveComponent*,
+            in mOtherBodyIndex : int32,
+            in mbFromSweep : bool,
+            in mconst SweepResult : FHitResult&)
++ OnSpehereEndOverlap(
+            in mOverlappedComponent : UPrimitiveComponent*,
+            in mOtherActor : AActor*,
+            in mOtherComp : UPrimitiveComponent*,
+            in mOtherBodyIndex : int32)
+\# BeginPlay () override
+\# Tick (DeltaTime : float) override
+]<-
+[ALadder
+|
+# attributes
++ CollisionMeshTop : UBoxComponent*
+|
+# operations
+\# BeginPlay () override
+]

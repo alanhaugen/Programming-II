@@ -1,0 +1,143 @@
+\hypertarget{class_a_harker}{}\doxysection{A\+Harker Class Reference}
+\label{class_a_harker}\index{AHarker@{AHarker}}
+Inheritance diagram for A\+Harker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_a_harker}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_harker_aa97955d87ae0fbc983e3f5b3e82e091f}\label{class_a_harker_aa97955d87ae0fbc983e3f5b3e82e091f}} 
+void {\bfseries Equip\+Weapon} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_a26f7977c8efa57c91edaa756c28394e2}\label{class_a_harker_a26f7977c8efa57c91edaa756c28394e2}} 
+virtual void {\bfseries Tick} (float Delta\+Time) override
+\item 
+\mbox{\Hypertarget{class_a_harker_a5428dc33c478280cfc4df25ca7d7f097}\label{class_a_harker_a5428dc33c478280cfc4df25ca7d7f097}} 
+virtual void {\bfseries Setup\+Player\+Input\+Component} (class U\+Input\+Component $\ast$Player\+Input\+Component) override
+\item 
+\mbox{\Hypertarget{class_a_harker_a0e60d7ee8f72c651c3c619d53d204a25}\label{class_a_harker_a0e60d7ee8f72c651c3c619d53d204a25}} 
+void {\bfseries Fire} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_ac1a4d5300ad2401bd1731514f9fc023e}\label{class_a_harker_ac1a4d5300ad2401bd1731514f9fc023e}} 
+void {\bfseries Aim\+Start} (const F\+Input\+Action\+Value \&Value)
+\item 
+\mbox{\Hypertarget{class_a_harker_ab6217959635e71cf548431f7c75c0fde}\label{class_a_harker_ab6217959635e71cf548431f7c75c0fde}} 
+void {\bfseries Aim\+End} (const F\+Input\+Action\+Value \&Value)
+\item 
+\mbox{\Hypertarget{class_a_harker_a325655b2d9ada66718675ea58149fe7b}\label{class_a_harker_a325655b2d9ada66718675ea58149fe7b}} 
+void {\bfseries Scope} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_ac66e7e140c7de7197c5db0ed217f0dad}\label{class_a_harker_ac66e7e140c7de7197c5db0ed217f0dad}} 
+void {\bfseries Interaction} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_ad0691e8d5076f92654480e3d3f4a929d}\label{class_a_harker_ad0691e8d5076f92654480e3d3f4a929d}} 
+void {\bfseries Cycle\+Ammunition} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_ac1cbe62532a70577bfb3cdbbcfc705ad}\label{class_a_harker_ac1cbe62532a70577bfb3cdbbcfc705ad}} 
+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE E\+Character\+State {\bfseries Get\+Character\+State} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_harker_a9abe29080cba03229e23a2f3427f3b6d}\label{class_a_harker_a9abe29080cba03229e23a2f3427f3b6d}} 
+float {\bfseries Health} = 100.\+0f
+\item 
+\mbox{\Hypertarget{class_a_harker_a0b684a440b2ee5126f29baddf9926df3}\label{class_a_harker_a0b684a440b2ee5126f29baddf9926df3}} 
+float {\bfseries Ammunition\+Normal} = 10.\+0f
+\item 
+\mbox{\Hypertarget{class_a_harker_a94b5e5afb141a6e2cb0167fb8a4cc06e}\label{class_a_harker_a94b5e5afb141a6e2cb0167fb8a4cc06e}} 
+float {\bfseries Ammunition\+Flame} = 0.\+0f
+\item 
+\mbox{\Hypertarget{class_a_harker_a69ce19a3a00a1840bc9c80066b9b0bff}\label{class_a_harker_a69ce19a3a00a1840bc9c80066b9b0bff}} 
+float {\bfseries Ammunition\+Holy} = 0.\+0f
+\item 
+\mbox{\Hypertarget{class_a_harker_a0d7f8309589fab8182999f24c9cfc6c8}\label{class_a_harker_a0d7f8309589fab8182999f24c9cfc6c8}} 
+bool {\bfseries is\+Zooming\+In} = false
+\item 
+\mbox{\Hypertarget{class_a_harker_a2854d9fcd6c6b9705f41585abe95b12f}\label{class_a_harker_a2854d9fcd6c6b9705f41585abe95b12f}} 
+float {\bfseries Zoom\+Factor}
+\item 
+\mbox{\Hypertarget{class_a_harker_acdccc58cfa2baee139e0b0d58a271583}\label{class_a_harker_acdccc58cfa2baee139e0b0d58a271583}} 
+bool {\bfseries is\+Interacting} = false
+\item 
+\mbox{\Hypertarget{class_a_harker_a29b949a34c76811e35166cc720607a5d}\label{class_a_harker_a29b949a34c76811e35166cc720607a5d}} 
+\mbox{\hyperlink{class_a_interactable}{A\+Interactable}} $\ast$ {\bfseries Current\+Interactable}
+\item 
+\mbox{\Hypertarget{class_a_harker_a88b6e0c42fca9161c9a411228da2a9eb}\label{class_a_harker_a88b6e0c42fca9161c9a411228da2a9eb}} 
+bool {\bfseries b\+Can\+Interact} = false
+\item 
+\mbox{\Hypertarget{class_a_harker_a0e0fd81099a488b4c603912558910a61}\label{class_a_harker_a0e0fd81099a488b4c603912558910a61}} 
+U\+Input\+Mapping\+Context $\ast$ {\bfseries Harker\+Context}
+\item 
+\mbox{\Hypertarget{class_a_harker_a9ac3c2cf9da1b2a941aee1f4475d793b}\label{class_a_harker_a9ac3c2cf9da1b2a941aee1f4475d793b}} 
+U\+Input\+Action $\ast$ {\bfseries Move\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a368a7e491b279e51586f68fa1e1c27f9}\label{class_a_harker_a368a7e491b279e51586f68fa1e1c27f9}} 
+U\+Input\+Action $\ast$ {\bfseries Jump\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a240c6a9bd4c26247d211f292797debc5}\label{class_a_harker_a240c6a9bd4c26247d211f292797debc5}} 
+U\+Input\+Action $\ast$ {\bfseries Look\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_aa567e614586471de955a305b56c183cf}\label{class_a_harker_aa567e614586471de955a305b56c183cf}} 
+class U\+Input\+Action $\ast$ {\bfseries Fire\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a346244e3d17d63fe497915262754157a}\label{class_a_harker_a346244e3d17d63fe497915262754157a}} 
+class U\+Input\+Action $\ast$ {\bfseries Aim\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_acdbd990468ea4b0d28c2f70ff2ed74f0}\label{class_a_harker_acdbd990468ea4b0d28c2f70ff2ed74f0}} 
+U\+Input\+Action $\ast$ {\bfseries Scope\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a309a5a54f4cefbf311d7a939c4275b41}\label{class_a_harker_a309a5a54f4cefbf311d7a939c4275b41}} 
+class U\+Input\+Action $\ast$ {\bfseries Interaction\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a2b47c51eb38ce7d8713e610f30d7bd00}\label{class_a_harker_a2b47c51eb38ce7d8713e610f30d7bd00}} 
+class U\+Input\+Action $\ast$ {\bfseries Cycle\+Ammunition\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a410a789b1c0d9346f0da62eae0a0e61f}\label{class_a_harker_a410a789b1c0d9346f0da62eae0a0e61f}} 
+T\+Subclass\+Of$<$ A\+Actor $>$ {\bfseries Bullet\+To\+Spawn}
+\item 
+\mbox{\Hypertarget{class_a_harker_a603b6fa46c681b43def4dffdcaa20f38}\label{class_a_harker_a603b6fa46c681b43def4dffdcaa20f38}} 
+\mbox{\hyperlink{class_a_check_point}{A\+Check\+Point}} $\ast$ {\bfseries Current\+Check\+Point}
+\item 
+\mbox{\Hypertarget{class_a_harker_a527c2564a1b2a09d2fd22945c2177216}\label{class_a_harker_a527c2564a1b2a09d2fd22945c2177216}} 
+T\+Array$<$ \mbox{\hyperlink{class_a_check_point}{A\+Check\+Point}} $\ast$ $>$ {\bfseries Check\+Points}
+\item 
+\mbox{\Hypertarget{class_a_harker_a1aa967e85da426edfaa1a54a6a550b86}\label{class_a_harker_a1aa967e85da426edfaa1a54a6a550b86}} 
+T\+Enum\+As\+Byte$<$ E\+Collision\+Channel $>$ {\bfseries Trace\+Channel\+Property} = E\+C\+C\+\_\+\+Pawn
+\item 
+\mbox{\Hypertarget{class_a_harker_acc681d9d5bb288be8b0ba6320c6edbc6}\label{class_a_harker_acc681d9d5bb288be8b0ba6320c6edbc6}} 
+U\+Anim\+Montage $\ast$ {\bfseries Attack\+Montage}
+\item 
+\mbox{\Hypertarget{class_a_harker_a352abe0620c98080ad88c52c571c524d}\label{class_a_harker_a352abe0620c98080ad88c52c571c524d}} 
+U\+Anim\+Montage $\ast$ {\bfseries Death\+Montage}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_harker_ac3b2f48c3a482b929931f373e5aa9637}\label{class_a_harker_ac3b2f48c3a482b929931f373e5aa9637}} 
+virtual void {\bfseries Begin\+Play} () override
+\item 
+\mbox{\Hypertarget{class_a_harker_a0376de3c7ad200fcf47bfb1f131ce250}\label{class_a_harker_a0376de3c7ad200fcf47bfb1f131ce250}} 
+bool {\bfseries Melee\+Attack} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_adf844e2eedc85d8ead69ed4415ba7720}\label{class_a_harker_adf844e2eedc85d8ead69ed4415ba7720}} 
+bool {\bfseries Spend\+Ammo} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_a2257c1f6cdcf7f30d960bd7dca12996a}\label{class_a_harker_a2257c1f6cdcf7f30d960bd7dca12996a}} 
+void {\bfseries Spawn\+Bullet} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_a2c5318be996bf81b6220781f6ec34961}\label{class_a_harker_a2c5318be996bf81b6220781f6ec34961}} 
+bool {\bfseries Can\+Fire} () const
+\item 
+\mbox{\Hypertarget{class_a_harker_a2130944c88b2d29acff4f1f2fef80a93}\label{class_a_harker_a2130944c88b2d29acff4f1f2fef80a93}} 
+{\bfseries U\+F\+U\+N\+C\+T\+I\+ON} (Blueprint\+Callable) void Melee\+Attack\+End()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/hanswhitburnhaugen/\+Programming-\/\+I\+I/\+Source/\+Programming\+I\+I/\+Public/Harker.\+h\item 
+/\+Users/hanswhitburnhaugen/\+Programming-\/\+I\+I/\+Source/\+Programming\+I\+I/\+Private/Harker.\+cpp\end{DoxyCompactItemize}

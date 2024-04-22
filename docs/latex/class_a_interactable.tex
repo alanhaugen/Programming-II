@@ -1,0 +1,47 @@
+\hypertarget{class_a_interactable}{}\doxysection{A\+Interactable Class Reference}
+\label{class_a_interactable}\index{AInteractable@{AInteractable}}
+Inheritance diagram for A\+Interactable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_a_interactable}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_interactable_a14d28344ca50925bff37bd9e712fc0b8}\label{class_a_interactable_a14d28344ca50925bff37bd9e712fc0b8}} 
+virtual void {\bfseries On\+Spehere\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index, bool b\+From\+Sweep, const F\+Hit\+Result \&Sweep\+Result)
+\item 
+\mbox{\Hypertarget{class_a_interactable_ac58a86d54b96722d98716d273a4193dc}\label{class_a_interactable_ac58a86d54b96722d98716d273a4193dc}} 
+virtual void {\bfseries On\+Spehere\+End\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_interactable_a8b71d8bae275d7f1aead02f0145a64eb}\label{class_a_interactable_a8b71d8bae275d7f1aead02f0145a64eb}} 
+virtual void {\bfseries Begin\+Play} () override
+\item 
+\mbox{\Hypertarget{class_a_interactable_a9a3b64a3d91538da5d03f9e74d73fbc9}\label{class_a_interactable_a9a3b64a3d91538da5d03f9e74d73fbc9}} 
+virtual void {\bfseries Tick} (float Delta\+Time) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_interactable_a47a537fad87f8729c820bda66a2eefc5}\label{class_a_interactable_a47a537fad87f8729c820bda66a2eefc5}} 
+U\+Static\+Mesh\+Component $\ast$ {\bfseries Mesh}
+\item 
+\mbox{\Hypertarget{class_a_interactable_a398bbe4d037a918ef72881130e75947f}\label{class_a_interactable_a398bbe4d037a918ef72881130e75947f}} 
+U\+Box\+Component $\ast$ {\bfseries Collision\+Box}
+\item 
+\mbox{\Hypertarget{class_a_interactable_aa52c8316dcfaccad91bae1267a34008e}\label{class_a_interactable_aa52c8316dcfaccad91bae1267a34008e}} 
+F\+Text {\bfseries Pre\+Interaction\+Message} = F\+Text\+::\+From\+String(\char`\"{}Press E to Interact\char`\"{})
+\item 
+\mbox{\Hypertarget{class_a_interactable_aa26aeff496d9ab764332bccbb9fd1a27}\label{class_a_interactable_aa26aeff496d9ab764332bccbb9fd1a27}} 
+F\+Text {\bfseries Interaction\+Message} = F\+Text\+::\+From\+String(\char`\"{}This is the text for the message box upon pressing E\char`\"{})
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/hanswhitburnhaugen/\+Programming-\/\+I\+I/\+Source/\+Programming\+I\+I/\+Public/Interactable.\+h\item 
+/\+Users/hanswhitburnhaugen/\+Programming-\/\+I\+I/\+Source/\+Programming\+I\+I/\+Private/Interactable.\+cpp\end{DoxyCompactItemize}
