@@ -3,15 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SurvivalGameMode.h"
 #include "GameFramework/GameModeBase.h"
 #include "AdventureGameMode.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class PROGRAMMINGII_API AAdventureGameMode : public AGameModeBase
+class PROGRAMMINGII_API AAdventureGameMode : public ASurvivalGameMode
 {
 	GENERATED_BODY()
 	
+public:
+	AAdventureGameMode();
+	void TriggerWave(int Wave);
 };

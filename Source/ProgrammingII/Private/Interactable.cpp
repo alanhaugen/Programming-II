@@ -23,8 +23,8 @@ void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AInteractable::OnSpehereOverlap);
-	CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AInteractable::OnSpehereEndOverlap);
+	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AInteractable::OnOverlap);
+	CollisionBox->OnComponentEndOverlap.AddDynamic(this, &AInteractable::OnEndOverlap);
 }
 
 void AInteractable::Tick(float DeltaTime)
@@ -33,7 +33,7 @@ void AInteractable::Tick(float DeltaTime)
 
 }
 
-void AInteractable::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AInteractable::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AHarker* Player = Cast<AHarker>(OtherActor);
 
@@ -44,7 +44,7 @@ void AInteractable::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, A
 	}
 }
 
-void AInteractable::OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AInteractable::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	AHarker* Player = Cast<AHarker>(OtherActor);
 

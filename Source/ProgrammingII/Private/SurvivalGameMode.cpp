@@ -28,16 +28,22 @@ void ASurvivalGameMode::CheckIfLastEnemy()
 	if (EnemyQuantity == 0)
 	{
 		// Spawn a new wave
-		for (int i = 0; i < Spawners.Num(); i++)
-		{
-			Spawners[i]->Spawn(CurrentWave);
-		}
-
+		SpawnWave();
 		CurrentWave++;
-		EnemyQuantityForCurrentWave = EnemyQuantity;
 	}
 }
 
 void ASurvivalGameMode::PickupSpecialItem()
 {
+}
+
+void ASurvivalGameMode::SpawnWave()
+{
+	// Spawn a new wave
+	for (int i = 0; i < Spawners.Num(); i++)
+	{
+		Spawners[i]->Spawn(CurrentWave);
+	}
+
+	EnemyQuantityForCurrentWave = EnemyQuantity;
 }

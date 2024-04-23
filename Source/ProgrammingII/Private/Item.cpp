@@ -76,7 +76,7 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 		break;
 
 	case EItemType::EIT_Special:
-		if (GetWorld())
+		/*if (GetWorld())
 		{
 			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
@@ -84,7 +84,7 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 			{
 				SurvivalMode->PickupSpecialItem(); // Potentially start waves of enemies
 			}
-		}
+		}*/
 
 		break;
 
