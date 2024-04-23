@@ -167,6 +167,8 @@ Using lightguard's Wooden Sign - Low Poly (2020) https://sketchfab.com/3d-models
 
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
 
+Using Three Dog Night's Small Red Potion (Low poly) (2019): https://sketchfab.com/3d-models/small-red-potion-low-poly-2744e118c83e4502a858ff2c1f961be7
+
 fire arrow by Aisyah from https://thenounproject.com/browse/icons/term/fire-arrow/ (CC BY 3.0)
 
 Hunting by Sahab Uddin from https://thenounproject.com/browse/icons/term/hunting/ (CC BY 3.0)
