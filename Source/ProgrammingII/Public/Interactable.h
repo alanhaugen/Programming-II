@@ -22,15 +22,15 @@ public:
 	UFUNCTION()
 	virtual void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	// Collision mesh for interactable
+	UPROPERTY(VisibleAnywhere)
+	UBoxComponent* CollisionBox;
+
 protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, Category = Mesh)
 	UStaticMeshComponent* Mesh;
-
-	// Collision mesh for interactable
-	UPROPERTY(VisibleAnywhere)
-	UBoxComponent* CollisionBox;
 
 	virtual void Tick(float DeltaTime) override;
 

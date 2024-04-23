@@ -458,7 +458,14 @@ void AHarker::Interaction()
 	ALadder* Ladder = Cast<ALadder>(CurrentInteractable);
 	if (Ladder && bCanInteract)
 	{
-		SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
+		if (FVector::Dist(GetActorLocation(), Ladder->CollisionMeshTop->GetComponentLocation()) < 100.0f)
+		{
+			SetActorLocation(Ladder->CollisionBox->GetComponentLocation());
+		}
+		else
+		{
+			SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
+		}
 	}
 	// Toggle interact with object (Interacting will freeze movement)
 	else if (bCanInteract && IsInteracting == false)
