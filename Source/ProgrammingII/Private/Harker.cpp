@@ -167,10 +167,19 @@ void AHarker::SpawnBullet()
 
 		if (World)
 		{
+			UCameraComponent* CurrentCamera;
+			if (FPSCamera->IsActive())
+			{
+				CurrentCamera = FPSCamera;
+			}
+			else
+			{
+				CurrentCamera = Camera;
+			}
 			// Make ray from crossbow to middle of screen (Crossair)
 			// Thanks to https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
-			FVector TraceStart = Camera->GetComponentLocation();
-			FVector TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * 10000000.f;
+			FVector TraceStart = CurrentCamera->GetComponentLocation();
+			FVector TraceEnd = CurrentCamera->GetComponentLocation() + CurrentCamera->GetForwardVector() * 10000000.f;
 
 			// FHitResult will hold all data returned by our line collision query
 			FHitResult Hit;
@@ -188,7 +197,7 @@ void AHarker::SpawnBullet()
 			else
 			{
 				// Else just fire from the crossbow and far into the middle of the screen
-				TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * Distance;
+				TraceEnd = CurrentCamera->GetComponentLocation() + CurrentCamera->GetForwardVector() * Distance;
 			}
 
 			// Direction the bullet will travel (from the crossbow to the middle of the screen or enemy)
