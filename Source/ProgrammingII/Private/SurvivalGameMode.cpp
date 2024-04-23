@@ -39,6 +39,12 @@ void ASurvivalGameMode::PickupSpecialItem()
 
 void ASurvivalGameMode::SpawnWave()
 {
+	// Don't spawn if array is out of bounds
+	if (CurrentWave < 0)
+	{
+		return;
+	}
+
 	// Spawn a new wave
 	for (int i = 0; i < Spawners.Num(); i++)
 	{
