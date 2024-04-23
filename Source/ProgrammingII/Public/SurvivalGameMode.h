@@ -35,4 +35,6 @@ public:
 
 protected:
 	void SpawnWave();
+
+	bool bWillAutomaticallyGoToNextWave = true;
 };

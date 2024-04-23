@@ -4,6 +4,12 @@
 
 void ASurvivalGameMode::CheckIfLastEnemy()
 {
+	// Don't continue if auto cycling through waves is disabled
+	if (bWillAutomaticallyGoToNextWave == false)
+	{
+		return;
+	}
+
 	// Get reference to player
 	AHarker* Player;
 
