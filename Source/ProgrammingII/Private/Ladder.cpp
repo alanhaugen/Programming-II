@@ -16,6 +16,6 @@ void ALadder::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CollisionMeshTop->OnComponentBeginOverlap.AddDynamic(this, &AInteractable::OnSpehereOverlap);
-	CollisionMeshTop->OnComponentEndOverlap.AddDynamic(this, &AInteractable::OnSpehereEndOverlap);
+	CollisionMeshTop->OnComponentBeginOverlap.AddDynamic(this, &AInteractable::OnOverlap);
+	CollisionMeshTop->OnComponentEndOverlap.AddDynamic(this, &AInteractable::OnEndOverlap);
 }

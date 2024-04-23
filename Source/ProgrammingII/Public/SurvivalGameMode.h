@@ -32,4 +32,7 @@ public:
 	void CheckIfLastEnemy();
 
 	void PickupSpecialItem();
+
+protected:
+	void SpawnWave();
 };
