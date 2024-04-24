@@ -194,3 +194,5 @@ Trace a line to where the character’s camera is looking (2023) Unreal Forum. h
 Farris, J. (2024) Damage in UE4. Unreal blog. https://www.unrealengine.com/en-US/blog/damage-in-ue4
 
 CL0UDRED. (2017) [QUESTION] How do stop my AI Move To node from executing when an AI has died? https://www.reddit.com/r/unrealengine/comments/6a8id9/question_how_do_stop_my_ai_move_to_node_from/
+
+dacanizares (2023) Sample AI Controller - GetRandomReachablePointInRadius - UE4 https://gist.github.com/dacanizares/5db9c59281a9c9049bf819acce7e29bc

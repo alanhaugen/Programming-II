@@ -10,6 +10,7 @@
 
 class AHarker;
 class ASurvivalGameMode;
+class UNavigationSystemV1;
 
 UCLASS()
 class PROGRAMMINGII_API AEnemySpawner : public AActor
@@ -41,4 +42,5 @@ protected:
 private:
 	AHarker* Player;
 	ASurvivalGameMode* SurvivalMode;
+	UNavigationSystemV1* NavSys;
 };

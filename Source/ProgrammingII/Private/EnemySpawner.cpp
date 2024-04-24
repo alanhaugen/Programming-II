@@ -5,6 +5,7 @@
 #include <Math/UnrealMathUtility.h>
 #include <Kismet/GameplayStatics.h>
 #include <Blueprint/AIBlueprintHelperLibrary.h>
+#include <NavigationSystem.h>
 #include "SurvivalGameMode.h"
 #include "Harker.h"
 #include "Enemy.h"
@@ -23,6 +24,7 @@ void AEnemySpawner::BeginPlay()
 	{
 		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
 		SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+		NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
 
 		if (SurvivalMode)
 		{
@@ -39,10 +41,20 @@ void AEnemySpawner::Spawn(int Wave)
 		return;
 	}
 
+	// Spawn parameters (always spawn, adjust the spawn location)
+	FActorSpawnParameters ActorSpawnParams;
+	ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
 	// Spawn the amount of enemies corresponding to the setup for the current wave
 	for (int i = 0; i < Waves[Wave]; i++)
 	{
-		GetWorld()->SpawnActor<AEnemy>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
+		FVector Location;
+		
+		// Thanks to https://gist.github.com/dacanizares/5db9c59281a9c9049bf819acce7e29bc
+		if (NavSys->K2_GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), Location, 500.0f))
+		{
+			GetWorld()->SpawnActor<AEnemy>(EnemyClass, Location, FRotator::ZeroRotator, ActorSpawnParams);
+		}
 	}
 }
 
