@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "Harker.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
@@ -11,6 +9,8 @@
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
+#include <Kismet/GameplayStatics.h>
+#include "Bullet.h"
 #include "CheckPoint.h"
 #include "Ladder.h"
 
@@ -165,10 +165,20 @@ void AHarker::SpawnBullet()
 
 		if (World)
 		{
+			UCameraComponent* CurrentCamera;
+			if (FPSCamera->IsActive())
+			{
+				CurrentCamera = FPSCamera;
+			}
+			else
+			{
+				CurrentCamera = Camera;
+			}
+
 			// Make ray from crossbow to middle of screen (Crossair)
 			// Thanks to https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
-			FVector TraceStart = Camera->GetComponentLocation();
-			FVector TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * 10000000.f;
+			FVector TraceStart = CurrentCamera->GetComponentLocation();
+			FVector TraceEnd = CurrentCamera->GetComponentLocation() + CurrentCamera->GetForwardVector() * 10000000.f;
 
 			// FHitResult will hold all data returned by our line collision query
 			FHitResult Hit;
@@ -186,18 +196,26 @@ void AHarker::SpawnBullet()
 			else
 			{
 				// Else just fire from the crossbow and far into the middle of the screen
-				TraceEnd = Camera->GetComponentLocation() + Camera->GetForwardVector() * Distance;
+				TraceEnd = CurrentCamera->GetComponentLocation() + CurrentCamera->GetForwardVector() * Distance;
 			}
 
+			// Direction the bullet will travel (from the crossbow to the middle of the screen or enemy)
 			FVector Direction(TraceEnd - GetMesh()->GetSocketLocation("RightHandGunSocket"));
 
-			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			// Setup spawn state
 			FRotator SpawnRotation = Direction.Rotation();
 			FVector SpawnLocation = GetMesh()->GetSocketLocation("RightHandGunSocket");
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-			World->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			// Spawn the bullet into the game world
+			ABullet* Bullet = World->SpawnActor<ABullet>(BulletToSpawn, SpawnLocation, SpawnRotation, ActorSpawnParams);
+
+			// Set the bullet ammunition type
+			if (Bullet)
+			{
+				Bullet->BulletType = SelectedAmmo;
+			}
 
 			//DrawDebugLine(GetWorld(), TraceStart, TraceEnd, Hit.bBlockingHit ? FColor::Blue : FColor::Red, false, 5.0f, 0, 10.0f);
 		}
@@ -301,6 +319,7 @@ void AHarker::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(InteractionAction, ETriggerEvent::Triggered, this, &AHarker::Interaction);
 		EnhancedInputComponent->BindAction(ScopeAction, ETriggerEvent::Triggered, this, &AHarker::Scope);
 		EnhancedInputComponent->BindAction(CycleAmmunitionAction, ETriggerEvent::Triggered, this, &AHarker::CycleAmmunition);
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Triggered, this, &AHarker::PauseGame);
 	}
 }
 
@@ -447,7 +466,14 @@ void AHarker::Interaction()
 	ALadder* Ladder = Cast<ALadder>(CurrentInteractable);
 	if (Ladder && bCanInteract)
 	{
-		SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
+		if (FVector::Dist(GetActorLocation(), Ladder->CollisionMeshTop->GetComponentLocation()) < 100.0f)
+		{
+			SetActorLocation(Ladder->CollisionBox->GetComponentLocation());
+		}
+		else
+		{
+			SetActorLocation(Ladder->CollisionMeshTop->GetComponentLocation());
+		}
 	}
 	// Toggle interact with object (Interacting will freeze movement)
 	else if (bCanInteract && IsInteracting == false)
@@ -480,4 +506,27 @@ void AHarker::CycleAmmunition()
 	default:
 		UE_LOG(LogTemp, Warning, TEXT("Unsupported ammo type set"));
 	}
+}
+
+void AHarker::PauseGame()
+{
+	if (GetWorld())
+	{
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
+	}
+}
+
+bool AHarker::LoadCheckPoint()
+{
+	if (CurrentCheckPoint)
+	{
+		CurrentCheckPoint->Load();
+		Health = MaxHealth;
+
+		CharacterState = ECharacterState::ECS_Equipped;
+
+		return true;
+	}
+
+	return false;
 }

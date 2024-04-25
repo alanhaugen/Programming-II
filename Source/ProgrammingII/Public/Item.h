@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -17,8 +15,28 @@ class PROGRAMMINGII_API AItem : public AActor
 public:	
 	AItem();
 
+	virtual void Tick(float DeltaTime) override;
+
+	// Blueprint visible
+	UPROPERTY(VisibleAnywhere, Category = "Item Parameters")
+	float RunningTime;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float Amplitude = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float TimeConstant = 5.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float RotationSpeed = 50.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Item Parameters")
+	float ItemAmount = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Item Parameters")
+	int ItemType = 0;
+
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Collision mesh for item
@@ -40,29 +58,7 @@ private:
 		EIT_HolyWaterArrow,
 		EIT_Crossbow = 5,
 		EIT_InstantDeath,
-		EIT_Health
+		EIT_Health,
+		EIT_Special
 	};
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Blueprint visible
-	UPROPERTY(VisibleAnywhere, Category = "Item Parameters")
-	float RunningTime;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float Amplitude = 1.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float TimeConstant = 5.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float RotationSpeed = 50.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Item Parameters")
-	float ItemAmount = 10.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Item Parameters")
-	int ItemType = 0;
 };

@@ -167,6 +167,14 @@ Using lightguard's Wooden Sign - Low Poly (2020) https://sketchfab.com/3d-models
 
 Using Good Sky from Uneasy Game Dev - Blueprints (2018) Unreal Marketplace: https://www.unrealengine.com/marketplace/en-US/product/good-sky
 
+Using Three Dog Night's Small Red Potion (Low poly) (2019): https://sketchfab.com/3d-models/small-red-potion-low-poly-2744e118c83e4502a858ff2c1f961be7
+
+fire arrow by Aisyah from https://thenounproject.com/browse/icons/term/fire-arrow/ (CC BY 3.0)
+
+Hunting by Sahab Uddin from https://thenounproject.com/browse/icons/term/hunting/ (CC BY 3.0)
+
+alchemy symbol by David Alexander Slaager from https://thenounproject.com/browse/icons/term/alchemy-symbol/ (CC BY 3.0)
+
 Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Assets/3DModels/3rdParty. He also made the re-rendered films in Content/Video 
 
 ## Resources
@@ -184,3 +192,7 @@ AI Enemy not moving. (2019). Unreal Forum. https://forums.unrealengine.com/t/ai-
 Trace a line to where the character’s camera is looking (2023) Unreal Forum. https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
 
 Farris, J. (2024) Damage in UE4. Unreal blog. https://www.unrealengine.com/en-US/blog/damage-in-ue4
+
+CL0UDRED. (2017) [QUESTION] How do stop my AI Move To node from executing when an AI has died? https://www.reddit.com/r/unrealengine/comments/6a8id9/question_how_do_stop_my_ai_move_to_node_from/
+
+dacanizares (2023) Sample AI Controller - GetRandomReachablePointInRadius - UE4 https://gist.github.com/dacanizares/5db9c59281a9c9049bf819acce7e29bc

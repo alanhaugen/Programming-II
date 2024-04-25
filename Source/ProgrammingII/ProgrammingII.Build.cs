@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
+using UnrealBuildTool.Rules;
 
 public class ProgrammingII : ModuleRules
 {
@@ -17,8 +18,9 @@ public class ProgrammingII : ModuleRules
 			"EnhancedInput",
 			"AnimGraphRuntime",
 			"AIModule",
-			"UMG"
-		});
+			"UMG",
+            "NavigationSystem"
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

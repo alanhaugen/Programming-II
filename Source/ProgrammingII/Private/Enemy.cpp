@@ -8,7 +8,9 @@
 #include <AIController.h>
 #include <Perception/AIPerceptionComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
-#include "Harker.h"
+#include <Kismet/GameplayStatics.h>
+#include "SurvivalGameMode.h"
+#include "Item.h"
 
 AEnemy::AEnemy()
 {
@@ -39,6 +41,46 @@ void AEnemy::CancelWaypoints()
 	Waypoints.Empty();
 }
 
+void AEnemy::SpawnRandomPickup()
+{
+	// ChanceOfDroppingItem dictates chance of spawning an item (somewhat random spawning)
+	if (FMath::RandRange(0, ChanceOfDroppingItem) == 0)
+	{
+		// Randomly choose a pickup to spawn
+		const int32 Selection = FMath::RandRange(0, 3);
+		TSubclassOf<AItem> ItemToSpawn;
+
+		switch (Selection)
+		{
+		case 0:
+			ItemToSpawn = NormalAmmoPickup;
+			break;
+		case 1:
+			ItemToSpawn = FireAmmoPickup;
+			break;
+		case 2:
+			ItemToSpawn = HolyAmmoPickup;
+			break;
+		case 3:
+			ItemToSpawn = HealthPickup;
+			break;
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("Invalid pickup"));
+		}
+
+		// Spawn item
+		FActorSpawnParameters ActorSpawnParams;
+		ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		UWorld* World = GetWorld();
+
+		if (World && ItemToSpawn)
+		{
+			World->SpawnActor<AActor>(ItemToSpawn, GetActorLocation(), FRotator::ZeroRotator, ActorSpawnParams);
+		}
+	}
+}
+
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
@@ -46,6 +88,16 @@ void AEnemy::BeginPlay()
 	if (HealthBarWidget)
 	{
 		HealthBarWidget->SetHealthPercent(1.0f);
+	}
+
+	if (GetWorld())
+	{
+		SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+		
+		if (SurvivalMode)
+		{
+			SurvivalMode->EnemyQuantity++;
+		}
 	}
 }
 
@@ -76,6 +128,7 @@ void AEnemy::UpdateDeathLogic()
 		const int32 Selection = FMath::RandRange(0, 3);
 		FName SelectionName;
 
+		// Play a random death animation
 		switch (Selection)
 		{
 		case 0:
@@ -96,20 +149,29 @@ void AEnemy::UpdateDeathLogic()
 
 		AnimInstance->Montage_JumpToSectionsEnd(SelectionName, DeathMontage);
 		IsDead = true;
+
+		// Spawn pickup on death
+		SpawnRandomPickup();
+
+		// Keep track of number of enemies
+		if (SurvivalMode)
+		{
+			SurvivalMode->EnemyQuantity--;
+
+			// Potentially start a new wave of enemies (for survival game mode)
+			SurvivalMode->CheckIfLastEnemy();
+		}
+
+		// Stop processing AI on dead agent
+		RemoveAIComponent();
 	}
 }
 
 void AEnemy::MoveToNextWaypoint()
 {
-	// Check if there are waypoints to travel between
+	// Check if there are waypoints to travel between and if the waypoint still exists (It might have been destroyed)
 	AAIController* AIController = Cast<AAIController>(GetController());
-	if (AIController == nullptr || Waypoints.Num() == 0)
-	{
-		return;
-	}
-
-	// Check if the waypoint still exists (It might have been destroyed)
-	if (Waypoints[CurrentWaypointIndex] == nullptr)
+	if (AIController == nullptr || Waypoints.Num() == 0 || Waypoints[CurrentWaypointIndex] == nullptr)
 	{
 		return;
 	}
@@ -131,6 +193,20 @@ void AEnemy::MoveToNextWaypoint()
 	else
 	{
 		AIController->MoveToLocation(TargetLocation);
+	}
+}
+
+void AEnemy::RemoveAIComponent()
+{
+	// Thanks to https://www.reddit.com/r/unrealengine/comments/6a8id9/question_how_do_stop_my_ai_move_to_node_from/
+	AController* CurrentController = GetController();
+	if (CurrentController) {
+		// Stop movement so the death animation plays immediately
+		CurrentController->StopMovement();
+		// Unpossess to stop AI
+		CurrentController->UnPossess();
+		// Destroy the controller, since it's not part of the enemy anymore
+		CurrentController->Destroy();
 	}
 }
 

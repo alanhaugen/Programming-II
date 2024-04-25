@@ -1,0 +1,691 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 234,
+      "max": [
+        26.40116310119629,
+        57.22100830078125,
+        8.726120948791504
+      ],
+      "min": [
+        -43.292144775390625,
+        -8.726120948791504,
+        -431.0218200683594
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 2808,
+      "componentType": 5126,
+      "count": 234,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 234,
+      "max": [
+        0.9929705262184143,
+        0.9915661811828613
+      ],
+      "min": [
+        0.8117856383323669,
+        0.5095071792602539
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 1296,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5616,
+      "componentType": 5126,
+      "count": 74,
+      "max": [
+        7.436089515686035,
+        7.436089515686035,
+        10.894062995910645
+      ],
+      "min": [
+        -7.436089515686035,
+        -7.436089515686035,
+        -0.41707950830459595
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 6504,
+      "componentType": 5126,
+      "count": 74,
+      "max": [
+        0.9664231538772583,
+        0.9664232730865479,
+        1.0
+      ],
+      "min": [
+        -0.9664232730865479,
+        -0.9664231538772583,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1872,
+      "componentType": 5126,
+      "count": 74,
+      "max": [
+        0.3718223571777344,
+        0.8761800527572632
+      ],
+      "min": [
+        0.2193508744239807,
+        0.5724285840988159
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 5184,
+      "componentType": 5125,
+      "count": 432,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 7392,
+      "componentType": 5126,
+      "count": 192,
+      "max": [
+        6.169109344482422,
+        6.169109344482422,
+        4.101109504699707
+      ],
+      "min": [
+        -6.169109344482422,
+        -6.169109344482422,
+        -0.16458046436309814
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 9696,
+      "componentType": 5126,
+      "count": 192,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 2464,
+      "componentType": 5126,
+      "count": 192,
+      "max": [
+        0.19484086334705353,
+        0.982204020023346
+      ],
+      "min": [
+        0.01265503466129303,
+        0.5324686765670776
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 6912,
+      "componentType": 5125,
+      "count": 1008,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 12000,
+      "componentType": 5126,
+      "count": 97,
+      "max": [
+        4.999999523162842,
+        4.999998569488525,
+        61.935604095458984
+      ],
+      "min": [
+        -4.999999523162842,
+        -5.000000953674316,
+        3.4973588753928198e-06
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 13164,
+      "componentType": 5126,
+      "count": 97,
+      "max": [
+        0.9952396750450134,
+        0.9952428936958313,
+        1.0
+      ],
+      "min": [
+        -0.995246410369873,
+        -0.9952433109283447,
+        -0.9789109230041504
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4000,
+      "componentType": 5126,
+      "count": 97,
+      "max": [
+        0.9190541505813599,
+        0.8294298052787781
+      ],
+      "min": [
+        0.8674342632293701,
+        0.5265454649925232
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 10944,
+      "componentType": 5125,
+      "count": 570,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 14328,
+      "componentType": 5126,
+      "count": 84,
+      "max": [
+        5.0,
+        5.0,
+        58.05644989013672
+      ],
+      "min": [
+        -5.0,
+        -5.0,
+        0.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 15336,
+      "componentType": 5126,
+      "count": 84,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4776,
+      "componentType": 5126,
+      "count": 84,
+      "max": [
+        0.13774365186691284,
+        0.49028924107551575
+      ],
+      "min": [
+        0.05907200276851654,
+        0.005645737983286381
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 13224,
+      "componentType": 5125,
+      "count": 417,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Three Dog Night (https://sketchfab.com/ThreeDogNight404)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/small-red-potion-low-poly-2744e118c83e4502a858ff2c1f961be7",
+      "title": "Small Red Potion (Low poly)"
+    },
+    "generator": "Sketchfab-12.67.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 14892,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5448,
+      "byteOffset": 14892,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 16344,
+      "byteOffset": 20340,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 36684,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_unlit"
+  ],
+  "images": [
+    {
+      "uri": "textures/Potion_001_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "extensions": {
+        "KHR_materials_unlit": {}
+      },
+      "name": "Potion_001",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Sphere002_Potion_001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cylinder005_Potion_001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cylinder004_Potion_001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cylinder002_Potion_001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cylinder001_Potion_001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 17,
+            "POSITION": 16,
+            "TEXCOORD_0": 18
+          },
+          "indices": 19,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.33476653695106506,
+        0.31269121170043945,
+        6.94313965655534e-17,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "SRP_001.FBX"
+    },
+    {
+      "children": [
+        3,
+        5,
+        7,
+        9,
+        12
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        0.07483634498520995,
+        -0.026878888864165423,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.07951699942350388,
+        0.0,
+        0.026878888864165423,
+        0.07483634498520995,
+        0.0,
+        0.0,
+        3.430950164794922,
+        47.1269645690918,
+        1.803964614868164,
+        1.0
+      ],
+      "name": "Sphere002"
+    },
+    {
+      "mesh": 0,
+      "name": "Sphere002_Potion_001_0"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        0.6783052718144591,
+        -0.24362614962066378,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.7207300066947937,
+        0.0,
+        0.4197872081479516,
+        1.1687738642604153,
+        0.0,
+        0.0,
+        4.75288200378418,
+        53.497432708740234,
+        0.0,
+        1.0
+      ],
+      "name": "Cylinder005"
+    },
+    {
+      "mesh": 1,
+      "name": "Cylinder005_Potion_001_0"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        0.9411364228349973,
+        -0.33802697172466156,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.33802697172466156,
+        0.9411364228349974,
+        0.0,
+        0.0,
+        6.008796691894531,
+        56.99415969848633,
+        0.0,
+        1.0
+      ],
+      "name": "Cylinder004"
+    },
+    {
+      "mesh": 2,
+      "name": "Cylinder004_Potion_001_0"
+    },
+    {
+      "children": [
+        10
+      ],
+      "matrix": [
+        0.775970783182537,
+        -0.27870453721588406,
+        -2.28845836122675e-17,
+        0.0,
+        2.28845836122675e-17,
+        9.153833444907e-17,
+        -0.824504017829895,
+        0.0,
+        0.27870453721588406,
+        0.775970783182537,
+        9.153833444907e-17,
+        0.0,
+        -4.848241806030273,
+        26.76593589782715,
+        0.0,
+        1.0
+      ],
+      "name": "Cylinder002"
+    },
+    {
+      "children": [
+        11
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -2.384185791015625e-07,
+        0.0,
+        -30.0,
+        1.0
+      ],
+      "name": "Object_10"
+    },
+    {
+      "mesh": 3,
+      "name": "Cylinder002_Potion_001_0"
+    },
+    {
+      "children": [
+        13
+      ],
+      "matrix": [
+        0.9411364228349973,
+        -0.33802697172466156,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.33802697172466156,
+        0.9411364228349974,
+        0.0,
+        0.0,
+        -3.464991569519043,
+        30.6171875,
+        0.0,
+        1.0
+      ],
+      "name": "Cylinder001"
+    },
+    {
+      "children": [
+        14
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        -0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -2.384185791015625e-07,
+        0.0,
+        -30.0,
+        1.0
+      ],
+      "name": "Object_13"
+    },
+    {
+      "mesh": 4,
+      "name": "Cylinder001_Potion_001_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}
