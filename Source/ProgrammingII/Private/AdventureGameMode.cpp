@@ -15,8 +15,9 @@ void AAdventureGameMode::PickupSpecialItem()
 	SpecialItemsQuantity++;
 
 	// If there are many special items, delete the gate
-	if (SpecialItemsQuantity >= 3)
+	if (SpecialItemsQuantity >= AmountOfSpecialItemsToOpenGates)
 	{
+		// There can be more than one gate
 		TArray<AActor*> Gates;
 		UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("Gate"), Gates);
 

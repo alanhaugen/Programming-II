@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Spawn Options")
 	TSubclassOf<class AEnemy> EnemyClass;
 
+	UPROPERTY(EditAnywhere, Category = "Spawn Options")
+	float SpawnRadius = 500.0f;
+
 	UPROPERTY(EditAnywhere, Category = Default)
 	float SpawnTime;
 

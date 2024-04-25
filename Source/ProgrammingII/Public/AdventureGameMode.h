@@ -19,4 +19,5 @@ public:
 
 private:
 	int SpecialItemsQuantity = 0;
+	int AmountOfSpecialItemsToOpenGates = 3;
 };

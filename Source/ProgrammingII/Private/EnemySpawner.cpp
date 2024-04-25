@@ -48,7 +48,7 @@ void AEnemySpawner::Spawn(int Wave)
 		FVector Location;
 		
 		// Thanks to https://gist.github.com/dacanizares/5db9c59281a9c9049bf819acce7e29bc
-		if (NavSys->K2_GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), Location, 500.0f))
+		if (NavSys->K2_GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), Location, SpawnRadius))
 		{
 			GetWorld()->SpawnActor<AEnemy>(EnemyClass, Location, FRotator::ZeroRotator, ActorSpawnParams);
 		}
