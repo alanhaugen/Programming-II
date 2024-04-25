@@ -4,7 +4,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <Components/BoxComponent.h>
 #include "Harker.h"
-#include "SurvivalGameMode.h"
+#include "AdventureGameMode.h"
 
 AItem::AItem()
 {
@@ -76,15 +76,15 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 		break;
 
 	case EItemType::EIT_Special:
-		/*if (GetWorld())
+		if (GetWorld())
 		{
-			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
-			if (SurvivalMode)
+			if (AdventureMode)
 			{
-				SurvivalMode->PickupSpecialItem(); // Potentially start waves of enemies
+				AdventureMode->PickupSpecialItem();
 			}
-		}*/
+		}
 
 		break;
 

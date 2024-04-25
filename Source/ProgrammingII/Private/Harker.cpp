@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "Harker.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
@@ -176,6 +174,7 @@ void AHarker::SpawnBullet()
 			{
 				CurrentCamera = Camera;
 			}
+
 			// Make ray from crossbow to middle of screen (Crossair)
 			// Thanks to https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
 			FVector TraceStart = CurrentCamera->GetComponentLocation();

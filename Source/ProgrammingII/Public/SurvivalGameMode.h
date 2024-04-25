@@ -31,8 +31,6 @@ public:
 	// Call this when an enemy dies
 	void CheckIfLastEnemy();
 
-	void PickupSpecialItem();
-
 protected:
 	void SpawnWave();
 
