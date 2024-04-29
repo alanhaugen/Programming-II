@@ -33,7 +33,18 @@ void AEnemySpawner::BeginPlay()
 void AEnemySpawner::Spawn(int Wave)
 {
 	// Escape if waves array is empty or out of bounds
-	if (Waves.IsEmpty() || Wave >= Waves.Num())
+	if (Waves.IsEmpty())
+	{
+		return;
+	}
+
+	// If the next wave does not exist, create a new wave based on the last wave
+	if (Wave == Waves.Num())
+	{
+		Waves.Add(Waves[Waves.Num() - 1] * 2);
+	}
+	// Espace if out of bounds (greater than one out)
+	else if (Wave >= Waves.Num())
 	{
 		return;
 	}

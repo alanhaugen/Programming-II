@@ -27,6 +27,9 @@ public:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
 	bool IsDead = false;
 
+	UPROPERTY(EditAnywhere)
+	float AttackDamage = 10.0f;
+
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

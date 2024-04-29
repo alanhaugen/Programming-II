@@ -225,7 +225,8 @@ void AHarker::SpawnBullet()
 bool AHarker::CanFire() const
 {
 	return CharacterState == ECharacterState::ECS_Equipped &&
-		   ActionState    == EActionState::EAS_Unoccupied;
+		   ActionState    == EActionState::EAS_Unoccupied  &&
+		   IsFiring       == false;
 }
 
 void AHarker::MeleeAttackEnd()
@@ -366,6 +367,11 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 	bUseControllerRotationRoll  = isTurningWithCamera;
 }
 
+void AHarker::FireDelay()
+{
+	IsFiring = false;
+}
+
 void AHarker::Fire()
 {
 	// Don't do anything if dead
@@ -391,6 +397,9 @@ void AHarker::Fire()
 
 		// Spawn arrow/bullet from crossbow
 		SpawnBullet();
+		IsFiring = true;
+		FTimerHandle FireHandle;
+		GetWorldTimerManager().SetTimer(FireHandle, this, &AHarker::FireDelay, FireDelayTime, false);
 	}
 }
 

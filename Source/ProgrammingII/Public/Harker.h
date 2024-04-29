@@ -219,6 +219,13 @@ private:
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
+	// Cooldown for firing crossbow
+	bool IsFiring = false;
+
+	// Set Delay time for firing
+	void FireDelay();
+	float FireDelayTime = 0.3f;
+
 public:
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
 };
