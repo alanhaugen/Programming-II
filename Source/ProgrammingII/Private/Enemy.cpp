@@ -28,7 +28,7 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 	return 0.0f;
 }
 
-void AEnemy::UpdateWalkSpeed(float NewWalkSpeed)
+void AEnemy::UpdateWalkSpeed(float NewWalkSpeed) const
 {
 	if (GetCharacterMovement())
 	{
@@ -196,15 +196,18 @@ void AEnemy::MoveToNextWaypoint()
 	}
 }
 
-void AEnemy::RemoveAIComponent()
+void AEnemy::RemoveAIComponent() const
 {
 	// Thanks to https://www.reddit.com/r/unrealengine/comments/6a8id9/question_how_do_stop_my_ai_move_to_node_from/
 	AController* CurrentController = GetController();
-	if (CurrentController) {
+	if (CurrentController)
+	{
 		// Stop movement so the death animation plays immediately
 		CurrentController->StopMovement();
+
 		// Unpossess to stop AI
 		CurrentController->UnPossess();
+
 		// Destroy the controller, since it's not part of the enemy anymore
 		CurrentController->Destroy();
 	}

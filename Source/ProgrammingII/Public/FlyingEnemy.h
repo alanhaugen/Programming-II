@@ -24,7 +24,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	float EnemySpeed = 300.0f;
 
-
 private:
 	AHarker* Player;
 

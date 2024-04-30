@@ -42,7 +42,7 @@ public:
 	int ChanceOfDroppingItem = 1; // Higher => Less likely
 
 	UFUNCTION(BlueprintCallable)
-	void UpdateWalkSpeed(float NewWalkSpeed);
+	void UpdateWalkSpeed(float NewWalkSpeed) const;
 
 	UFUNCTION(BlueprintCallable)
 	void CancelWaypoints();
@@ -73,9 +73,13 @@ protected:
 	void UpdateUI();
 	void UpdateDeathLogic();
 	void MoveToNextWaypoint();
-	void RemoveAIComponent();
+	void RemoveAIComponent() const;
 
 	int32 CurrentWaypointIndex = 0;
+
+	// Array of waypoints
+	UPROPERTY(EditAnywhere, Category = "Waypoints")
+	TArray<AActor*> Waypoints;
 
 private:	
 	// Animation Montages
@@ -84,10 +88,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* DeathMontage;
-
-	// Array of waypoints
-	UPROPERTY(EditAnywhere, Category = "Waypoints")
-	TArray<AActor*> Waypoints;
 
 	// Pointer to Survival Game Mode
 	UPROPERTY()
