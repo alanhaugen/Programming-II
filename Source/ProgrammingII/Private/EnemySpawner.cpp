@@ -61,7 +61,7 @@ void AEnemySpawner::Spawn(int Wave)
 		// Thanks to https://gist.github.com/dacanizares/5db9c59281a9c9049bf819acce7e29bc
 		if (NavSys->K2_GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), Location, SpawnRadius))
 		{
-			GetWorld()->SpawnActor<AEnemy>(EnemyClass, Location, FRotator::ZeroRotator, ActorSpawnParams);
+			GetWorld()->SpawnActor<AActor>(EnemyClass, Location, FRotator::ZeroRotator, ActorSpawnParams);
 		}
 	}
 }

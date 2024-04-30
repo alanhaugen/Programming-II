@@ -9,6 +9,7 @@
 #include <Perception/AIPerceptionComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Kismet/GameplayStatics.h>
+#include "AdventureGameMode.h"
 #include "SurvivalGameMode.h"
 #include "Item.h"
 
@@ -158,8 +159,13 @@ void AEnemy::UpdateDeathLogic()
 		{
 			SurvivalMode->EnemyQuantity--;
 
-			// Potentially start a new wave of enemies (for survival game mode)
-			SurvivalMode->CheckIfLastEnemy();
+			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+			
+			if (AdventureMode == nullptr)
+			{
+				// Potentially start a new wave of enemies (for survival game mode)
+				SurvivalMode->CheckIfLastEnemy();
+			}
 		}
 
 		// Stop processing AI on dead agent

@@ -26,7 +26,7 @@ public:
 	TArray<int> Waves;
 
 	UPROPERTY(EditAnywhere, Category = "Spawn Options")
-	TSubclassOf<class AEnemy> EnemyClass;
+	TSubclassOf<class AActor> EnemyClass;
 
 	UPROPERTY(EditAnywhere, Category = "Spawn Options")
 	float SpawnRadius = 500.0f;

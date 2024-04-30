@@ -53,9 +53,14 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 		Player->EquipWeapon();
 		if (GetWorld())
 		{
+			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
-			if (SurvivalMode)
+			if (AdventureMode)
+			{
+				AdventureMode->TriggerWave(1); // Spawn the first wave
+			}
+			else if (SurvivalMode)
 			{
 				SurvivalMode->CheckIfLastEnemy(); // Potentially start waves of enemies
 			}
@@ -83,6 +88,7 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 			if (AdventureMode)
 			{
 				AdventureMode->PickupSpecialItem();
+				AdventureMode->TriggerWave(AdventureMode->CurrentWave + 1);
 			}
 		}
 
