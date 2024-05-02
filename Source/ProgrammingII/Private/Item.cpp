@@ -58,7 +58,7 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 
 			if (AdventureMode)
 			{
-				AdventureMode->TriggerWave(1); // Spawn the first wave
+				AdventureMode->TriggerWave(0); // Spawn the first wave
 			}
 			else if (SurvivalMode)
 			{

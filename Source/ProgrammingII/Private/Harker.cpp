@@ -288,11 +288,11 @@ void AHarker::Tick(float DeltaTime)
 
 	if (isZoomingIn)
 	{
-		ZoomFactor += DeltaTime / 0.2f;         //Zoom in over half a second
+		ZoomFactor += DeltaTime / 0.2f;         // Zoom in over half a second
 	}
 	else
 	{
-		ZoomFactor -= DeltaTime / 0.25f;        //Zoom out over a quarter of a second
+		ZoomFactor -= DeltaTime / 0.25f;        // Zoom out over a quarter of a second
 	}
 
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
