@@ -258,17 +258,11 @@ void AHarker::MeleeAttackEnd()
 
 void AHarker::EquipWeapon()
 {
-	if (CharacterState != ECharacterState::ECS_Equipped)
-	{
-		// Show the crossbow
-		Crossbow->ToggleVisibility();
+	// Change the state of the character
+	CharacterState = ECharacterState::ECS_Equipped;
 
-		// Change the state of the character
-		CharacterState = ECharacterState::ECS_Equipped;
-
-		// Hide the default assets
-		ToggleDefaultItems();
-	}
+	// Hide the default assets
+	UpdateItemVisibility();
 }
 
 // Called every frame
@@ -362,11 +356,75 @@ void AHarker::LookAround(const FInputActionValue& Value)
 	AddControllerYawInput(LookAxisVector.X);
 }
 
-void AHarker::ToggleDefaultItems()
+void AHarker::UpdateItemVisibility()
 {
-	Lantern->ToggleVisibility();
-	LanternSpotLight->ToggleVisibility();
-	Umbrella->ToggleVisibility();
+	if (CharacterState == ECharacterState::ECS_Equipped)
+	{
+		SetItemVisibilityEquipped();
+	}
+	else
+	{
+		SetItemVisibilityUnequipped();
+	}
+}
+
+void AHarker::SetItemVisibilityEquipped()
+{
+	if (FPSCamera->IsActive())
+	{
+		GetMesh()->SetVisibility(false);
+		Crossbow->SetVisibility(false);
+
+		if (isZoomingIn)
+		{
+			UmbrellaFPSMode->SetVisibility(false);
+			CrossbowFPSMode->SetVisibility(true);
+		}
+		else
+		{
+			UmbrellaFPSMode->SetVisibility(true);
+			CrossbowFPSMode->SetVisibility(false);
+		}
+	}
+	else
+	{
+		GetMesh()->SetVisibility(true);
+
+		UmbrellaFPSMode->SetVisibility(false);
+		CrossbowFPSMode->SetVisibility(false);
+
+		Crossbow->SetVisibility(true);
+	}
+
+	Lantern->SetVisibility(false);
+	LanternSpotLight->SetVisibility(false);
+	Umbrella->SetVisibility(false);
+}
+
+void AHarker::SetItemVisibilityUnequipped()
+{
+	if (FPSCamera->IsActive())
+	{
+		GetMesh()->SetVisibility(false);
+
+		UmbrellaFPSMode->SetVisibility(true);
+		CrossbowFPSMode->SetVisibility(false);
+
+		Lantern->SetVisibility(false);
+		LanternSpotLight->SetVisibility(false);
+		Umbrella->SetVisibility(false);
+	}
+	else
+	{
+		GetMesh()->SetVisibility(true);
+
+		UmbrellaFPSMode->SetVisibility(false);
+		CrossbowFPSMode->SetVisibility(false);
+
+		Lantern->SetVisibility(true);
+		LanternSpotLight->SetVisibility(true);
+		Umbrella->SetVisibility(true);
+	}
 }
 
 void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
@@ -424,6 +482,7 @@ void AHarker::AimStart(const FInputActionValue& Value)
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
 	UpdateCameraBehaviour(true);
+	UpdateItemVisibility();
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
@@ -438,47 +497,28 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 	isZoomingIn = false;
 
 	UpdateCameraBehaviour();
+	UpdateItemVisibility();
 }
 
 void AHarker::Scope()
 {
 	if (Camera->IsActive())
 	{
+		// Set FPS camera as active
 		FPSCamera->SetActive(true);
 		Camera->SetActive(false);
 
-		GetMesh()->SetVisibility(false);
-
-		Umbrella->SetVisibility(false);
-		Crossbow->SetVisibility(false);
-
-		//UmbrellaFPSMode->SetVisibility(false);
-		CrossbowFPSMode->SetVisibility(true);
-
 		UpdateCameraBehaviour(true);
+		UpdateItemVisibility();
 	}
 	else
 	{
-		FPSCamera->SetActive(false);
+		// Set 3rd person camera as active
 		Camera->SetActive(true);
-
-		GetMesh()->SetVisibility(true);
-
-		if (CharacterState == ECharacterState::ECS_Equipped)
-		{
-			Crossbow->SetVisibility(true);
-			Umbrella->SetVisibility(false);
-		}
-		else
-		{
-			Crossbow->SetVisibility(false);
-			Umbrella->SetVisibility(true);
-		}
-
-		//UmbrellaFPSMode->SetVisibility(false);
-		CrossbowFPSMode->SetVisibility(false);
-
+		FPSCamera->SetActive(false);
+		
 		UpdateCameraBehaviour();
+		UpdateItemVisibility();
 	}
 }
 

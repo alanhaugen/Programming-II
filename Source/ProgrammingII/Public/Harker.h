@@ -212,7 +212,9 @@ private:
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
 
-	void ToggleDefaultItems();
+	void UpdateItemVisibility();
+	void SetItemVisibilityEquipped();
+	void SetItemVisibilityUnequipped();
 	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
 
 	// Equipment state of the player
