@@ -48,21 +48,22 @@ void AEnemy::SpawnRandomPickup()
 	if (FMath::RandRange(0, ChanceOfDroppingItem) == 0)
 	{
 		// Randomly choose a pickup to spawn
-		const int32 Selection = FMath::RandRange(0, 3);
+		const int32 Selection = FMath::RandRange(0, 4);
 		TSubclassOf<AItem> ItemToSpawn;
 
 		switch (Selection)
 		{
 		case 0:
+		case 1:
 			ItemToSpawn = NormalAmmoPickup;
 			break;
-		case 1:
+		case 2:
 			ItemToSpawn = FireAmmoPickup;
 			break;
-		case 2:
+		case 3:
 			ItemToSpawn = HolyAmmoPickup;
 			break;
-		case 3:
+		case 4:
 			ItemToSpawn = HealthPickup;
 			break;
 		default:
