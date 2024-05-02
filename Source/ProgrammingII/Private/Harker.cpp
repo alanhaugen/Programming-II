@@ -57,7 +57,17 @@ AHarker::AHarker()
 	// Make the crossbow then hide it as it is not equipped by default
 	Crossbow = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow"));
 	Crossbow->SetupAttachment(GetRootComponent());
-	Crossbow->ToggleVisibility();
+	Crossbow->SetVisibility(false);
+
+	// Make umbrella for FPS mode (and hide it for 3PS mode)
+	UmbrellaFPSMode = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella FPS Mode"));
+	UmbrellaFPSMode->SetupAttachment(FPSCamera);
+	UmbrellaFPSMode->SetVisibility(false);
+
+	// Make crossbow for FPS mode (and hide it for 3PS mode)
+	CrossbowFPSMode = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow FPS Mode"));
+	CrossbowFPSMode->SetupAttachment(FPSCamera);
+	CrossbowFPSMode->SetVisibility(false);
 
 	// Set first check point
 	CurrentCheckPoint = nullptr;
@@ -104,8 +114,8 @@ bool AHarker::MeleeAttack()
 
 			if (CharacterState == ECharacterState::ECS_Equipped)
 			{
-				Umbrella->ToggleVisibility();
-				Crossbow->ToggleVisibility();
+				Umbrella->SetVisibility(true);
+				Crossbow->SetVisibility(false);
 			}
 
 			ActionState = EActionState::EAS_Attacking;
@@ -235,8 +245,8 @@ void AHarker::MeleeAttackEnd()
 
 	if (CharacterState == ECharacterState::ECS_Equipped)
 	{
-		Umbrella->ToggleVisibility();
-		Crossbow->ToggleVisibility();
+		Umbrella->SetVisibility(false);
+		Crossbow->SetVisibility(true);
 	}
 
 	// If in 3ps mode, return camera behaviour to normal
@@ -439,6 +449,12 @@ void AHarker::Scope()
 
 		GetMesh()->SetVisibility(false);
 
+		Umbrella->SetVisibility(false);
+		Crossbow->SetVisibility(false);
+
+		//UmbrellaFPSMode->SetVisibility(false);
+		CrossbowFPSMode->SetVisibility(true);
+
 		UpdateCameraBehaviour(true);
 	}
 	else
@@ -447,6 +463,17 @@ void AHarker::Scope()
 		Camera->SetActive(true);
 
 		GetMesh()->SetVisibility(true);
+
+		if (CharacterState == ECharacterState::ECS_Equipped)
+		{
+			Crossbow->SetVisibility(true);
+			Umbrella->SetVisibility(false);
+		}
+		else
+		{
+			Crossbow->SetVisibility(false);
+			Umbrella->SetVisibility(true);
+		}
 
 		UpdateCameraBehaviour();
 	}

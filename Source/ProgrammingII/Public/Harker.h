@@ -201,6 +201,14 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Crossbow;
 
+	// Umbrella for FPS mode
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* UmbrellaFPSMode;
+
+	// Crossbow for FPS mode
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* CrossbowFPSMode;
+
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
 
