@@ -35,7 +35,7 @@ AHarker::AHarker()
 
 	// Setup Harker First Person Camera
 	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPSCamera"));
-	FPSCamera->SetupAttachment(GetMesh());
+	FPSCamera->SetupAttachment(GetRootComponent());
 
 	// Make the Character face where it is moving
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -474,6 +474,9 @@ void AHarker::Scope()
 			Crossbow->SetVisibility(false);
 			Umbrella->SetVisibility(true);
 		}
+
+		//UmbrellaFPSMode->SetVisibility(false);
+		CrossbowFPSMode->SetVisibility(false);
 
 		UpdateCameraBehaviour();
 	}
