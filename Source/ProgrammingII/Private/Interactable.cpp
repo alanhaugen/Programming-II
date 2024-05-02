@@ -47,6 +47,9 @@ void AInteractable::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (Player)
 	{
-		Player->bCanInteract = false;
+		if (Player->CurrentInteractable == this)
+		{
+			Player->bCanInteract = false;
+		}
 	}
 }
