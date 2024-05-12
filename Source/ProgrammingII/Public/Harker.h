@@ -133,9 +133,15 @@ public:
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void PauseGame();
 
-	// Bullet spawn on Fire
+	// Bullets spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
-	TSubclassOf<ABullet> BulletToSpawn;
+	TSubclassOf<ABullet> BulletToSpawnNormal;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
+	TSubclassOf<ABullet> BulletToSpawnFire;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
+	TSubclassOf<ABullet> BulletToSpawnHoly;
 
 	// Check points
 	UPROPERTY(VisibleInstanceOnly, Category = CheckPoint)

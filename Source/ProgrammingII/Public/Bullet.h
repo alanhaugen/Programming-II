@@ -30,7 +30,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Bullet Settings")
 	class UStaticMeshComponent* BulletMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Bullet Type")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bullet Settings")
 	EAmmoTypes BulletType = EAmmoTypes::EAT_Normal;
 
 	UPROPERTY(EditAnywhere, Category = "Bullet Settings")

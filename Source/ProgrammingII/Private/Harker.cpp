@@ -169,6 +169,23 @@ bool AHarker::SpendAmmo()
 
 void AHarker::SpawnBullet()
 {
+	TSubclassOf<ABullet> BulletToSpawn;
+
+	switch (SelectedAmmo)
+	{
+	case EAmmoTypes::EAT_Normal:
+		BulletToSpawn = BulletToSpawnNormal;
+		break;
+	case EAmmoTypes::EAT_Fire:
+		BulletToSpawn = BulletToSpawnFire;
+		break;
+	case EAmmoTypes::EAT_Holy:
+		BulletToSpawn = BulletToSpawnHoly;
+		break;
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Invalid ammunition selected for ammo spawning"));
+	}
+
 	if (BulletToSpawn)
 	{
 		UWorld* World = GetWorld();
