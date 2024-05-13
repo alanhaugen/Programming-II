@@ -245,4 +245,5 @@ private:
 public:
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
 	FORCEINLINE EActionState GetCharacterActionState() const { return ActionState; };
+	FORCEINLINE void ResetStates() { CharacterState = ECharacterState::ECS_Dead; ActionState = EActionState::EAS_Unoccupied; };
 };
