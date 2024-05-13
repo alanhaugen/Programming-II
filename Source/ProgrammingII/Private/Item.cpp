@@ -23,11 +23,10 @@ void AItem::BeginPlay()
 		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	}
 
-	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSpehereOverlap);
-	CollisionMesh->OnComponentEndOverlap.AddDynamic(this, &AItem::OnSpehereEndOverlap);
+	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnBoxOverlap);
 }
 
-void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AItem::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	// Only pick up if player overlaps items
 	if (Cast<AHarker>(OtherActor) == nullptr)
@@ -99,10 +98,6 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 	}
 
 	Destroy();
-}
-
-void AItem::OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
 }
 
 void AItem::Tick(float DeltaTime)

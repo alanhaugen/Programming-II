@@ -244,4 +244,5 @@ private:
 
 public:
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
+	FORCEINLINE EActionState GetCharacterActionState() const { return ActionState; };
 };

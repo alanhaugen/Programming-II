@@ -1,4 +1,7 @@
 #include "Bullet.h"
+#include <Kismet/GameplayStatics.h>
+#include "Enemy.h"
+
 
 ABullet::ABullet()
 {
@@ -7,6 +10,8 @@ ABullet::ABullet()
 
 	BulletMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Bullet Mesh"));
 	RootComponent = BulletMesh;
+
+	BulletMesh->OnComponentBeginOverlap.AddDynamic(this, &ABullet::OnBoxOverlap);
 }
 
 void ABullet::BeginPlay()
@@ -21,5 +26,35 @@ void ABullet::Tick(float DeltaTime)
 	SetActorLocation(GetActorLocation() + (this->GetActorForwardVector() * DeltaTime * MovementSpeed));
 }
 
+void ABullet::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	// Only deal damage if bullet overlaps enemies
+	if (Cast<AEnemy>(OtherActor))
+	{
+		// Call take damage on enemy: https://www.unrealengine.com/en-US/blog/damage-in-ue4
+		FDamageEvent DamageEvent;
+		OtherActor->TakeDamage(BulletDamage, DamageEvent, nullptr, this);
+		
+		Destroy();
+	}
+	// Something else was hit. If fire bolts are selected and the it did not hit the player, make an explosion (radial damage)
+	else if (BulletType == EAmmoTypes::EAT_Fire && Cast<AHarker>(OtherActor) == nullptr)
+	{
+		TArray<AActor*> ignoredActors;
+		float ExplosionRadius = 200.0f;
+		TSubclassOf<UDamageType> DamageType;
 
+		UGameplayStatics::ApplyRadialDamage(GetWorld(),
+			BulletDamage,
+			GetActorLocation(),
+			ExplosionRadius,
+			DamageType,
+			ignoredActors,
+			this,
+			nullptr,
+			false,
+			ECollisionChannel::ECC_Visibility);
 
+		Destroy();
+	}
+}
