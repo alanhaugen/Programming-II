@@ -15,4 +15,9 @@ class PROGRAMMINGII_API AAdventureGameMode : public ASurvivalGameMode
 public:
 	AAdventureGameMode();
 	void TriggerWave(int Wave);
+	void PickupSpecialItem();
+
+private:
+	int SpecialItemsQuantity = 0;
+	int AmountOfSpecialItemsToOpenGates = 3;
 };

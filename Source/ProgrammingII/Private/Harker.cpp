@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "Harker.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
@@ -37,7 +35,7 @@ AHarker::AHarker()
 
 	// Setup Harker First Person Camera
 	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPSCamera"));
-	FPSCamera->SetupAttachment(GetMesh());
+	FPSCamera->SetupAttachment(GetRootComponent());
 
 	// Make the Character face where it is moving
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -59,7 +57,17 @@ AHarker::AHarker()
 	// Make the crossbow then hide it as it is not equipped by default
 	Crossbow = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow"));
 	Crossbow->SetupAttachment(GetRootComponent());
-	Crossbow->ToggleVisibility();
+	Crossbow->SetVisibility(false);
+
+	// Make umbrella for FPS mode (and hide it for 3PS mode)
+	UmbrellaFPSMode = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella FPS Mode"));
+	UmbrellaFPSMode->SetupAttachment(FPSCamera);
+	UmbrellaFPSMode->SetVisibility(false);
+
+	// Make crossbow for FPS mode (and hide it for 3PS mode)
+	CrossbowFPSMode = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Crossbow FPS Mode"));
+	CrossbowFPSMode->SetupAttachment(FPSCamera);
+	CrossbowFPSMode->SetVisibility(false);
 
 	// Set first check point
 	CurrentCheckPoint = nullptr;
@@ -106,8 +114,8 @@ bool AHarker::MeleeAttack()
 
 			if (CharacterState == ECharacterState::ECS_Equipped)
 			{
-				Umbrella->ToggleVisibility();
-				Crossbow->ToggleVisibility();
+				Umbrella->SetVisibility(true);
+				Crossbow->SetVisibility(false);
 			}
 
 			ActionState = EActionState::EAS_Attacking;
@@ -161,6 +169,23 @@ bool AHarker::SpendAmmo()
 
 void AHarker::SpawnBullet()
 {
+	TSubclassOf<ABullet> BulletToSpawn;
+
+	switch (SelectedAmmo)
+	{
+	case EAmmoTypes::EAT_Normal:
+		BulletToSpawn = BulletToSpawnNormal;
+		break;
+	case EAmmoTypes::EAT_Fire:
+		BulletToSpawn = BulletToSpawnFire;
+		break;
+	case EAmmoTypes::EAT_Holy:
+		BulletToSpawn = BulletToSpawnHoly;
+		break;
+	default:
+		UE_LOG(LogTemp, Warning, TEXT("Invalid ammunition selected for ammo spawning"));
+	}
+
 	if (BulletToSpawn)
 	{
 		UWorld* World = GetWorld();
@@ -176,6 +201,7 @@ void AHarker::SpawnBullet()
 			{
 				CurrentCamera = Camera;
 			}
+
 			// Make ray from crossbow to middle of screen (Crossair)
 			// Thanks to https://forums.unrealengine.com/t/trace-a-line-to-where-the-characters-camera-is-looking/1445068
 			FVector TraceStart = CurrentCamera->GetComponentLocation();
@@ -226,7 +252,8 @@ void AHarker::SpawnBullet()
 bool AHarker::CanFire() const
 {
 	return CharacterState == ECharacterState::ECS_Equipped &&
-		   ActionState    == EActionState::EAS_Unoccupied;
+		   ActionState    == EActionState::EAS_Unoccupied  &&
+		   IsFiring       == false;
 }
 
 void AHarker::MeleeAttackEnd()
@@ -235,8 +262,8 @@ void AHarker::MeleeAttackEnd()
 
 	if (CharacterState == ECharacterState::ECS_Equipped)
 	{
-		Umbrella->ToggleVisibility();
-		Crossbow->ToggleVisibility();
+		Umbrella->SetVisibility(false);
+		Crossbow->SetVisibility(true);
 	}
 
 	// If in 3ps mode, return camera behaviour to normal
@@ -248,17 +275,11 @@ void AHarker::MeleeAttackEnd()
 
 void AHarker::EquipWeapon()
 {
-	if (CharacterState != ECharacterState::ECS_Equipped)
-	{
-		// Show the crossbow
-		Crossbow->ToggleVisibility();
+	// Change the state of the character
+	CharacterState = ECharacterState::ECS_Equipped;
 
-		// Change the state of the character
-		CharacterState = ECharacterState::ECS_Equipped;
-
-		// Hide the default assets
-		ToggleDefaultItems();
-	}
+	// Hide the default assets
+	UpdateItemVisibility();
 }
 
 // Called every frame
@@ -280,6 +301,7 @@ void AHarker::Tick(float DeltaTime)
 		}
 
 		CharacterState = ECharacterState::ECS_Dead;
+		ActionState = EActionState::EAS_Unoccupied;
 		isZoomingIn = false;
 		UpdateCameraBehaviour();
 
@@ -288,11 +310,11 @@ void AHarker::Tick(float DeltaTime)
 
 	if (isZoomingIn)
 	{
-		ZoomFactor += DeltaTime / 0.2f;         //Zoom in over half a second
+		ZoomFactor += DeltaTime / 0.2f;         // Zoom in over half a second
 	}
 	else
 	{
-		ZoomFactor -= DeltaTime / 0.25f;        //Zoom out over a quarter of a second
+		ZoomFactor -= DeltaTime / 0.25f;        // Zoom out over a quarter of a second
 	}
 
 	ZoomFactor = FMath::Clamp<float>(ZoomFactor, 0.0f, 1.0f);
@@ -352,11 +374,75 @@ void AHarker::LookAround(const FInputActionValue& Value)
 	AddControllerYawInput(LookAxisVector.X);
 }
 
-void AHarker::ToggleDefaultItems()
+void AHarker::UpdateItemVisibility()
 {
-	Lantern->ToggleVisibility();
-	LanternSpotLight->ToggleVisibility();
-	Umbrella->ToggleVisibility();
+	if (CharacterState == ECharacterState::ECS_Equipped)
+	{
+		SetItemVisibilityEquipped();
+	}
+	else
+	{
+		SetItemVisibilityUnequipped();
+	}
+}
+
+void AHarker::SetItemVisibilityEquipped()
+{
+	if (FPSCamera->IsActive())
+	{
+		GetMesh()->SetVisibility(false);
+		Crossbow->SetVisibility(false);
+
+		if (isZoomingIn)
+		{
+			UmbrellaFPSMode->SetVisibility(false);
+			CrossbowFPSMode->SetVisibility(true);
+		}
+		else
+		{
+			UmbrellaFPSMode->SetVisibility(true);
+			CrossbowFPSMode->SetVisibility(false);
+		}
+	}
+	else
+	{
+		GetMesh()->SetVisibility(true);
+
+		UmbrellaFPSMode->SetVisibility(false);
+		CrossbowFPSMode->SetVisibility(false);
+
+		Crossbow->SetVisibility(true);
+	}
+
+	Lantern->SetVisibility(false);
+	LanternSpotLight->SetVisibility(false);
+	Umbrella->SetVisibility(false);
+}
+
+void AHarker::SetItemVisibilityUnequipped()
+{
+	if (FPSCamera->IsActive())
+	{
+		GetMesh()->SetVisibility(false);
+
+		UmbrellaFPSMode->SetVisibility(true);
+		CrossbowFPSMode->SetVisibility(false);
+
+		Lantern->SetVisibility(false);
+		LanternSpotLight->SetVisibility(false);
+		Umbrella->SetVisibility(false);
+	}
+	else
+	{
+		GetMesh()->SetVisibility(true);
+
+		UmbrellaFPSMode->SetVisibility(false);
+		CrossbowFPSMode->SetVisibility(false);
+
+		Lantern->SetVisibility(true);
+		LanternSpotLight->SetVisibility(true);
+		Umbrella->SetVisibility(true);
+	}
 }
 
 void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
@@ -365,6 +451,11 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 	bUseControllerRotationPitch = isTurningWithCamera;
 	bUseControllerRotationYaw   = isTurningWithCamera;
 	bUseControllerRotationRoll  = isTurningWithCamera;
+}
+
+void AHarker::FireDelay()
+{
+	IsFiring = false;
 }
 
 void AHarker::Fire()
@@ -392,6 +483,9 @@ void AHarker::Fire()
 
 		// Spawn arrow/bullet from crossbow
 		SpawnBullet();
+		IsFiring = true;
+		FTimerHandle FireHandle;
+		GetWorldTimerManager().SetTimer(FireHandle, this, &AHarker::FireDelay, FireDelayTime, false);
 	}
 }
 
@@ -406,6 +500,7 @@ void AHarker::AimStart(const FInputActionValue& Value)
 	//UE_LOG(LogTemp, Warning, TEXT("Using Aim"));
 	isZoomingIn = true;
 	UpdateCameraBehaviour(true);
+	UpdateItemVisibility();
 }
 
 void AHarker::AimEnd(const FInputActionValue& Value)
@@ -420,27 +515,28 @@ void AHarker::AimEnd(const FInputActionValue& Value)
 	isZoomingIn = false;
 
 	UpdateCameraBehaviour();
+	UpdateItemVisibility();
 }
 
 void AHarker::Scope()
 {
 	if (Camera->IsActive())
 	{
+		// Set FPS camera as active
 		FPSCamera->SetActive(true);
 		Camera->SetActive(false);
 
-		GetMesh()->SetVisibility(false);
-
 		UpdateCameraBehaviour(true);
+		UpdateItemVisibility();
 	}
 	else
 	{
-		FPSCamera->SetActive(false);
+		// Set 3rd person camera as active
 		Camera->SetActive(true);
-
-		GetMesh()->SetVisibility(true);
-
+		FPSCamera->SetActive(false);
+		
 		UpdateCameraBehaviour();
+		UpdateItemVisibility();
 	}
 }
 

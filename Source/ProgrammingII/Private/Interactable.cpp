@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Interactable.h"
 #include <Components/BoxComponent.h>
 #include "Harker.h"
@@ -50,6 +47,9 @@ void AInteractable::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 	if (Player)
 	{
-		Player->bCanInteract = false;
+		if (Player->CurrentInteractable == this)
+		{
+			Player->bCanInteract = false;
+		}
 	}
 }

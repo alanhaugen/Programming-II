@@ -10,6 +10,7 @@ class UAttributeComponent;
 class UAnimMontage;
 class UHealthBarComponent;
 class ASurvivalGameMode;
+class AHarker;
 class AItem;
 
 UCLASS()
@@ -25,10 +26,19 @@ public:
 
 	// Enemy state
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
+	bool IsAttacking = false;
+
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
 	bool IsDead = false;
 
+	// How much damage this enemy deals on attack
+	UPROPERTY(EditAnywhere)
+	float AttackDamage = 10.0f;
+
+	// UE Take Damage method: https://www.unrealengine.com/en-US/blog/damage-in-ue4
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	// Enemy components
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UAttributeComponent* Attributes;
 
@@ -39,7 +49,7 @@ public:
 	int ChanceOfDroppingItem = 1; // Higher => Less likely
 
 	UFUNCTION(BlueprintCallable)
-	void UpdateWalkSpeed(float NewWalkSpeed);
+	void UpdateWalkSpeed(float NewWalkSpeed) const;
 
 	UFUNCTION(BlueprintCallable)
 	void CancelWaypoints();
@@ -64,17 +74,27 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)	// This function will be called in ABP_Enemy
-	void DeathEnd();				// in the event graph
+	// Methods which will be called in ABP_Enemy in the event graph
+	UFUNCTION(BlueprintCallable)	
+	void DeathEnd();
 
+	UFUNCTION(BlueprintCallable)
+	void AttackEnd();
+
+	// Enemy logic methods
 	void UpdateUI();
 	void UpdateDeathLogic();
 	void MoveToNextWaypoint();
-	void RemoveAIComponent();
+	void Combat();
+	void RemoveAIComponent() const;
 
 	int32 CurrentWaypointIndex = 0;
 
-private:	
+	// Array of waypoints
+	UPROPERTY(EditAnywhere, Category = "Waypoints")
+	TArray<AActor*> Waypoints;
+
+private:
 	// Animation Montages
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* AttackMontage;
@@ -82,9 +102,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	UAnimMontage* DeathMontage;
 
-	// Array of waypoints
-	UPROPERTY(EditAnywhere, Category = "Waypoints")
-	TArray<AActor*> Waypoints;
+	// Pointer to player
+	AHarker* Player;
 
 	// Pointer to Survival Game Mode
 	UPROPERTY()

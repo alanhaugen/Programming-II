@@ -6,9 +6,6 @@
 #include "Interactable.h"
 #include "Ladder.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class PROGRAMMINGII_API ALadder : public AInteractable
 {

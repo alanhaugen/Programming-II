@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -10,6 +8,7 @@
 
 class AHarker;
 class ASurvivalGameMode;
+class UNavigationSystemV1;
 
 UCLASS()
 class PROGRAMMINGII_API AEnemySpawner : public AActor
@@ -27,7 +26,10 @@ public:
 	TArray<int> Waves;
 
 	UPROPERTY(EditAnywhere, Category = "Spawn Options")
-	TSubclassOf<class AEnemy> EnemyClass;
+	TSubclassOf<class AActor> EnemyClass;
+
+	UPROPERTY(EditAnywhere, Category = "Spawn Options")
+	float SpawnRadius = 500.0f;
 
 	UPROPERTY(EditAnywhere, Category = Default)
 	float SpawnTime;
@@ -41,4 +43,5 @@ protected:
 private:
 	AHarker* Player;
 	ASurvivalGameMode* SurvivalMode;
+	UNavigationSystemV1* NavSys;
 };

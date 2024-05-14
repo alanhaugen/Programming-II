@@ -14,12 +14,12 @@
             in mOtherComp : UPrimitiveComponent*,
             in mOtherBodyIndex : int32,
             in mbFromSweep : bool,
-            in mconst SweepResult : FHitResult&)
-+ OnEndOverlap(
+            out mconst SweepResult : FHitResult&) : void
++ OnSpehereEndOverlap(
             in mOverlappedComponent : UPrimitiveComponent*,
             in mOtherActor : AActor*,
             in mOtherComp : UPrimitiveComponent*,
-            in mOtherBodyIndex : int32)
+            in mOtherBodyIndex : int32) : void
 \# BeginPlay () override
 \# Tick (DeltaTime : float) override
 ]<-

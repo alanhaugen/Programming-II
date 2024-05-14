@@ -39,10 +39,6 @@ void ASurvivalGameMode::CheckIfLastEnemy()
 	}
 }
 
-void ASurvivalGameMode::PickupSpecialItem()
-{
-}
-
 void ASurvivalGameMode::SpawnWave()
 {
 	// Don't spawn if array is out of bounds

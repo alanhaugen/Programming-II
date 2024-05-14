@@ -133,9 +133,15 @@ public:
 	UFUNCTION(Blueprintcallable, Category = "Input")
 	void PauseGame();
 
-	// Bullet spawn on Fire
+	// Bullets spawn on Fire
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
-	TSubclassOf<ABullet> BulletToSpawn;
+	TSubclassOf<ABullet> BulletToSpawnNormal;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
+	TSubclassOf<ABullet> BulletToSpawnFire;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bullet")
+	TSubclassOf<ABullet> BulletToSpawnHoly;
 
 	// Check points
 	UPROPERTY(VisibleInstanceOnly, Category = CheckPoint)
@@ -201,10 +207,20 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Crossbow;
 
+	// Umbrella for FPS mode
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* UmbrellaFPSMode;
+
+	// Crossbow for FPS mode
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* CrossbowFPSMode;
+
 	void Move(const FInputActionValue& Value);
 	void LookAround(const FInputActionValue& Value);
 
-	void ToggleDefaultItems();
+	void UpdateItemVisibility();
+	void SetItemVisibilityEquipped();
+	void SetItemVisibilityUnequipped();
 	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
 
 	// Equipment state of the player
@@ -219,6 +235,15 @@ private:
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	EAmmoTypes SelectedAmmo = EAmmoTypes::EAT_Normal;
 
+	// Cooldown for firing crossbow
+	bool IsFiring = false;
+
+	// Set Delay time for firing
+	void FireDelay();
+	float FireDelayTime = 0.3f;
+
 public:
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
+	FORCEINLINE EActionState GetCharacterActionState() const { return ActionState; };
+	FORCEINLINE void ResetStates() { CharacterState = ECharacterState::ECS_Dead; ActionState = EActionState::EAS_Unoccupied; };
 };

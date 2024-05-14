@@ -4,7 +4,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <Components/BoxComponent.h>
 #include "Harker.h"
-#include "SurvivalGameMode.h"
+#include "AdventureGameMode.h"
 
 AItem::AItem()
 {
@@ -23,11 +23,10 @@ void AItem::BeginPlay()
 		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	}
 
-	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSpehereOverlap);
-	CollisionMesh->OnComponentEndOverlap.AddDynamic(this, &AItem::OnSpehereEndOverlap);
+	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnBoxOverlap);
 }
 
-void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AItem::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	// Only pick up if player overlaps items
 	if (Cast<AHarker>(OtherActor) == nullptr)
@@ -53,9 +52,14 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 		Player->EquipWeapon();
 		if (GetWorld())
 		{
+			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
-			if (SurvivalMode)
+			if (AdventureMode)
+			{
+				AdventureMode->TriggerWave(0); // Spawn the first wave
+			}
+			else if (SurvivalMode)
 			{
 				SurvivalMode->CheckIfLastEnemy(); // Potentially start waves of enemies
 			}
@@ -76,15 +80,16 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 		break;
 
 	case EItemType::EIT_Special:
-		/*if (GetWorld())
+		if (GetWorld())
 		{
-			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
-			if (SurvivalMode)
+			if (AdventureMode)
 			{
-				SurvivalMode->PickupSpecialItem(); // Potentially start waves of enemies
+				AdventureMode->PickupSpecialItem();
+				AdventureMode->TriggerWave(AdventureMode->CurrentWave + 1);
 			}
-		}*/
+		}
 
 		break;
 
@@ -93,10 +98,6 @@ void AItem::OnSpehereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 	}
 
 	Destroy();
-}
-
-void AItem::OnSpehereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
 }
 
 void AItem::Tick(float DeltaTime)
