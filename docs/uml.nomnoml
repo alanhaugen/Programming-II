@@ -132,6 +132,7 @@ in DamageCauser: AActor*) : override virtual float
 + BeginPlay() : override virtual void
 ]
 
+[UActorComponent]<-
 [UAttributeComponent
 |
 + Health : float
