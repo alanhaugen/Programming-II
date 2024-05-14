@@ -18,6 +18,6 @@ public:
 	void SetHealthPercent(float Percent);
 
 private:
-	UPROPERTY() // UPROPERTY() will make HealtBar start off as a nullptr
+	UPROPERTY() // UPROPERTY() will make HealthBar start off as a nullptr
 	class UHealthBar* HealthBarWidget;
 };

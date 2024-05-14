@@ -15,6 +15,8 @@
 [AAdventureGameMode
 |
 # attributes
+- SpecialItemsQuantity : int
+- AmountOfSpecialItemsToOpenGate : int
 |
 # operations
 + TriggerWave(Wave : int) : void
@@ -35,12 +37,12 @@
 + Tick (DeltaTime : float) : virtual void override
 \# BeginPlay() : virtual void override
 \# OnBoxOverlap (
-OverlappedComponent : UPrimitiveComponent*,
-OtherActor : AActor*,
-OtherComp : UPrimitiveComponent*,
-OtherBodyIndex : int32,
-bFromSweep : bool,
-SweepResult : const FHitResult&) : virtual void
+in OverlappedComponent : UPrimitiveComponent*,
+in OtherActor : AActor*,
+in OtherComp : UPrimitiveComponent*,
+in OtherBodyIndex : int32,
+in bFromSweep : bool,
+in SweepResult : const FHitResult&) : virtual void
 ]
 
 [AActor]<-
@@ -50,10 +52,34 @@ SweepResult : const FHitResult&) : virtual void
 + AmmunitionFlame : float
 + AmmunitionHoly : float
 + Wave : int
+- Player : AHarker*
 |
 + Tick(DeltaTime : float) : override virtual void
 + Load() : void
 \# BeginPlay() : override virtual void
+]
+
+[AActor]<-
+[AItem
+|
++ RunningTime : float
++ Amplitude : float
++ TimeConstant : float
++ RotationSpeed : float
++ ItemAmount : float
++ ItemType : int
+- Player : AHarker*
+\# CollisionMesh : UBoxComponent*
+|
++ Tick (DeltaTime : float) : override virtual void
+\# BeginPlay() : override virtual void
+\# OnBoxOverlap (
+in OverlappedComponent : UPrimitiveComponent*,
+in OtherActor : AActor*,
+in OtherComp : UPrimitiveComponent*,
+in OtherBodyIndex : int32,
+in bFromSweep : bool,
+in SweepResult : const FHitResult&) : virtual void
 ]
 
 [ACharacter]<-
@@ -71,15 +97,19 @@ SweepResult : const FHitResult&) : virtual void
 + HealthPickup : TSubclassOf<AItem>
 \# CurrentWaypointIndex : int32
 \# Waypoints : TArray< AActor*>
+- AttackMontage : UAnimMontage*
+- DeathMontage : UAnimMontage*
+- Player : AHarker*
+- SurvivalMode : ASurvivalGameMode*
 |
 + Tick (DeltaTime : float) : override void
 + SetupPlayerInputComponent (
 PlayerInputComponent : UInputComponent*) : override virtual void
 + TakeDamage (
-DamageAmount : float,
-DamageEvent : struct FDamageEvent const&,
-EventInstigator : class AController*,
-DamageCauser: AActor*) : override virtual float
+in DamageAmount : float,
+in DamageEvent : struct FDamageEvent const&,
+in EventInstigator : class AController*,
+in DamageCauser: AActor*) : override virtual float
 + void 	UpdateWalkSpeed (NewWalkSpeed : float) const 
 + void 	CancelWaypoints() 
 + void 	SpawnRandomPickup()
@@ -102,7 +132,22 @@ DamageCauser: AActor*) : override virtual float
 + BeginPlay() : override virtual void
 ]
 
+[UAttributeComponent
+|
++ Health : float
++ MaxHealth : float
+|
++ TickComponent(
+in DeltaTime : float,
+in TickType : ELevelTick,
+in ThisTickFunction : FActorComponentTickFunction*) : override virtual void
+\# BeginPlay() : override void
+]
+
 [AEnemy]o-[UHealthBarComponent]
+[UHealthBar]-o[UHealthBarComponent]
+[AEnemy]o-[UAttributeComponent]
+
 #[AHarker]-o[AInteractable]
 #[AHarker]-o[ABullet]
 #[AHarker]-o[UHarkerAnimInstance]
@@ -152,6 +197,21 @@ DamageCauser: AActor*) : override virtual float
 + TraceChannelProperty : TEnumAsByte<ECollisionChannel>
 + AttackMontage : UAnimMontage*
 + DeathMontage : UAnimMontage*
+- IsFiring : bool
+- FireDelayTime : float
+- CharacterState : ECharacterState
+- ActionState : EActionState
+- SelectedAmmo : EAmmoTypes
+- SpringArm : USpringArmComponent* 
+- Camera : UCameraComponent*
+- FPSCamera : UCameraComponent*
+- Lantern : UStaticMeshComponent*
+- LanternSpotLight : UPointLightComponent*
+- Umbrella : UStaticMeshComponent*
+- CollisionBoxUmbrella : UBoxComponent*
+- Crossbow : USkeletalMeshComponent*
+- UmbrellaFPSMode : UStaticMeshComponent*
+- CrossbowFPSMode : USkeletalMeshComponent*
 |
 + EquipWeapon() : void
 + Tick (float DeltaTime) : override virtual void
@@ -167,6 +227,13 @@ DamageCauser: AActor*) : override virtual float
 + GetCharacterState () : const FORCEINLINE ECharacterState
 + GetCharacterActionState() : const FORCEINLINE EActionState
 + ResetStates() : FORCEINLINE void
+- FireDelay() : void
+- Move(Value : const FInputActionValue&) : void
+- LookAround(Value : const FInputActionValue&) : void
+- UpdateItemVisibility() : void
+- SetItemVisibilityEquipped() : void
+- SetItemVisibilityUnequipped() : void
+- UpdateCameraBehaviour(isTurningWithCamera : bool) : void
 \# BeginPlay() : override virtual void
 \# MeleeAttack() : bool
 \# SpendAmmo() : bool
@@ -214,6 +281,7 @@ DamageCauser: AActor*) : override virtual float
 [UWidgetComponent]<-
 [UHealthBarComponent
 |
+- HealthBarWidget : UPROPERTY() UHealthBar*
 |
 + SetHealthPercent (Percent : float) : void
 ]
