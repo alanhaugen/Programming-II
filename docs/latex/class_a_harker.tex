@@ -36,14 +36,29 @@ void {\bfseries Interaction} ()
 \mbox{\Hypertarget{class_a_harker_ad0691e8d5076f92654480e3d3f4a929d}\label{class_a_harker_ad0691e8d5076f92654480e3d3f4a929d}} 
 void {\bfseries Cycle\+Ammunition} ()
 \item 
+\mbox{\Hypertarget{class_a_harker_a7008142c052ed28617d7066a0c10985d}\label{class_a_harker_a7008142c052ed28617d7066a0c10985d}} 
+void {\bfseries Pause\+Game} ()
+\item 
+\mbox{\Hypertarget{class_a_harker_a6f917191a495fb67fb9db46e50da5659}\label{class_a_harker_a6f917191a495fb67fb9db46e50da5659}} 
+bool {\bfseries Load\+Check\+Point} ()
+\item 
 \mbox{\Hypertarget{class_a_harker_ac1cbe62532a70577bfb3cdbbcfc705ad}\label{class_a_harker_ac1cbe62532a70577bfb3cdbbcfc705ad}} 
 F\+O\+R\+C\+E\+I\+N\+L\+I\+NE E\+Character\+State {\bfseries Get\+Character\+State} () const
+\item 
+\mbox{\Hypertarget{class_a_harker_a9460198e400629424f579bc5dd2094da}\label{class_a_harker_a9460198e400629424f579bc5dd2094da}} 
+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE E\+Action\+State {\bfseries Get\+Character\+Action\+State} () const
+\item 
+\mbox{\Hypertarget{class_a_harker_a5a9bcea604a3b6d06d161cac9b7fb45b}\label{class_a_harker_a5a9bcea604a3b6d06d161cac9b7fb45b}} 
+F\+O\+R\+C\+E\+I\+N\+L\+I\+NE void {\bfseries Reset\+States} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_a_harker_ab6038eeaae3db544a05d2ad3b0580f55}\label{class_a_harker_ab6038eeaae3db544a05d2ad3b0580f55}} 
+float {\bfseries Max\+Health} = 100.\+0f
+\item 
 \mbox{\Hypertarget{class_a_harker_a9abe29080cba03229e23a2f3427f3b6d}\label{class_a_harker_a9abe29080cba03229e23a2f3427f3b6d}} 
-float {\bfseries Health} = 100.\+0f
+float {\bfseries Health} = Max\+Health
 \item 
 \mbox{\Hypertarget{class_a_harker_a0b684a440b2ee5126f29baddf9926df3}\label{class_a_harker_a0b684a440b2ee5126f29baddf9926df3}} 
 float {\bfseries Ammunition\+Normal} = 10.\+0f
@@ -60,8 +75,8 @@ bool {\bfseries is\+Zooming\+In} = false
 \mbox{\Hypertarget{class_a_harker_a2854d9fcd6c6b9705f41585abe95b12f}\label{class_a_harker_a2854d9fcd6c6b9705f41585abe95b12f}} 
 float {\bfseries Zoom\+Factor}
 \item 
-\mbox{\Hypertarget{class_a_harker_acdccc58cfa2baee139e0b0d58a271583}\label{class_a_harker_acdccc58cfa2baee139e0b0d58a271583}} 
-bool {\bfseries is\+Interacting} = false
+\mbox{\Hypertarget{class_a_harker_ab331bffcb3a73a3ac4ad2e19458fa46c}\label{class_a_harker_ab331bffcb3a73a3ac4ad2e19458fa46c}} 
+bool {\bfseries Is\+Interacting} = false
 \item 
 \mbox{\Hypertarget{class_a_harker_a29b949a34c76811e35166cc720607a5d}\label{class_a_harker_a29b949a34c76811e35166cc720607a5d}} 
 \mbox{\hyperlink{class_a_interactable}{A\+Interactable}} $\ast$ {\bfseries Current\+Interactable}
@@ -96,8 +111,17 @@ class U\+Input\+Action $\ast$ {\bfseries Interaction\+Action}
 \mbox{\Hypertarget{class_a_harker_a2b47c51eb38ce7d8713e610f30d7bd00}\label{class_a_harker_a2b47c51eb38ce7d8713e610f30d7bd00}} 
 class U\+Input\+Action $\ast$ {\bfseries Cycle\+Ammunition\+Action}
 \item 
-\mbox{\Hypertarget{class_a_harker_a410a789b1c0d9346f0da62eae0a0e61f}\label{class_a_harker_a410a789b1c0d9346f0da62eae0a0e61f}} 
-T\+Subclass\+Of$<$ A\+Actor $>$ {\bfseries Bullet\+To\+Spawn}
+\mbox{\Hypertarget{class_a_harker_abb60ebf13b8faaed0b4bf577b57b6cb7}\label{class_a_harker_abb60ebf13b8faaed0b4bf577b57b6cb7}} 
+class U\+Input\+Action $\ast$ {\bfseries Pause\+Action}
+\item 
+\mbox{\Hypertarget{class_a_harker_a0d34c7737699b245b50ccc2fda1f9d63}\label{class_a_harker_a0d34c7737699b245b50ccc2fda1f9d63}} 
+T\+Subclass\+Of$<$ \mbox{\hyperlink{class_a_bullet}{A\+Bullet}} $>$ {\bfseries Bullet\+To\+Spawn\+Normal}
+\item 
+\mbox{\Hypertarget{class_a_harker_a2bbbe7a474ac0969066eca6b8c160310}\label{class_a_harker_a2bbbe7a474ac0969066eca6b8c160310}} 
+T\+Subclass\+Of$<$ \mbox{\hyperlink{class_a_bullet}{A\+Bullet}} $>$ {\bfseries Bullet\+To\+Spawn\+Fire}
+\item 
+\mbox{\Hypertarget{class_a_harker_a2d19ec140bea1f4f08564cb2e8c8e1d6}\label{class_a_harker_a2d19ec140bea1f4f08564cb2e8c8e1d6}} 
+T\+Subclass\+Of$<$ \mbox{\hyperlink{class_a_bullet}{A\+Bullet}} $>$ {\bfseries Bullet\+To\+Spawn\+Holy}
 \item 
 \mbox{\Hypertarget{class_a_harker_a603b6fa46c681b43def4dffdcaa20f38}\label{class_a_harker_a603b6fa46c681b43def4dffdcaa20f38}} 
 \mbox{\hyperlink{class_a_check_point}{A\+Check\+Point}} $\ast$ {\bfseries Current\+Check\+Point}

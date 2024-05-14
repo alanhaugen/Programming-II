@@ -75,8 +75,11 @@ $(function() {
 Inheritance diagram for AEnemy:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="class_a_enemy.png" alt=""/>
- </div></div>
+  <img src="class_a_enemy.png" usemap="#AEnemy_map" alt=""/>
+  <map id="AEnemy_map" name="AEnemy_map">
+<area href="class_a_flying_enemy.html" alt="AFlyingEnemy" shape="rect" coords="0,112,94,136"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -89,33 +92,60 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetupPlayerIn
 <tr class="memitem:a08a7c6c84c5fc82e1aa0fc529c65918e"><td class="memItemLeft" align="right" valign="top"><a id="a08a7c6c84c5fc82e1aa0fc529c65918e"></a>
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>TakeDamage</b> (float DamageAmount, struct FDamageEvent const &amp;DamageEvent, class AController *EventInstigator, AActor *DamageCauser) override</td></tr>
 <tr class="separator:a08a7c6c84c5fc82e1aa0fc529c65918e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02938bcb3bcfb88e8f61fd598558aeb4"><td class="memItemLeft" align="right" valign="top"><a id="a02938bcb3bcfb88e8f61fd598558aeb4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateWalkSpeed</b> (float NewWalkSpeed)</td></tr>
-<tr class="separator:a02938bcb3bcfb88e8f61fd598558aeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8041a55b78c0a8bd79ee7dc49c03d790"><td class="memItemLeft" align="right" valign="top"><a id="a8041a55b78c0a8bd79ee7dc49c03d790"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateWalkSpeed</b> (float NewWalkSpeed) const</td></tr>
+<tr class="separator:a8041a55b78c0a8bd79ee7dc49c03d790"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe9d808cd52d070a0dbe47e85cd9f432"><td class="memItemLeft" align="right" valign="top"><a id="afe9d808cd52d070a0dbe47e85cd9f432"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CancelWaypoints</b> ()</td></tr>
 <tr class="separator:afe9d808cd52d070a0dbe47e85cd9f432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef6a75c0c3f955c3d493fd896f6f08ca"><td class="memItemLeft" align="right" valign="top"><a id="aef6a75c0c3f955c3d493fd896f6f08ca"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SpawnRandomPickup</b> ()</td></tr>
+<tr class="separator:aef6a75c0c3f955c3d493fd896f6f08ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a99825496b3eecd56a4f7b6af9b63c92c"><td class="memItemLeft" align="right" valign="top"><a id="a99825496b3eecd56a4f7b6af9b63c92c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsAttacking</b> = false</td></tr>
+<tr class="separator:a99825496b3eecd56a4f7b6af9b63c92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc75c8f055f056acbb4a5e9e6ae577fc"><td class="memItemLeft" align="right" valign="top"><a id="acc75c8f055f056acbb4a5e9e6ae577fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsDead</b> = false</td></tr>
 <tr class="separator:acc75c8f055f056acbb4a5e9e6ae577fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbfeca72802ac3ed2750b988ed3f1cef"><td class="memItemLeft" align="right" valign="top"><a id="afbfeca72802ac3ed2750b988ed3f1cef"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>AttackDamage</b> = 10.0f</td></tr>
+<tr class="separator:afbfeca72802ac3ed2750b988ed3f1cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dad9605c59593c82669930bfa8f48af"><td class="memItemLeft" align="right" valign="top"><a id="a1dad9605c59593c82669930bfa8f48af"></a>
 UAttributeComponent *&#160;</td><td class="memItemRight" valign="bottom"><b>Attributes</b></td></tr>
 <tr class="separator:a1dad9605c59593c82669930bfa8f48af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98f3ce765d03fda14af692ee5b7b4bf1"><td class="memItemLeft" align="right" valign="top"><a id="a98f3ce765d03fda14af692ee5b7b4bf1"></a>
 <a class="el" href="class_u_health_bar_component.html">UHealthBarComponent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>HealthBarWidget</b></td></tr>
 <tr class="separator:a98f3ce765d03fda14af692ee5b7b4bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8a8fd42729ea98a480d9813fc420bf"><td class="memItemLeft" align="right" valign="top"><a id="a7d8a8fd42729ea98a480d9813fc420bf"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>ChanceOfDroppingItem</b> = 1</td></tr>
+<tr class="separator:a7d8a8fd42729ea98a480d9813fc420bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6a25f313e505e0ba90856195f0c066c"><td class="memItemLeft" align="right" valign="top"><a id="ad6a25f313e505e0ba90856195f0c066c"></a>
+TSubclassOf&lt; <a class="el" href="class_a_item.html">AItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>NormalAmmoPickup</b></td></tr>
+<tr class="separator:ad6a25f313e505e0ba90856195f0c066c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18f1c559377a9c835c8d08b420d34614"><td class="memItemLeft" align="right" valign="top"><a id="a18f1c559377a9c835c8d08b420d34614"></a>
+TSubclassOf&lt; <a class="el" href="class_a_item.html">AItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>FireAmmoPickup</b></td></tr>
+<tr class="separator:a18f1c559377a9c835c8d08b420d34614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8b7b1047bba990262d16976c08b9c1"><td class="memItemLeft" align="right" valign="top"><a id="a7b8b7b1047bba990262d16976c08b9c1"></a>
+TSubclassOf&lt; <a class="el" href="class_a_item.html">AItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>HolyAmmoPickup</b></td></tr>
+<tr class="separator:a7b8b7b1047bba990262d16976c08b9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e28792aa3411a5a238b6619969d7c57"><td class="memItemLeft" align="right" valign="top"><a id="a4e28792aa3411a5a238b6619969d7c57"></a>
+TSubclassOf&lt; <a class="el" href="class_a_item.html">AItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>HealthPickup</b></td></tr>
+<tr class="separator:a4e28792aa3411a5a238b6619969d7c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:abd845c5787bc005ae01686635f7f3fba"><td class="memItemLeft" align="right" valign="top"><a id="abd845c5787bc005ae01686635f7f3fba"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>BeginPlay</b> () override</td></tr>
 <tr class="separator:abd845c5787bc005ae01686635f7f3fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1255f97c97c6f68596f1b597859a7ff"><td class="memItemLeft" align="right" valign="top"><a id="ad1255f97c97c6f68596f1b597859a7ff"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UFUNCTION</b> (BlueprintCallable) void DeathEnd()</td></tr>
-<tr class="separator:ad1255f97c97c6f68596f1b597859a7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe406dbbe41dd0f77c33d873a2b713db"><td class="memItemLeft" align="right" valign="top"><a id="abe406dbbe41dd0f77c33d873a2b713db"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DeathEnd</b> ()</td></tr>
+<tr class="separator:abe406dbbe41dd0f77c33d873a2b713db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab7071e982bc55a693bcff90ae899769"><td class="memItemLeft" align="right" valign="top"><a id="aab7071e982bc55a693bcff90ae899769"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>AttackEnd</b> ()</td></tr>
+<tr class="separator:aab7071e982bc55a693bcff90ae899769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19624ea514983cef48df79d282e5226c"><td class="memItemLeft" align="right" valign="top"><a id="a19624ea514983cef48df79d282e5226c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateUI</b> ()</td></tr>
 <tr class="separator:a19624ea514983cef48df79d282e5226c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,12 +155,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateDeathLogic</b> 
 <tr class="memitem:a210d1f6c80101f0b5cdffa613c640d92"><td class="memItemLeft" align="right" valign="top"><a id="a210d1f6c80101f0b5cdffa613c640d92"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>MoveToNextWaypoint</b> ()</td></tr>
 <tr class="separator:a210d1f6c80101f0b5cdffa613c640d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34522db40c999b50d4b30d5cfa542dc2"><td class="memItemLeft" align="right" valign="top"><a id="a34522db40c999b50d4b30d5cfa542dc2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Combat</b> ()</td></tr>
+<tr class="separator:a34522db40c999b50d4b30d5cfa542dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84ee4888f1ebbba854f5e5043d33da54"><td class="memItemLeft" align="right" valign="top"><a id="a84ee4888f1ebbba854f5e5043d33da54"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveAIComponent</b> () const</td></tr>
+<tr class="separator:a84ee4888f1ebbba854f5e5043d33da54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a672468336caed5f2d03a1de564b0f151"><td class="memItemLeft" align="right" valign="top"><a id="a672468336caed5f2d03a1de564b0f151"></a>
 int32&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentWaypointIndex</b> = 0</td></tr>
 <tr class="separator:a672468336caed5f2d03a1de564b0f151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a36d2e0b39d7ebcd75e3f426675278"><td class="memItemLeft" align="right" valign="top"><a id="a42a36d2e0b39d7ebcd75e3f426675278"></a>
+TArray&lt; AActor * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Waypoints</b></td></tr>
+<tr class="separator:a42a36d2e0b39d7ebcd75e3f426675278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/hanswhitburnhaugen/Programming-II/Source/ProgrammingII/Public/<a class="el" href="_enemy_8h_source.html">Enemy.h</a></li>

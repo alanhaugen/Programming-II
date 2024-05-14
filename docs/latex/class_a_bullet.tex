@@ -21,14 +21,23 @@ virtual void {\bfseries Tick} (float Delta\+Time) override
 \mbox{\Hypertarget{class_a_bullet_a18b38b490203a9771d2899239c787859}\label{class_a_bullet_a18b38b490203a9771d2899239c787859}} 
 class U\+Static\+Mesh\+Component $\ast$ {\bfseries Bullet\+Mesh}
 \item 
+\mbox{\Hypertarget{class_a_bullet_ae2348a9b57b39598a7c378cbd3b9f999}\label{class_a_bullet_ae2348a9b57b39598a7c378cbd3b9f999}} 
+float {\bfseries Bullet\+Damage} = 25.\+0f
+\item 
+\mbox{\Hypertarget{class_a_bullet_a765f9225ff71e0467f18d0f025c6477c}\label{class_a_bullet_a765f9225ff71e0467f18d0f025c6477c}} 
+E\+Ammo\+Types {\bfseries Bullet\+Type} = E\+Ammo\+Types\+::\+E\+A\+T\+\_\+\+Normal
+\item 
 \mbox{\Hypertarget{class_a_bullet_a0486a2bc22d706f60eb68457ef843a87}\label{class_a_bullet_a0486a2bc22d706f60eb68457ef843a87}} 
-float {\bfseries Movement\+Speed} = 10.f
+float {\bfseries Movement\+Speed} = 10.\+0f
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_a_bullet_a4b4380258b3d7b5ae1975d0c969a0717}\label{class_a_bullet_a4b4380258b3d7b5ae1975d0c969a0717}} 
 virtual void {\bfseries Begin\+Play} () override
+\item 
+\mbox{\Hypertarget{class_a_bullet_aa1023638bc75e4878b6ebbd4c23b7b8e}\label{class_a_bullet_aa1023638bc75e4878b6ebbd4c23b7b8e}} 
+virtual void {\bfseries On\+Box\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index, bool b\+From\+Sweep, const F\+Hit\+Result \&Sweep\+Result)
 \end{DoxyCompactItemize}
 
 

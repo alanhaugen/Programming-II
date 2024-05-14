@@ -106,14 +106,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Interaction</b> ()</t
 <tr class="memitem:ad0691e8d5076f92654480e3d3f4a929d"><td class="memItemLeft" align="right" valign="top"><a id="ad0691e8d5076f92654480e3d3f4a929d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CycleAmmunition</b> ()</td></tr>
 <tr class="separator:ad0691e8d5076f92654480e3d3f4a929d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7008142c052ed28617d7066a0c10985d"><td class="memItemLeft" align="right" valign="top"><a id="a7008142c052ed28617d7066a0c10985d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>PauseGame</b> ()</td></tr>
+<tr class="separator:a7008142c052ed28617d7066a0c10985d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f917191a495fb67fb9db46e50da5659"><td class="memItemLeft" align="right" valign="top"><a id="a6f917191a495fb67fb9db46e50da5659"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>LoadCheckPoint</b> ()</td></tr>
+<tr class="separator:a6f917191a495fb67fb9db46e50da5659"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1cbe62532a70577bfb3cdbbcfc705ad"><td class="memItemLeft" align="right" valign="top"><a id="ac1cbe62532a70577bfb3cdbbcfc705ad"></a>
 FORCEINLINE ECharacterState&#160;</td><td class="memItemRight" valign="bottom"><b>GetCharacterState</b> () const</td></tr>
 <tr class="separator:ac1cbe62532a70577bfb3cdbbcfc705ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9460198e400629424f579bc5dd2094da"><td class="memItemLeft" align="right" valign="top"><a id="a9460198e400629424f579bc5dd2094da"></a>
+FORCEINLINE EActionState&#160;</td><td class="memItemRight" valign="bottom"><b>GetCharacterActionState</b> () const</td></tr>
+<tr class="separator:a9460198e400629424f579bc5dd2094da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9bcea604a3b6d06d161cac9b7fb45b"><td class="memItemLeft" align="right" valign="top"><a id="a5a9bcea604a3b6d06d161cac9b7fb45b"></a>
+FORCEINLINE void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetStates</b> ()</td></tr>
+<tr class="separator:a5a9bcea604a3b6d06d161cac9b7fb45b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ab6038eeaae3db544a05d2ad3b0580f55"><td class="memItemLeft" align="right" valign="top"><a id="ab6038eeaae3db544a05d2ad3b0580f55"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>MaxHealth</b> = 100.0f</td></tr>
+<tr class="separator:ab6038eeaae3db544a05d2ad3b0580f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9abe29080cba03229e23a2f3427f3b6d"><td class="memItemLeft" align="right" valign="top"><a id="a9abe29080cba03229e23a2f3427f3b6d"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>Health</b> = 100.0f</td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>Health</b> = MaxHealth</td></tr>
 <tr class="separator:a9abe29080cba03229e23a2f3427f3b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b684a440b2ee5126f29baddf9926df3"><td class="memItemLeft" align="right" valign="top"><a id="a0b684a440b2ee5126f29baddf9926df3"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>AmmunitionNormal</b> = 10.0f</td></tr>
@@ -130,9 +145,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isZoomingIn</b> = fal
 <tr class="memitem:a2854d9fcd6c6b9705f41585abe95b12f"><td class="memItemLeft" align="right" valign="top"><a id="a2854d9fcd6c6b9705f41585abe95b12f"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>ZoomFactor</b></td></tr>
 <tr class="separator:a2854d9fcd6c6b9705f41585abe95b12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdccc58cfa2baee139e0b0d58a271583"><td class="memItemLeft" align="right" valign="top"><a id="acdccc58cfa2baee139e0b0d58a271583"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInteracting</b> = false</td></tr>
-<tr class="separator:acdccc58cfa2baee139e0b0d58a271583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab331bffcb3a73a3ac4ad2e19458fa46c"><td class="memItemLeft" align="right" valign="top"><a id="ab331bffcb3a73a3ac4ad2e19458fa46c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsInteracting</b> = false</td></tr>
+<tr class="separator:ab331bffcb3a73a3ac4ad2e19458fa46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b949a34c76811e35166cc720607a5d"><td class="memItemLeft" align="right" valign="top"><a id="a29b949a34c76811e35166cc720607a5d"></a>
 <a class="el" href="class_a_interactable.html">AInteractable</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentInteractable</b></td></tr>
 <tr class="separator:a29b949a34c76811e35166cc720607a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,9 +181,18 @@ class UInputAction *&#160;</td><td class="memItemRight" valign="bottom"><b>Inter
 <tr class="memitem:a2b47c51eb38ce7d8713e610f30d7bd00"><td class="memItemLeft" align="right" valign="top"><a id="a2b47c51eb38ce7d8713e610f30d7bd00"></a>
 class UInputAction *&#160;</td><td class="memItemRight" valign="bottom"><b>CycleAmmunitionAction</b></td></tr>
 <tr class="separator:a2b47c51eb38ce7d8713e610f30d7bd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a410a789b1c0d9346f0da62eae0a0e61f"><td class="memItemLeft" align="right" valign="top"><a id="a410a789b1c0d9346f0da62eae0a0e61f"></a>
-TSubclassOf&lt; AActor &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BulletToSpawn</b></td></tr>
-<tr class="separator:a410a789b1c0d9346f0da62eae0a0e61f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb60ebf13b8faaed0b4bf577b57b6cb7"><td class="memItemLeft" align="right" valign="top"><a id="abb60ebf13b8faaed0b4bf577b57b6cb7"></a>
+class UInputAction *&#160;</td><td class="memItemRight" valign="bottom"><b>PauseAction</b></td></tr>
+<tr class="separator:abb60ebf13b8faaed0b4bf577b57b6cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d34c7737699b245b50ccc2fda1f9d63"><td class="memItemLeft" align="right" valign="top"><a id="a0d34c7737699b245b50ccc2fda1f9d63"></a>
+TSubclassOf&lt; <a class="el" href="class_a_bullet.html">ABullet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BulletToSpawnNormal</b></td></tr>
+<tr class="separator:a0d34c7737699b245b50ccc2fda1f9d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bbbe7a474ac0969066eca6b8c160310"><td class="memItemLeft" align="right" valign="top"><a id="a2bbbe7a474ac0969066eca6b8c160310"></a>
+TSubclassOf&lt; <a class="el" href="class_a_bullet.html">ABullet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BulletToSpawnFire</b></td></tr>
+<tr class="separator:a2bbbe7a474ac0969066eca6b8c160310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d19ec140bea1f4f08564cb2e8c8e1d6"><td class="memItemLeft" align="right" valign="top"><a id="a2d19ec140bea1f4f08564cb2e8c8e1d6"></a>
+TSubclassOf&lt; <a class="el" href="class_a_bullet.html">ABullet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BulletToSpawnHoly</b></td></tr>
+<tr class="separator:a2d19ec140bea1f4f08564cb2e8c8e1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a603b6fa46c681b43def4dffdcaa20f38"><td class="memItemLeft" align="right" valign="top"><a id="a603b6fa46c681b43def4dffdcaa20f38"></a>
 <a class="el" href="class_a_check_point.html">ACheckPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentCheckPoint</b></td></tr>
 <tr class="separator:a603b6fa46c681b43def4dffdcaa20f38"><td class="memSeparator" colspan="2">&#160;</td></tr>

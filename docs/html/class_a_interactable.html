@@ -63,6 +63,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_a_interactable-members.html">List of all members</a>  </div>
@@ -82,12 +83,18 @@ Inheritance diagram for AInteractable:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a14d28344ca50925bff37bd9e712fc0b8"><td class="memItemLeft" align="right" valign="top"><a id="a14d28344ca50925bff37bd9e712fc0b8"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnSpehereOverlap</b> (UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &amp;SweepResult)</td></tr>
-<tr class="separator:a14d28344ca50925bff37bd9e712fc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac58a86d54b96722d98716d273a4193dc"><td class="memItemLeft" align="right" valign="top"><a id="ac58a86d54b96722d98716d273a4193dc"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnSpehereEndOverlap</b> (UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex)</td></tr>
-<tr class="separator:ac58a86d54b96722d98716d273a4193dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49348abfb4b21767efd238975aec25eb"><td class="memItemLeft" align="right" valign="top"><a id="a49348abfb4b21767efd238975aec25eb"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnOverlap</b> (UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &amp;SweepResult)</td></tr>
+<tr class="separator:a49348abfb4b21767efd238975aec25eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2053cfc67bfb64e6b7e2218269db8e23"><td class="memItemLeft" align="right" valign="top"><a id="a2053cfc67bfb64e6b7e2218269db8e23"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnEndOverlap</b> (UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex)</td></tr>
+<tr class="separator:a2053cfc67bfb64e6b7e2218269db8e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a398bbe4d037a918ef72881130e75947f"><td class="memItemLeft" align="right" valign="top"><a id="a398bbe4d037a918ef72881130e75947f"></a>
+UBoxComponent *&#160;</td><td class="memItemRight" valign="bottom"><b>CollisionBox</b></td></tr>
+<tr class="separator:a398bbe4d037a918ef72881130e75947f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -103,9 +110,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a47a537fad87f8729c820bda66a2eefc5"><td class="memItemLeft" align="right" valign="top"><a id="a47a537fad87f8729c820bda66a2eefc5"></a>
 UStaticMeshComponent *&#160;</td><td class="memItemRight" valign="bottom"><b>Mesh</b></td></tr>
 <tr class="separator:a47a537fad87f8729c820bda66a2eefc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a398bbe4d037a918ef72881130e75947f"><td class="memItemLeft" align="right" valign="top"><a id="a398bbe4d037a918ef72881130e75947f"></a>
-UBoxComponent *&#160;</td><td class="memItemRight" valign="bottom"><b>CollisionBox</b></td></tr>
-<tr class="separator:a398bbe4d037a918ef72881130e75947f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa52c8316dcfaccad91bae1267a34008e"><td class="memItemLeft" align="right" valign="top"><a id="aa52c8316dcfaccad91bae1267a34008e"></a>
 FText&#160;</td><td class="memItemRight" valign="bottom"><b>PreInteractionMessage</b> = FText::FromString(&quot;Press E to Interact&quot;)</td></tr>
 <tr class="separator:aa52c8316dcfaccad91bae1267a34008e"><td class="memSeparator" colspan="2">&#160;</td></tr>

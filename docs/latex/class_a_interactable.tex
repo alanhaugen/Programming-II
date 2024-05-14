@@ -9,11 +9,17 @@ Inheritance diagram for A\+Interactable\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_interactable_a14d28344ca50925bff37bd9e712fc0b8}\label{class_a_interactable_a14d28344ca50925bff37bd9e712fc0b8}} 
-virtual void {\bfseries On\+Spehere\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index, bool b\+From\+Sweep, const F\+Hit\+Result \&Sweep\+Result)
+\mbox{\Hypertarget{class_a_interactable_a49348abfb4b21767efd238975aec25eb}\label{class_a_interactable_a49348abfb4b21767efd238975aec25eb}} 
+virtual void {\bfseries On\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index, bool b\+From\+Sweep, const F\+Hit\+Result \&Sweep\+Result)
 \item 
-\mbox{\Hypertarget{class_a_interactable_ac58a86d54b96722d98716d273a4193dc}\label{class_a_interactable_ac58a86d54b96722d98716d273a4193dc}} 
-virtual void {\bfseries On\+Spehere\+End\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index)
+\mbox{\Hypertarget{class_a_interactable_a2053cfc67bfb64e6b7e2218269db8e23}\label{class_a_interactable_a2053cfc67bfb64e6b7e2218269db8e23}} 
+virtual void {\bfseries On\+End\+Overlap} (U\+Primitive\+Component $\ast$Overlapped\+Component, A\+Actor $\ast$Other\+Actor, U\+Primitive\+Component $\ast$Other\+Comp, int32 Other\+Body\+Index)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_interactable_a398bbe4d037a918ef72881130e75947f}\label{class_a_interactable_a398bbe4d037a918ef72881130e75947f}} 
+U\+Box\+Component $\ast$ {\bfseries Collision\+Box}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -29,9 +35,6 @@ virtual void {\bfseries Tick} (float Delta\+Time) override
 \item 
 \mbox{\Hypertarget{class_a_interactable_a47a537fad87f8729c820bda66a2eefc5}\label{class_a_interactable_a47a537fad87f8729c820bda66a2eefc5}} 
 U\+Static\+Mesh\+Component $\ast$ {\bfseries Mesh}
-\item 
-\mbox{\Hypertarget{class_a_interactable_a398bbe4d037a918ef72881130e75947f}\label{class_a_interactable_a398bbe4d037a918ef72881130e75947f}} 
-U\+Box\+Component $\ast$ {\bfseries Collision\+Box}
 \item 
 \mbox{\Hypertarget{class_a_interactable_aa52c8316dcfaccad91bae1267a34008e}\label{class_a_interactable_aa52c8316dcfaccad91bae1267a34008e}} 
 F\+Text {\bfseries Pre\+Interaction\+Message} = F\+Text\+::\+From\+String(\char`\"{}Press E to Interact\char`\"{})

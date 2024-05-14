@@ -91,21 +91,30 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Called when the game starts or when spawned</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> BeginPlay() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>: </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_a_harker.html">AHarker</a>* Character;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// Called every frame</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Tick(<span class="keywordtype">float</span> DeltaTime) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = <span class="stringliteral">&quot;BulletSettings&quot;</span>)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">class </span>UStaticMeshComponent* BulletMesh;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    UPROPERTY(EditAnywhere, Category = <span class="stringliteral">&quot;WeaponSettings&quot;</span>)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">float</span> MovementSpeed = 10.f;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    UFUNCTION()</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, <span class="keywordtype">bool</span> bFromSweep, <span class="keyword">const</span> FHitResult&amp; SweepResult);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_a_harker.html">AHarker</a>* Character;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// Called every frame</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Tick(<span class="keywordtype">float</span> DeltaTime) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Blueprint editable bullet settings</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    UPROPERTY(EditDefaultsOnly, Category = <span class="stringliteral">&quot;Bullet Settings&quot;</span>)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">class </span>UStaticMeshComponent* BulletMesh;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    UPROPERTY(EditDefaultsOnly, Category = <span class="stringliteral">&quot;Bullet Settings&quot;</span>)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">float</span> BulletDamage = 25.0f;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = <span class="stringliteral">&quot;Bullet Settings&quot;</span>)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    EAmmoTypes BulletType = EAmmoTypes::EAT_Normal;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    UPROPERTY(EditDefaultsOnly, Category = <span class="stringliteral">&quot;Bullet Settings&quot;</span>)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">float</span> MovementSpeed = 10.0f;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_a_harker_html"><div class="ttname"><a href="class_a_harker.html">AHarker</a></div><div class="ttdef"><b>Definition:</b> Harker.h:31</div></div>
+<div class="ttc" id="aclass_a_harker_html"><div class="ttname"><a href="class_a_harker.html">AHarker</a></div><div class="ttdef"><b>Definition:</b> Harker.h:33</div></div>
 <div class="ttc" id="aclass_a_bullet_html"><div class="ttname"><a href="class_a_bullet.html">ABullet</a></div><div class="ttdef"><b>Definition:</b> Bullet.h:12</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

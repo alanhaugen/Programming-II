@@ -11,21 +11,27 @@ Inheritance diagram for A\+Enemy\+Spawner\+:\begin{figure}[H]
 \item 
 \mbox{\Hypertarget{class_a_enemy_spawner_af718055674ce9c2325e8a0b0482d6658}\label{class_a_enemy_spawner_af718055674ce9c2325e8a0b0482d6658}} 
 virtual void {\bfseries Tick} (float Delta\+Time) override
+\item 
+\mbox{\Hypertarget{class_a_enemy_spawner_ae81f8c43f6a8cae1c18d7cdb6feca869}\label{class_a_enemy_spawner_ae81f8c43f6a8cae1c18d7cdb6feca869}} 
+void {\bfseries Spawn} (int Wave)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_a_enemy_spawner_a165f1e7560f62d5e628a59c49b0ba7e9}\label{class_a_enemy_spawner_a165f1e7560f62d5e628a59c49b0ba7e9}} 
-float {\bfseries Running\+Time} = 0.f
+float {\bfseries Running\+Time} = 0.\+0f
+\item 
+\mbox{\Hypertarget{class_a_enemy_spawner_ac61f7a624a424f24229cdabf9373edef}\label{class_a_enemy_spawner_ac61f7a624a424f24229cdabf9373edef}} 
+T\+Array$<$ int $>$ {\bfseries Waves}
+\item 
+\mbox{\Hypertarget{class_a_enemy_spawner_a2b3df3e2051c7c31ce26ba3b872225f7}\label{class_a_enemy_spawner_a2b3df3e2051c7c31ce26ba3b872225f7}} 
+T\+Subclass\+Of$<$ class A\+Actor $>$ {\bfseries Enemy\+Class}
+\item 
+\mbox{\Hypertarget{class_a_enemy_spawner_a0b45cce24ba9ac74d31a5e6d420831e3}\label{class_a_enemy_spawner_a0b45cce24ba9ac74d31a5e6d420831e3}} 
+float {\bfseries Spawn\+Radius} = 500.\+0f
 \item 
 \mbox{\Hypertarget{class_a_enemy_spawner_ad0f978876ea9d39a9ada32bf7cb5278c}\label{class_a_enemy_spawner_ad0f978876ea9d39a9ada32bf7cb5278c}} 
 float {\bfseries Spawn\+Time}
-\item 
-\mbox{\Hypertarget{class_a_enemy_spawner_a523622c94d8306fd223d48967a8e5c80}\label{class_a_enemy_spawner_a523622c94d8306fd223d48967a8e5c80}} 
-T\+Subclass\+Of$<$ class \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} $>$ {\bfseries Enemy\+Class}
-\item 
-\mbox{\Hypertarget{class_a_enemy_spawner_aafaae93cf414ad8cfa7a4983b6d0833c}\label{class_a_enemy_spawner_aafaae93cf414ad8cfa7a4983b6d0833c}} 
-\mbox{\hyperlink{class_a_harker}{A\+Harker}} $\ast$ {\bfseries Player}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}

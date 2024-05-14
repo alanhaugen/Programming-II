@@ -91,8 +91,14 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a18b38b490203a9771d2899239c787859"><td class="memItemLeft" align="right" valign="top"><a id="a18b38b490203a9771d2899239c787859"></a>
 class UStaticMeshComponent *&#160;</td><td class="memItemRight" valign="bottom"><b>BulletMesh</b></td></tr>
 <tr class="separator:a18b38b490203a9771d2899239c787859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2348a9b57b39598a7c378cbd3b9f999"><td class="memItemLeft" align="right" valign="top"><a id="ae2348a9b57b39598a7c378cbd3b9f999"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>BulletDamage</b> = 25.0f</td></tr>
+<tr class="separator:ae2348a9b57b39598a7c378cbd3b9f999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a765f9225ff71e0467f18d0f025c6477c"><td class="memItemLeft" align="right" valign="top"><a id="a765f9225ff71e0467f18d0f025c6477c"></a>
+EAmmoTypes&#160;</td><td class="memItemRight" valign="bottom"><b>BulletType</b> = EAmmoTypes::EAT_Normal</td></tr>
+<tr class="separator:a765f9225ff71e0467f18d0f025c6477c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0486a2bc22d706f60eb68457ef843a87"><td class="memItemLeft" align="right" valign="top"><a id="a0486a2bc22d706f60eb68457ef843a87"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>MovementSpeed</b> = 10.f</td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>MovementSpeed</b> = 10.0f</td></tr>
 <tr class="separator:a0486a2bc22d706f60eb68457ef843a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -100,6 +106,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a4b4380258b3d7b5ae1975d0c969a0717"><td class="memItemLeft" align="right" valign="top"><a id="a4b4380258b3d7b5ae1975d0c969a0717"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>BeginPlay</b> () override</td></tr>
 <tr class="separator:a4b4380258b3d7b5ae1975d0c969a0717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1023638bc75e4878b6ebbd4c23b7b8e"><td class="memItemLeft" align="right" valign="top"><a id="aa1023638bc75e4878b6ebbd4c23b7b8e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OnBoxOverlap</b> (UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &amp;SweepResult)</td></tr>
+<tr class="separator:aa1023638bc75e4878b6ebbd4c23b7b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/hanswhitburnhaugen/Programming-II/Source/ProgrammingII/Public/<a class="el" href="_bullet_8h_source.html">Bullet.h</a></li>
