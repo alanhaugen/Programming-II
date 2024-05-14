@@ -8,14 +8,14 @@
 \# InteractionMessage : FText
 |
 # operations
-+ OnSpehereOverlap(
++ OnOverlap(
             in mOverlappedComponent : UPrimitiveComponent*,
             in mOtherActor : AActor*,
             in mOtherComp : UPrimitiveComponent*,
             in mOtherBodyIndex : int32,
             in mbFromSweep : bool,
             in mconst SweepResult : FHitResult&)
-+ OnSpehereEndOverlap(
++ OnEndOverlap(
             in mOverlappedComponent : UPrimitiveComponent*,
             in mOtherActor : AActor*,
             in mOtherComp : UPrimitiveComponent*,
@@ -26,7 +26,7 @@
 [ALadder
 |
 # attributes
-+ CollisionMeshTop : UBoxComponent*
++ CollisionBoxTop : UBoxComponent*
 |
 # operations
 \# BeginPlay () override
