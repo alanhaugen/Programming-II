@@ -2,7 +2,6 @@
 #include <Kismet/GameplayStatics.h>
 #include "Enemy.h"
 
-
 ABullet::ABullet()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -41,7 +40,7 @@ void ABullet::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	else if (BulletType == EAmmoTypes::EAT_Fire && Cast<AHarker>(OtherActor) == nullptr)
 	{
 		TArray<AActor*> ignoredActors;
-		float ExplosionRadius = 200.0f;
+		float ExplosionRadius = 2000.0f;
 		TSubclassOf<UDamageType> DamageType;
 
 		UGameplayStatics::ApplyRadialDamage(GetWorld(),

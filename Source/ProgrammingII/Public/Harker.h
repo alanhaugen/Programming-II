@@ -222,6 +222,7 @@ private:
 	void SetItemVisibilityEquipped();
 	void SetItemVisibilityUnequipped();
 	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
+	void UpdateFPSUmbrellaAnim();
 
 	// Equipment state of the player
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
@@ -245,5 +246,5 @@ private:
 public:
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
 	FORCEINLINE EActionState GetCharacterActionState() const { return ActionState; };
-	FORCEINLINE void ResetStates() { CharacterState = ECharacterState::ECS_Dead; ActionState = EActionState::EAS_Unoccupied; };
+	FORCEINLINE void ResetStates() { CharacterState = ECharacterState::ECS_Equipped; ActionState = EActionState::EAS_Unoccupied; };
 };

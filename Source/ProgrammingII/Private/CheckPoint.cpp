@@ -21,7 +21,6 @@ void ACheckPoint::BeginPlay()
 	{
 		Player = Cast<AHarker>(GetWorld()->GetFirstPlayerController()->GetPawn());
 		Player->CheckPoints.Add(this);
-		Player->CurrentCheckPoint = this;
 	}
 }
 
@@ -35,8 +34,6 @@ void ACheckPoint::Load()
 		Player->AmmunitionNormal = AmmunitionNormal;
 		Player->AmmunitionFlame  = AmmunitionFlame;
 		Player->AmmunitionHoly   = AmmunitionHoly;
-
-		Player->ResetStates();
 	}
 }
 

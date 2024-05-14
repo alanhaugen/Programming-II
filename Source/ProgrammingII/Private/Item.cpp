@@ -86,7 +86,16 @@ void AItem::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 
 			if (AdventureMode)
 			{
+				// Let adventure mode know a coin was picked up
 				AdventureMode->PickupSpecialItem();
+
+				// Set checkpoint!
+				if (Player->CheckPoints.Num() > AdventureMode->CurrentWave + 1)
+				{
+					Player->CurrentCheckPoint = Player->CheckPoints[AdventureMode->CurrentWave];
+				}
+
+				// Picking up coins triggers the next wave in adventure mode
 				AdventureMode->TriggerWave(AdventureMode->CurrentWave + 1);
 			}
 		}

@@ -33,10 +33,6 @@ AHarker::AHarker()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
-	// Setup Harker First Person Camera
-	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPSCamera"));
-	FPSCamera->SetupAttachment(GetRootComponent());
-
 	// Make the Character face where it is moving
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.f, 0.0f);
@@ -59,6 +55,10 @@ AHarker::AHarker()
 	Crossbow->SetupAttachment(GetRootComponent());
 	Crossbow->SetVisibility(false);
 
+	// Setup Harker First Person Camera
+	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPSCamera"));
+	FPSCamera->SetupAttachment(GetRootComponent());
+	
 	// Make umbrella for FPS mode (and hide it for 3PS mode)
 	UmbrellaFPSMode = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Umbrella FPS Mode"));
 	UmbrellaFPSMode->SetupAttachment(FPSCamera);
@@ -323,6 +323,9 @@ void AHarker::Tick(float DeltaTime)
 	Camera->FieldOfView = FMath::Lerp<float>(90.0f, 60.0f, ZoomFactor);
 	SpringArm->TargetArmLength = FMath::Lerp<float>(400.0f, 300.0f, ZoomFactor);
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
+
+	// Swing umbrella in FPS mode
+	UpdateFPSUmbrellaAnim();
 }
 
 // Called to bind functionality to input
@@ -453,6 +456,18 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 	bUseControllerRotationRoll  = isTurningWithCamera;
 }
 
+void AHarker::UpdateFPSUmbrellaAnim()
+{
+	/*if (ActionState == EActionState::EAS_Attacking)
+	{
+		UmbrellaFPSMode->AddLocalRotation(FRotator(0.0f, 0.0f, 0.0f));
+	}
+	else
+	{
+		UmbrellaFPSMode->SetwLocationAndRotation(UmbrellaFPSMode->GetComponentLocation(), FRotator(160.0f, 0.0f, 0.0f));
+	}*/
+}
+
 void AHarker::FireDelay()
 {
 	IsFiring = false;
@@ -549,16 +564,6 @@ void AHarker::Interaction()
 		return;
 	}
 
-	/*if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Interact"));
-	}
-
-	if (CurrentCheckPoint)
-	{
-		CurrentCheckPoint->Load();
-	}*/
-
 	// Climb ladder
 	ALadder* Ladder = Cast<ALadder>(CurrentInteractable);
 	if (Ladder && bCanInteract)
@@ -620,7 +625,8 @@ bool AHarker::LoadCheckPoint()
 		CurrentCheckPoint->Load();
 		Health = MaxHealth;
 
-		CharacterState = ECharacterState::ECS_Equipped;
+		ResetStates();
+		MeleeAttack();
 
 		return true;
 	}
