@@ -222,7 +222,9 @@ private:
 	void SetItemVisibilityEquipped();
 	void SetItemVisibilityUnequipped();
 	void UpdateCameraBehaviour(bool isTurningWithCamera = false);
-	void UpdateFPSUmbrellaAnim();
+	void UpdateFPSUmbrellaAnim(float DeltaTime);
+
+	float RunningTime = 0.0f;
 
 	// Equipment state of the player
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

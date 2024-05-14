@@ -325,7 +325,7 @@ void AHarker::Tick(float DeltaTime)
 	SpringArm->SocketOffset = FVector(0.0f, 60.0f, 0.0f) * ZoomFactor;
 
 	// Swing umbrella in FPS mode
-	UpdateFPSUmbrellaAnim();
+	UpdateFPSUmbrellaAnim(DeltaTime);
 }
 
 // Called to bind functionality to input
@@ -431,8 +431,10 @@ void AHarker::SetItemVisibilityUnequipped()
 		UmbrellaFPSMode->SetVisibility(true);
 		CrossbowFPSMode->SetVisibility(false);
 
+
 		Lantern->SetVisibility(false);
 		LanternSpotLight->SetVisibility(false);
+		Crossbow->SetVisibility(false);
 		Umbrella->SetVisibility(false);
 	}
 	else
@@ -444,6 +446,7 @@ void AHarker::SetItemVisibilityUnequipped()
 
 		Lantern->SetVisibility(true);
 		LanternSpotLight->SetVisibility(true);
+		Crossbow->SetVisibility(true);
 		Umbrella->SetVisibility(true);
 	}
 }
@@ -456,16 +459,16 @@ void AHarker::UpdateCameraBehaviour(bool isTurningWithCamera)
 	bUseControllerRotationRoll  = isTurningWithCamera;
 }
 
-void AHarker::UpdateFPSUmbrellaAnim()
+void AHarker::UpdateFPSUmbrellaAnim(float DeltaTime)
 {
-	/*if (ActionState == EActionState::EAS_Attacking)
+	if (ActionState == EActionState::EAS_Attacking)
 	{
-		UmbrellaFPSMode->AddLocalRotation(FRotator(0.0f, 0.0f, 0.0f));
+		float Amplitude = 0.1f;
+		float TimeConstant = 10.0f;
+		RunningTime += DeltaTime;
+		
+		UmbrellaFPSMode->AddLocalOffset(FVector(0.0f, Amplitude * FMath::Sin(RunningTime * TimeConstant), 0.0f));
 	}
-	else
-	{
-		UmbrellaFPSMode->SetwLocationAndRotation(UmbrellaFPSMode->GetComponentLocation(), FRotator(160.0f, 0.0f, 0.0f));
-	}*/
 }
 
 void AHarker::FireDelay()
