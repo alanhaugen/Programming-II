@@ -2,10 +2,13 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include <CoreMinimal.h>
+#include <GameFramework/Actor.h>
+#include <Components/ActorComponent.h>
 #include "Harker.h"
-#include "GameFramework/Actor.h"
 #include "Bullet.generated.h"
+
+class UNiagaraSystem;
 
 UCLASS()
 class PROGRAMMINGII_API ABullet : public AActor
@@ -38,6 +41,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bullet Settings")
 	EAmmoTypes BulletType = EAmmoTypes::EAT_Normal;
+
+	UPROPERTY(EditAnywhere, Category = "Bullet Settings")
+	UNiagaraSystem* OnHitEffect;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Bullet Settings")
 	float MovementSpeed = 10.0f;

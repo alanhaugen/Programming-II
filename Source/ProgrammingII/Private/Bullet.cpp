@@ -1,5 +1,7 @@
 #include "Bullet.h"
 #include <Kismet/GameplayStatics.h>
+#include <NiagaraFunctionLibrary.h>
+#include <NiagaraComponent.h>
 #include "Enemy.h"
 
 ABullet::ABullet()
@@ -45,6 +47,11 @@ void ABullet::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 			false,
 			ECollisionChannel::ECC_Visibility);
 
+		if (OnHitEffect && GetWorld())
+		{
+			UNiagaraComponent* NiagaraComp = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), OnHitEffect, GetActorLocation());
+		}
+
 		Destroy();
 	}
 	// Only deal damage if bullet overlaps enemies (unless it is a fire bolt)
@@ -54,6 +61,11 @@ void ABullet::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 		FDamageEvent DamageEvent;
 		OtherActor->TakeDamage(BulletDamage, DamageEvent, nullptr, this);
 		
+		if (OnHitEffect && GetWorld())
+		{
+			UNiagaraComponent* NiagaraComp = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), OnHitEffect, GetActorLocation(), GetActorRotation());
+		}
+
 		Destroy();
 	}
 }

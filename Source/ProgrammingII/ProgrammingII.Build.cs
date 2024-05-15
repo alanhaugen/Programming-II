@@ -19,7 +19,8 @@ public class ProgrammingII : ModuleRules
 			"AnimGraphRuntime",
 			"AIModule",
 			"UMG",
-            "NavigationSystem"
+            "NavigationSystem",
+            "Niagara"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
