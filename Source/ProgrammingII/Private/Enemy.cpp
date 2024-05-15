@@ -321,6 +321,18 @@ void AEnemy::Tick(float DeltaTime)
 	UpdateDeathLogic();
 
 	MoveToNextWaypoint();
+
+	// Hide / Show Health Bar
+	float HealthBarDistance = 2500.0f;
+
+	if (IsDead == false && FVector::Dist(Player->GetActorLocation(), GetActorLocation()) < HealthBarDistance)
+	{
+		HealthBarWidget->SetVisibility(true);
+	}
+	else
+	{
+		HealthBarWidget->SetVisibility(false);
+	}
 }
 
 // Called to bind functionality to input
