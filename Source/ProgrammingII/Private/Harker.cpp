@@ -434,7 +434,6 @@ void AHarker::SetItemVisibilityUnequipped()
 
 		Lantern->SetVisibility(false);
 		LanternSpotLight->SetVisibility(false);
-		Crossbow->SetVisibility(false);
 		Umbrella->SetVisibility(false);
 	}
 	else
@@ -446,7 +445,6 @@ void AHarker::SetItemVisibilityUnequipped()
 
 		Lantern->SetVisibility(true);
 		LanternSpotLight->SetVisibility(true);
-		Crossbow->SetVisibility(true);
 		Umbrella->SetVisibility(true);
 	}
 }
