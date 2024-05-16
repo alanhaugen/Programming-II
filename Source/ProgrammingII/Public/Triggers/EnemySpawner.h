@@ -1,8 +1,8 @@
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "Enemy.h"
+#include <CoreMinimal.h>
+#include <GameFramework/Actor.h>
+#include "Characters/Enemy.h"
 #include "Math/UnrealMathUtility.h"
 #include "EnemySpawner.generated.h"
 

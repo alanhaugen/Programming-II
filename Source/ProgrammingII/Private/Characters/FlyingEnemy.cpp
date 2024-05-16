@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "FlyingEnemy.h"
+#include "Characters/FlyingEnemy.h"
 #include <AIController.h>
-#include "Harker.h"
+#include "Characters/Harker.h"
 
 
 AFlyingEnemy::AFlyingEnemy()

@@ -1,11 +1,11 @@
-#include "EnemySpawner.h"
+#include "Triggers/EnemySpawner.h"
 #include <Math/UnrealMathUtility.h>
 #include <Kismet/GameplayStatics.h>
 #include <Blueprint/AIBlueprintHelperLibrary.h>
 #include <NavigationSystem.h>
-#include "SurvivalGameMode.h"
-#include "Harker.h"
-#include "Enemy.h"
+#include "GameModes/SurvivalGameMode.h"
+#include "Characters/Harker.h"
+#include "Characters/Enemy.h"
 
 AEnemySpawner::AEnemySpawner()
 {

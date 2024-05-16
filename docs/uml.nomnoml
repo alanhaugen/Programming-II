@@ -7,6 +7,7 @@
 + EnemyQuantityForCurrentWave : int
 + Spawners : TArray<AEnemySpawner*>
 \# bWillAutomaticallyGoToNextWave : bool
+- Score : int
 |
 # operations
 + CheckIfLastEnemy() : void
@@ -32,6 +33,7 @@
 + BulletDamage : float
 + BulletType : EAmmoTypes
 + MovementSpeed : float
++ OnHitEffect : UNiagaraSystem*
 |
 # operations
 + Tick (DeltaTime : float) : virtual void override
@@ -213,6 +215,7 @@ in ThisTickFunction : FActorComponentTickFunction*) : override virtual void
 - Crossbow : USkeletalMeshComponent*
 - UmbrellaFPSMode : UStaticMeshComponent*
 - CrossbowFPSMode : USkeletalMeshComponent*
+- RunningTime : float 
 |
 + EquipWeapon() : void
 + Tick (float DeltaTime) : override virtual void
@@ -235,6 +238,7 @@ in ThisTickFunction : FActorComponentTickFunction*) : override virtual void
 - SetItemVisibilityEquipped() : void
 - SetItemVisibilityUnequipped() : void
 - UpdateCameraBehaviour(isTurningWithCamera : bool) : void
+- UpdateFPSUmbrellaAnim(DeltaTime : float) : void
 \# BeginPlay() : override virtual void
 \# MeleeAttack() : bool
 \# SpendAmmo() : bool

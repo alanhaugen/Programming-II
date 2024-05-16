@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
-#include "CharacterState.h"
+#include "Characters/CharacterState.h"
 #include "HarkerAnimInstance.generated.h"
 
 UCLASS()

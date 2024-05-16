@@ -1,16 +1,16 @@
-#include "Enemy.h"
+#include "Characters/Enemy.h"
 #include "HUD/HealthBarComponent.h"
-#include "AttributeComponent.h"
+#include "Characters/AttributeComponent.h"
 #include <Animation/AnimMontage.h>
 #include <AIController.h>
 #include <Perception/AIPerceptionComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Components/CapsuleComponent.h>
 #include <Kismet/GameplayStatics.h>
-#include "AdventureGameMode.h"
-#include "SurvivalGameMode.h"
-#include "Harker.h"
-#include "Item.h"
+#include "GameModes/AdventureGameMode.h"
+#include "GameModes/SurvivalGameMode.h"
+#include "Characters/Harker.h"
+#include "Spawns/Item.h"
 
 AEnemy::AEnemy()
 {

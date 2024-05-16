@@ -1,4 +1,4 @@
-#include "Harker.h"
+#include "Characters/Harker.h"
 #include <EnhancedInputComponent.h>
 #include <EnhancedInputSubsystems.h>
 #include <Components/PointLightComponent.h>
@@ -10,9 +10,9 @@
 #include <Animation/AnimMontage.h>
 #include <Components/BoxComponent.h>
 #include <Kismet/GameplayStatics.h>
-#include "Bullet.h"
-#include "CheckPoint.h"
-#include "Ladder.h"
+#include "Spawns/Bullet.h"
+#include "Triggers/CheckPoint.h"
+#include "Interactables/Ladder.h"
 
 // Sets default values
 AHarker::AHarker()

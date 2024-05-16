@@ -1,6 +1,6 @@
-#include "SurvivalGameMode.h"
-#include "EnemySpawner.h"
-#include "Harker.h"
+#include "GameModes/SurvivalGameMode.h"
+#include "Triggers/EnemySpawner.h"
+#include "Characters/Harker.h"
 
 void ASurvivalGameMode::CheckIfLastEnemy()
 {

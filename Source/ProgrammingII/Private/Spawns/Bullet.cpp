@@ -1,8 +1,8 @@
-#include "Bullet.h"
+#include "Spawns/Bullet.h"
 #include <Kismet/GameplayStatics.h>
 #include <NiagaraFunctionLibrary.h>
 #include <NiagaraComponent.h>
-#include "Enemy.h"
+#include "Characters/Enemy.h"
 
 ABullet::ABullet()
 {

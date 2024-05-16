@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Item.h"
+#include "Spawns/Item.h"
 #include <Kismet/GameplayStatics.h>
 #include <Components/BoxComponent.h>
-#include "Harker.h"
-#include "AdventureGameMode.h"
+#include "Characters/Harker.h"
+#include "GameModes/AdventureGameMode.h"
 
 AItem::AItem()
 {

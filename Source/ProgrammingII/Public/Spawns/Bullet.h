@@ -5,7 +5,7 @@
 #include <CoreMinimal.h>
 #include <GameFramework/Actor.h>
 #include <Components/ActorComponent.h>
-#include "Harker.h"
+#include "Characters/Harker.h"
 #include "Bullet.generated.h"
 
 class UNiagaraSystem;

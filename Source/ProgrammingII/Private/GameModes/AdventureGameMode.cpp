@@ -1,5 +1,5 @@
-#include "AdventureGameMode.h"
-#include "Kismet/GameplayStatics.h"
+#include "GameModes/AdventureGameMode.h"
+#include <Kismet/GameplayStatics.h>
 
 AAdventureGameMode::AAdventureGameMode()
 {

@@ -1,6 +1,6 @@
-#include "Interactable.h"
+#include "Interactables/Interactable.h"
 #include <Components/BoxComponent.h>
-#include "Harker.h"
+#include "Characters/Harker.h"
 
 AInteractable::AInteractable()
 {

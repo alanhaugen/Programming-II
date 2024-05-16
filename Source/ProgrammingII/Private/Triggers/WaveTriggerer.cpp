@@ -1,6 +1,6 @@
-#include "WaveTriggerer.h"
-#include "AdventureGameMode.h"
-#include "Harker.h"
+#include "Triggers/WaveTriggerer.h"
+#include "GameModes/AdventureGameMode.h"
+#include "Characters/Harker.h"
 #include <Kismet/GameplayStatics.h>
 #include <Components/BoxComponent.h>
 

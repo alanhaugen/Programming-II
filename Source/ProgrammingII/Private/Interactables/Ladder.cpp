@@ -1,4 +1,4 @@
-#include "Ladder.h"
+#include "Interactables/Ladder.h"
 #include <Components/BoxComponent.h>
 
 ALadder::ALadder()

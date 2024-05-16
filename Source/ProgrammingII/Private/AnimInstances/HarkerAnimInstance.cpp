@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "HarkerAnimInstance.h"
-#include "Harker.h"
+#include "AnimInstances/HarkerAnimInstance.h"
+#include "Characters/Harker.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "KismetAnimationLibrary.h"
