@@ -83,6 +83,7 @@ void AItem::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 		if (GetWorld())
 		{
 			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+			ASurvivalGameMode* SurvivalMode = Cast<ASurvivalGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
 			if (AdventureMode)
 			{
@@ -97,6 +98,10 @@ void AItem::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 
 				// Picking up coins triggers the next wave in adventure mode
 				AdventureMode->TriggerWave(AdventureMode->CurrentWave + 1);
+			}
+			else if (SurvivalMode)
+			{
+				SurvivalMode->Score += 15;
 			}
 		}
 

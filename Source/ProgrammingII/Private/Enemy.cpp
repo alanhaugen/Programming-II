@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Enemy.h"
 #include "HUD/HealthBarComponent.h"
 #include "AttributeComponent.h"
@@ -179,6 +176,7 @@ void AEnemy::UpdateDeathLogic()
 		if (SurvivalMode)
 		{
 			SurvivalMode->EnemyQuantity--;
+			SurvivalMode->Score++;
 
 			AAdventureGameMode* AdventureMode = Cast<AAdventureGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 			

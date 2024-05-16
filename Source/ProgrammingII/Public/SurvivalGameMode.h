@@ -22,6 +22,10 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	int CurrentWave = 0;
 
+	// Points earned for defeating enemies and picking coins
+	UPROPERTY(BlueprintReadOnly)
+	int Score = 0;
+
 	// Total number of enemies in wave
 	UPROPERTY(BlueprintReadOnly)
 	int EnemyQuantityForCurrentWave = 0;
