@@ -123,7 +123,10 @@ void AEnemy::DeathEnd()
 {
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 
-	AnimInstance->Montage_Pause();
+	if (AnimInstance)
+	{
+		AnimInstance->Montage_Pause();
+	}
 }
 
 void AEnemy::UpdateUI()
@@ -141,31 +144,34 @@ void AEnemy::UpdateDeathLogic()
 		// Play animation montage
 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 
-		AnimInstance->Montage_Play(DeathMontage);
-
-		const int32 Selection = FMath::RandRange(0, 3);
-		FName SelectionName;
-
-		// Play a random death animation
-		switch (Selection)
+		if (AnimInstance && DeathMontage)
 		{
-		case 0:
-			SelectionName = FName("Death1");
-			break;
-		case 1:
-			SelectionName = FName("Death2");
-			break;
-		case 2:
-			SelectionName = FName("Death3");
-			break;
-		case 3:
-			SelectionName = FName("Death4");
-			break;
-		default:
-			UE_LOG(LogTemp, Warning, TEXT("Invalid animation"));
-		}
+			AnimInstance->Montage_Play(DeathMontage);
 
-		AnimInstance->Montage_JumpToSectionsEnd(SelectionName, DeathMontage);
+			const int32 Selection = FMath::RandRange(0, 3);
+			FName SelectionName;
+
+			// Play a random death animation
+			switch (Selection)
+			{
+			case 0:
+				SelectionName = FName("Death1");
+				break;
+			case 1:
+				SelectionName = FName("Death2");
+				break;
+			case 2:
+				SelectionName = FName("Death3");
+				break;
+			case 3:
+				SelectionName = FName("Death4");
+				break;
+			default:
+				UE_LOG(LogTemp, Warning, TEXT("Invalid animation"));
+			}
+
+			AnimInstance->Montage_JumpToSectionsEnd(SelectionName, DeathMontage);
+		}
 
 		IsDead = true;
 
@@ -262,28 +268,31 @@ void AEnemy::Combat()
 			// Play animation montage
 			UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 
-			AnimInstance->Montage_Play(AttackMontage);
-
-			const int32 Selection = FMath::RandRange(0, 2);
-			FName SelectionName;
-
-			// Play a random attack animation
-			switch (Selection)
+			if (AnimInstance && AttackMontage)
 			{
-			case 0:
-				SelectionName = FName("Attack1");
-				break;
-			case 1:
-				SelectionName = FName("Attack2");
-				break;
-			case 2:
-				SelectionName = FName("Attack3");
-				break;
-			default:
-				UE_LOG(LogTemp, Warning, TEXT("Invalid animation"));
-			}
+				AnimInstance->Montage_Play(AttackMontage);
 
-			AnimInstance->Montage_JumpToSection(SelectionName, AttackMontage);
+				const int32 Selection = FMath::RandRange(0, 2);
+				FName SelectionName;
+
+				// Play a random attack animation
+				switch (Selection)
+				{
+				case 0:
+					SelectionName = FName("Attack1");
+					break;
+				case 1:
+					SelectionName = FName("Attack2");
+					break;
+				case 2:
+					SelectionName = FName("Attack3");
+					break;
+				default:
+					UE_LOG(LogTemp, Warning, TEXT("Invalid animation"));
+				}
+
+				AnimInstance->Montage_JumpToSection(SelectionName, AttackMontage);
+			}
 
 			// Apply damage to player
 			Player->Health -= AttackDamage;
