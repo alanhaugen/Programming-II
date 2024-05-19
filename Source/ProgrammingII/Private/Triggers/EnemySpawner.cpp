@@ -57,11 +57,18 @@ void AEnemySpawner::Spawn(int Wave)
 	for (int i = 0; i < Waves[Wave]; i++)
 	{
 		FVector Location;
+		AActor* SpawnedActor = nullptr;
 		
 		// Thanks to https://gist.github.com/dacanizares/5db9c59281a9c9049bf819acce7e29bc
 		if (NavSys->K2_GetRandomReachablePointInRadius(GetWorld(), GetActorLocation(), Location, SpawnRadius))
 		{
-			GetWorld()->SpawnActor<AActor>(EnemyClass, Location, FRotator::ZeroRotator, ActorSpawnParams);
+			SpawnedActor = GetWorld()->SpawnActor<AActor>(EnemyClass, Location, FRotator::ZeroRotator, ActorSpawnParams);
+		}
+
+		// Fallback to a simpler way of spawning if the previous method fails
+		if (SpawnedActor == nullptr)
+		{
+			GetWorld()->SpawnActor<AActor>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
 		}
 	}
 }
@@ -89,7 +96,7 @@ void AEnemySpawner::Tick(float DeltaTime)
 		{
 			RunningTime = 0.0f;
 
-			GetWorld()->SpawnActor<AEnemy>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
+			GetWorld()->SpawnActor<AActor>(EnemyClass, GetActorLocation(), FRotator::ZeroRotator);
 		}
 	}
 }
