@@ -183,6 +183,8 @@ Whoosh sounds effect is from Unreal Engine 5 C++ The Ultimate Game Developer Cou
 
 Footstep sounds effects are from the free Unreal project Valley of the Ancient: https://www.unrealengine.com/marketplace/en-US/product/ancient-game-01
 
+Explosion sound effect for fire bolts is Huge Explosion.flac from CGEffex (2010), Attribution NonCommercial 4.0: https://freesound.org/people/CGEffex/sounds/93834/
+
 Erik Haugen made the Dracula, Skeleton, Zombie and Harker models found in Assets/3DModels/3rdParty. He also made the re-rendered films in Video 
 
 ## Resources
